@@ -1,42 +1,45 @@
 <?php
-/*
+/**
  * Class Code
  *
- * update : 2012-01-11
+ * update : 2013-05-29
  *----------------------------------------------------------------------*
  * @improve : ZYP            @time : 2012-01-11
  *----------------------------------------------------------------------*
  * Notes :
  *
  * $c = new Code ();
- * $c -> encode($string_you_want_to_encode , $key_you_will_decode);		// encode
+ * $c -> encode($string_you_want_to_encode , $key_you_will_decode);		    // encode
  * $c -> decode($string_you_want_to_decode , $key_you_have_encoded);		//  decode
  *----------------------------------------------------------------------*
  */
-if(!defined('IN_HISUNPHP'))	exit('Access Denied');
 
 class Code{
-	public function encode($string,$key='hisunphp'){
+	public function encode($string,$key='zyp'){
 		$encrypt_key = md5(rand(0,320000000));
+		$encrypt_key_length=32;
 		$ctr=0;
 		$tmp = "";
-		for ($i=0;$i<strlen($string);$i++){
-			if ($ctr==strlen($encrypt_key)) $ctr=0;
-				$tmp.= substr($encrypt_key,$ctr,1) .
-			(substr($string,$i,1) ^ substr($encrypt_key,$ctr,1));
+		$string_l=strlen($string);
+		for ($i=0;$i<$string_l;$i++){
+			if ($ctr==$encrypt_key_length) $ctr=0;
+			$code=substr($encrypt_key,$ctr,1);
+			$tmp.= $code .(substr($string,$i,1) ^ $code);
 			$ctr++;
 		}
 		return base64_encode($this->Keycode($tmp,$key));
 	}
 
-	public function decode($string,$key='hisunphp'){
+	public function decode($string,$key='zyp'){
 		$string=base64_decode($string);
 		$string = $this->keycode($string,$key);
 		$tmp = "";
-		for ($i=0;$i<strlen($string);$i++){
-			$md5 = substr($string,$i,1);
-			$i++;
-			$tmp.= (substr($string,$i,1) ^ $md5);
+
+		$string_l=strlen($string);
+		for ($i=0;$i<$string_l;$i+=2){
+			$code = substr($string,$i,1);
+			$codeplus= substr($string,$i+1,1);
+			$tmp.= ($codeplus ^ $code);
 		}
 		return $tmp;
 	}
@@ -44,20 +47,14 @@ class Code{
 		$encrypt_key = md5($encrypt_key);
 		$ctr=0;
 		$tmp ="";
-
-		for ($i=0;$i<strlen($string);$i++){
-			if ($ctr==strlen($encrypt_key)) $ctr=0;
+		$string_l=strlen($string);
+		$encrypt_key_length=32;
+		for ($i=0;$i<$string_l;$i++){
+			if ($ctr==$encrypt_key_length) $ctr=0;
 			$tmp.= substr($string,$i,1) ^ substr($encrypt_key,$ctr,1);
 			$ctr++;
 		}
-	return $tmp;
-	}
-
-	public static function encrypt($string){
-		$short = substr($string,0,4);
-		$string = md5(md5($string).$short);
-		return $string;
+		return $tmp;
 	}
 }
-
 ?>
