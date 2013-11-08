@@ -1,33 +1,40 @@
 ﻿<?php
+define('SITE_ROOT', dirname(dirname(__FILE__)) . '/');
 include 'bas/Controller.php';
 include 'bas/Router.php';
 include 'bas/Reflect.php';
 include 'bas/DB.php';
-define('SITE_ROOT', dirname(dirname(__FILE__)) . '/');
-define('THIS_HOST', $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['SCRIPT_NAME']) . '/');
+include 'bas/Base.php';
+define('THIS_HOST', Base::getThisHost());
 
 class App {
-
     static private $model;
     static private $page;
     static public $get = array();
     static public $CONFIG;
     static public $db;
+    
+    static private $_source;
+    static private $_theme;
 
-    function __construct() {
+    function __construct($source,$theme) {
         include SITE_ROOT . './Cloud/Config.php';
         self::$CONFIG = $CONFIG;
-        $this->_define();
+        
+        self::$_source=$source;
+        self::$_theme=$theme;        
+        
         $routerArr = Router::run();
         self::$model = $routerArr['model'];
         self::$page = $routerArr['page'];
         self::$get = $routerArr['gets'];
-        include SITE_ROOT . 'Cloud/Lib/function_global.php';
+        
 
+        $this->_define();        
         $this->_class();
         $this->_magic();
         $this->_check();
-
+        
         self::$db = DB::getInstance();
 
         session_start();
@@ -38,17 +45,17 @@ class App {
         date_default_timezone_set('PRC'); //设置中国时区
         define('DEBUG_MODE', true);                //调试模式开关
         define('NOROBOT', false);                  //限制蜘蛛程序访问开关
-        define('THIS_DIR', THIS_HOST . self::$CONFIG['APP']['THEME']);
+        define('THIS_DIR', THIS_HOST . self::$_theme);
     }
 
     public function run() {
-        include SITE_ROOT . './' . self::$CONFIG['APP']['CONTROLLER'] . '/common.php';
-        include SITE_ROOT . self::$CONFIG['APP']['THEME'] . 'header.html';
-        include SITE_ROOT . './' . self::$CONFIG['APP']['CONTROLLER'] . '/' . self::$model . '.php';
+        include SITE_ROOT . self::$_source . '/common.php';
+        include SITE_ROOT . self::$_theme . 'header.html';
+        include SITE_ROOT . self::$_source . '/' . self::$model . '.php';
         extract(Reflect::run(self::$model, self::$page));
         $page = self::$page == 'auto' ? '' : self::$page;
-        include SITE_ROOT . self::$CONFIG['APP']['THEME'] . self::$model . $page . '.html';
-        include SITE_ROOT . self::$CONFIG['APP']['THEME'] . 'footer.html';
+        include SITE_ROOT . self::$_theme . self::$model . $page . '.html';
+        include SITE_ROOT . self::$_theme . 'footer.html';
     }
 
     private function _magic() {
