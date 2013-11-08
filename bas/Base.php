@@ -102,7 +102,9 @@ function Debug() {
 
 function ErrorDiv($string) {
     echo "<div align=\"center\" style=\"width:100%;\"><div style=\"text-align:left;margin-top:40px;padding:10px;width:800px;line-height:1.5;border:1px solid #D52C2B;background:#FFEBE8\">";
+    echo '<pre>';
     echo $string;
+    echo '</pre>';
     echo "</div></div>";
     exit();
 }

@@ -27,7 +27,8 @@ class Reflect {
             $results = $method->invoke($instance);
             return null == $results ? array() : $results;
         } catch (Exception $e) {
-            ErrorDiv($e->getMessage());
+            //ErrorDiv($e->getMessage());
+            ErrorDiv($e);
         }
     }
 

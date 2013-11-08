@@ -16,6 +16,9 @@ class App {
     
     static private $_source;
     static private $_theme;
+    
+    static public $gid=1;
+    static public $uid=1;
 
     function __construct($source,$theme) {
         include SITE_ROOT . './Cloud/Config.php';
@@ -51,7 +54,8 @@ class App {
     public function run() {
         include SITE_ROOT . self::$_source . '/common.php';
         include SITE_ROOT . self::$_theme . 'header.html';
-        include SITE_ROOT . self::$_source . '/' . self::$model . '.php';
+        include SITE_ROOT . self::$_theme . 'sidebar.html';
+        include SITE_ROOT . self::$_source  . self::$model . '.php';
         extract(Reflect::run(self::$model, self::$page));
         $page = self::$page == 'auto' ? '' : self::$page;
         include SITE_ROOT . self::$_theme . self::$model . $page . '.html';

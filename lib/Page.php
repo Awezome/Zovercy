@@ -53,7 +53,7 @@ class Page {
 
     private function HtmlA($href, $page, $name) {
         $and = substr($href, -1) == '?' ? '' : '&';
-        return "<a href='" . $href . $and . "p=" . $page . "'>" . $name . "</a>";
+        return "<li><a href='" . $href . $and . "p=" . $page . "'>" . $name . "</a></li>";
     }
 
     private function start() {
@@ -89,15 +89,15 @@ class Page {
             $page = $this->page - $i;
             if ($page < 1)
                 continue;
-            $linkPage .="&nbsp;" . $this->HtmlA($this->uri, $page, $page) . "&nbsp;"; //每页数字两边显示空格
+            $linkPage .=$this->HtmlA($this->uri, $page, $page); //每页数字两边显示空格
         }
 
-        $linkPage.="&nbsp;" . $this->page . "&nbsp;";
+        $linkPage.=$this->page ;
 
         for ($i = 1; $i <= $inum; $i++) {
             $page = $this->page + $i;
             if ($page <= $this->pageNum)
-                $linkPage .="&nbsp;" . $this->HtmlA($this->uri, $page, $page) . "&nbsp;"; //每页数字两边显示空格
+                $linkPage .=$this->HtmlA($this->uri, $page, $page) ; //每页数字两边显示空格
             else
                 break;
         }
@@ -133,13 +133,14 @@ class Page {
 
     function run() {
         if ($this->pageNum != 1) {
-            $run = '';
-            $run.=$this->first() . "&nbsp;";
+            $run = '<ul class="pagination alternate">';
+            $run.=$this->first();
             //$run.=$this->prev();
             $run.=$this->pageList();
             //$run.=$this->next()."&nbsp;";
-            $run.=$this->last() . "&nbsp;&nbsp;";
-            $run.=$this->jump();
+            $run.=$this->last() ;
+            $run.='</ul>';
+            //$run.=$this->jump();
             return $run;
         }
     }
