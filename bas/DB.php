@@ -22,12 +22,12 @@
  */
 
 class DB {
-    private $db;
     private $tname;
     private $table;
     private $insertid;
     private $sql;
     private $config = array();
+    private $link = null;
     private static $_instance;
 
     private function __construct() {
@@ -109,19 +109,15 @@ class DB {
     public function close() {
         return mysql_close($this->link);
     }
-//-------------------------------------------------------------old
-    var $querynum = 0;
-    var $link = null;
 
     private function connect($dbhost, $dbuser, $dbpw, $dbname,$dbcharset='utf8', $pconnect = 0) {
-        if ($pconnect) {
-            if (!$this->link = mysql_pconnect($dbhost, $dbuser, $dbpw)) {
-                $this->halt('Can not connect to MySQL server');
-            }
-        } else {
-            if (!$this->link = mysql_connect($dbhost, $dbuser, $dbpw)) {
-                $this->halt('Can not connect to MySQL server');
-            }
+        if($pconnect){
+            $this->link = mysql_pconnect($dbhost, $dbuser, $dbpw);
+        }else{
+            $this->link = mysql_connect($dbhost, $dbuser, $dbpw);
+        }
+        if(!$this->link){
+            $this->halt('Can not connect to MySQL server');
         }
         mysql_query("SET character_set_connection=".$dbcharset.", character_set_results=".$dbcharset.", character_set_client=binary", $this->link);
         mysql_query("SET sql_mode=''", $this->link);
@@ -154,7 +150,6 @@ class DB {
        if (!($query = mysql_query($sql, $this->link))) {
             $this->halt('MySQL Query Error', $sql);
         }
-        $this->querynum++;
         return $query;
     }
 
