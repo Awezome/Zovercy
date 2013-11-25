@@ -8,6 +8,7 @@ $CONFIG['DB'] = array(
     'PWD' => '', // 数据库密码
     'TABLEPRE' => 'hisunphp_', // 表前缀
     'CHARSET' => 'utf8', // MySQL 字符集, 可选 'gbk', 'big5', 'utf8', 'latin1', 留空为按照默认字符集设定
+	'TIMEZONE'=>'+8:00' //时区
 );
 
 // Cookie

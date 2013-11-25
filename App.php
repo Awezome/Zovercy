@@ -30,15 +30,14 @@ class App {
         $routerArr = Router::run();
         self::$model = $routerArr['model'];
         self::$page = $routerArr['page'];
-        self::$get = $routerArr['gets'];
-        
+        self::$get = $routerArr['gets'];        
 
         $this->_define();        
         $this->_class();
         $this->_magic();
         $this->_check();
         
-        self::$db = DB::getInstance();
+        self::$db = DB::getInstance(self::$CONFIG['DB']);
 
         session_start();
         header('Content-Type:text/html;charset=' . self::$CONFIG['CHARSET']);
@@ -89,4 +88,7 @@ class App {
         }
     }
 
+    function __destruct() {
+        self::$db->close();
+    }
 }

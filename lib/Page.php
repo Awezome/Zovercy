@@ -56,6 +56,10 @@ class Page {
         return "<li><a href='" . $href . $and . "p=" . $page . "'>" . $name . "</a></li>";
     }
 
+    private function htmlCurrent($num){
+        return '<li  class="active" ><a href="#">'  . $num . '</a></li>';
+    }
+    
     private function start() {
         if ($this->total == 0)
             return 0;
@@ -92,7 +96,7 @@ class Page {
             $linkPage .=$this->HtmlA($this->uri, $page, $page); //每页数字两边显示空格
         }
 
-        $linkPage.=$this->page ;
+        $linkPage.=$this->htmlCurrent($this->page);
 
         for ($i = 1; $i <= $inum; $i++) {
             $page = $this->page + $i;
@@ -133,15 +137,14 @@ class Page {
 
     function run() {
         if ($this->pageNum != 1) {
-            $run = '<ul class="pagination alternate">';
-            $run.=$this->first();
-            //$run.=$this->prev();
-            $run.=$this->pageList();
-            //$run.=$this->next()."&nbsp;";
-            $run.=$this->last() ;
-            $run.='</ul>';
-            //$run.=$this->jump();
-            return $run;
+            return '<ul>'
+                    .$this->first()
+                    .$this->prev()
+                    .$this->pageList()
+                    .$this->next()
+                    .$this->last()
+                    //.$this->jump()
+                    .'</ul>';
         }
     }
 

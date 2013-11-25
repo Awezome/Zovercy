@@ -26,15 +26,14 @@ class DB {
     private $table;
     private $insertid;
     private $sql;
-    private $config = array();
+    private static $config = array();
     private $link = null;
     private static $_instance;
 
     private function __construct() {
-        $this->config = APP::$CONFIG['DB'];
-        $this->connect($this->config['HOST'], $this->config['USER'], $this->config['PWD'], $this->config['NAME'], $this->config['CHARSET']);
-        $this->query("set time_zone = '+8:00';");
-        $this->tname = $this->config['TABLEPRE'];
+        $this->connect(self::$config['HOST'], self::$config['USER'], self::$config['PWD'], self::$config['NAME'], self::$config['CHARSET']);
+        $this->query("set time_zone = '".self::$config['TIMEZONE']."';");
+        $this->tname = self::$config['TABLEPRE'];
     }
     
     public function __destruct() {}
@@ -43,7 +42,8 @@ class DB {
     
     private function __sleep() {}
 
-    public static function getInstance() {
+    public static function getInstance($config) {
+        self::$config =$config;
         if (!(self::$_instance instanceof self)) {
             self::$_instance = new self();
         }

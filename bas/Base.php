@@ -159,11 +159,7 @@ function newstype_newlist($a) {
 function is_online($uid) {
     $link = new db;
     $user = $link->table('user')->where('uid=' . $uid)->selectone('last_logtime');
-    $time_ok = time() - $user['last_logtime'] < 1800 ? 1 : 0;
-    if ($time_ok)
-        return true;
-    else
-        return false;
+    return   time() - $user['last_logtime'] < 1800;
 }
 
 function imageWaterMark($groundImage, $waterImage = '', $waterPos = 9, $alpha = 50) {
@@ -298,5 +294,3 @@ function Weather($city = '') {
     preg_match_all("|(.*)['](.*)['](.*)|isU", $str, $str_ary);
     return $str_ary[2];
 }
-
-?>
