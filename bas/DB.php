@@ -33,14 +33,16 @@ class DB {
 
     private function __construct() {
         $this->config = APP::$CONFIG['DB'];
-        $this->connect($this->config['HOST'], $this->config['USER'], $this->config['PWD'], $this->config['NAME'], 0, $this->config['CHARSET'], TRUE);
+        $this->connect($this->config['HOST'], $this->config['USER'], $this->config['PWD'], $this->config['NAME'], $this->config['CHARSET']);
         $this->query("set time_zone = '+8:00';");
         $this->tname = $this->config['TABLEPRE'];
     }
+    
+    public function __destruct() {}
 
-    private function __clone() {
-        
-    }
+    private function __clone() {}
+    
+    private function __sleep() {}
 
     public static function getInstance() {
         if (!(self::$_instance instanceof self)) {
@@ -62,7 +64,7 @@ class DB {
 //-------------------------------------------------------------select
     public function selectone($what = '*') {
         $this->sql = "select " . $what . " from " . $this->table . " where " . $this->where;
-        return $this->fetch_first($this->sql);
+        return $this->fetch_array($this->query($this->sql));
     }
 
     public function selectall($what = '*') {
@@ -90,7 +92,7 @@ class DB {
 
 //-------------------------------------------------------------insert
     public function insert($value) {
-        $this->sql = "insert INTO " . $this->table . $value;
+        $this->sql = "insert into " . $this->table . $value;
         $this->query($this->sql);
         $this->insertid = $this->insert_id();
     }
@@ -111,40 +113,28 @@ class DB {
     }
 
 //-------------------------------------------------------------old
-    var $version = '';
     var $querynum = 0;
     var $link = null;
     var $result = null;
 
-    private function connect($dbhost, $dbuser, $dbpw, $dbname = '', $pconnect = 0, $dbcharset, $halt = TRUE) {
-
+    private function connect($dbhost, $dbuser, $dbpw, $dbname,$dbcharset, $pconnect = 0,  $halt = TRUE) {
         $func = empty($pconnect) ? 'mysql_connect' : 'mysql_pconnect';
         if (!$this->link = $func($dbhost, $dbuser, $dbpw, 1)) {
             $halt && $this->halt('Can not connect to MySQL server');
         } else {
-            if ($this->version() > '4.1') {
-                $serverset = 'NAMES ' . $dbcharset . ',CHARACTER SET ' . $dbcharset . ',character_set_connection=' . $dbcharset . ', character_set_results=' . $dbcharset . ', character_set_client=binary';
-                $serverset .= $this->version() > '5.0.1' ? (',sql_mode=\'\'') : '';
-                $serverset && mysql_query("SET $serverset", $this->link);
-            }
+            $serverset = 'NAMES ' . $dbcharset . ',CHARACTER SET ' . $dbcharset . ',character_set_connection=' . $dbcharset . ', character_set_results=' . $dbcharset . ', character_set_client=binary';
+            $serverset .=',sql_mode=\'\'';
+            $serverset && mysql_query("SET $serverset", $this->link);
             $dbname && mysql_select_db($dbname, $this->link); //没有传入$dbname则不执行mysql_select_db
         }
-    }
-
-    private function select_db($dbname) {
-        return mysql_select_db($dbname, $this->link);
     }
 
     private function fetch_array($query, $result_type = MYSQL_ASSOC) {
         return mysql_fetch_array($query, $result_type);
     }
 
-    private function fetch_first($sql) {
-        return $this->fetch_array($this->query($sql)); //!!!!!
-    }
-
     private function result_first($sql) {
-        return $this->result($this->query($sql), 0);
+        return @mysql_result($this->query($sql), 0);
     }
 
     private function fetch_all($sql) {
@@ -172,13 +162,11 @@ class DB {
      * 返回值：资源标识符
      */
     private function query($sql, $type = '') {
-
         $func = $type == 'UNBUFFERED' && @function_exists('mysql_unbuffered_query') ?
                 'mysql_unbuffered_query' : 'mysql_query'; //mysql_unbuffered_query()查询的时候不产生结果集合的缓冲
         if (!($query = $func($sql, $this->link))) {
             if (in_array($this->errno(), array(2006, 2013)) && substr($type, 0, 5) != 'RETRY') {//'RETRY'用以说明是重新连接，只允许重连一次，否则显示错误信息
                 $this->close();
-                //require SITE_ROOT.'./config.inc.php';
                 $this->connect($dbhost, $dbuser, $dbpw, $dbname, $pconnect, true, $dbcharset);
                 return $this->query($sql, 'RETRY' . $type);
             } elseif ($type != 'SILENT' && substr($type, 5) != 'SILENT') {//$type设置为'SILENT'用以抑制错误信息**substr($type,5)表示输出下标5元素之后的串
@@ -203,14 +191,8 @@ class DB {
         return intval(($this->link) ? mysql_errno($this->link) : mysql_errno()); //返回mysql错误编号
     }
 
-    private function result($query, $row = 0) {
-        $query = @mysql_result($query, $row);
-        return $query;
-    }
-
     private function num_rows($query) {
-        $query = mysql_num_rows($query);
-        return $query;
+        return mysql_num_rows($query);
     }
 
     private function num_fields($query) {
@@ -221,40 +203,16 @@ class DB {
         return mysql_free_result($query);
     }
 
-    private function insert_id() {
-        return ($id = mysql_insert_id($this->link)) >= 0 ? $id : $this->result($this->query("SELECT last_insert_id()"), 0); //注意赋值语句外括号的使用
-    }
-
     private function fetch_row($query) {
-        $query = mysql_fetch_row($query);
-        return $query;
+        return  mysql_fetch_row($query);
     }
 
     private function fetch_fields($query) {
         return mysql_fetch_field($query);
     }
 
-    private function version() {
-        if (empty($this->version)) {
-            $this->version = mysql_get_server_info($this->link);
-        }
-        return $this->version;
-    }
-
     private function close() {
         return mysql_close($this->link);
-    }
-
-    private function selector($what, $table, $where = '', $orderby = '', $order = '', $limit = '', $type = '') {
-        $sql = 'SELECT ' . $what . ' FROM ' . tname($table);
-        if ($where)
-            $sql.=' WHERE ' . $where;
-        if ($orderby)
-            $sql.=' ORDER BY ' . $orderby . ' ' . $order;
-        if ($limit)
-            $sql.=' LIMIT ' . $limit;
-        //echo $sql;
-        return $this->query($sql, $type);
     }
 
     private function halt($message = '', $sql = '') {
@@ -271,5 +229,4 @@ class DB {
         $note .= '<b>Time: </b>' . date("Y-n-j H:i:s", time()) . '<br />';
         ErrorDiv($note);
     }
-
 }
