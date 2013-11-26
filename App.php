@@ -79,12 +79,9 @@ class App {
     }
 
     static function _autoload($class_name) {
-        $class_array = array();
-        $class_array[] = SITE_ROOT . 'Cloud/lib/' . $class_name . '.php';
-        foreach ($class_array as $class) {
-            if (is_file($class)) {
-                include $class;
-            }
+        $class = SITE_ROOT . 'Cloud/lib/' . $class_name . '.php';
+        if (is_file($class)) {
+            include $class;
         }
     }
 
