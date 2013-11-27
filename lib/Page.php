@@ -18,7 +18,7 @@
 class Page {
 
     private $total; //数据表中总记录数
-    private $listRows; //每页显示行数
+    private $listRows=10; //每页显示行数
     private $pageNum; //页数
     private $config = array('header' => '条记录', 'prev' => '上一页', 'next' => '下一页', 'first' => '«', 'last' => "»", 'jump' => 'GO');
     private $uri;
@@ -28,7 +28,7 @@ class Page {
     private $page;
     private $sql;
 
-    function __construct($listRows = 10, $tablename, $where) {
+    function __construct($listRows, $tablename, $where) {
         $pa = "";
         $this->sql = $where;
         $this->link = App::$db;
@@ -44,6 +44,7 @@ class Page {
         $url = $_SERVER["REQUEST_URI"] . (strpos($_SERVER["REQUEST_URI"], '?') ? '' : "?") . $pa;
         $parse = parse_url($url);
         if (isset($parse["query"])) {
+            $params=array();
             parse_str($parse['query'], $params);
             unset($params["p"]);
             $url = $parse['path'] . '?' . http_build_query($params);
@@ -51,7 +52,7 @@ class Page {
         return $url;
     }
 
-    private function HtmlA($href, $page, $name) {
+    private function htmlLink($href, $page, $name) {
         $and = substr($href, -1) == '?' ? '' : '&';
         return "<li><a href='" . $href . $and . "p=" . $page . "'>" . $name . "</a></li>";
     }
@@ -61,10 +62,7 @@ class Page {
     }
     
     private function start() {
-        if ($this->total == 0)
-            return 0;
-        else
-            return ($this->page - 1) * $this->listRows + 1;
+        return $this->total == 0?0:($this->page - 1) * $this->listRows + 1;
     }
 
     private function end() {
@@ -72,17 +70,11 @@ class Page {
     }
 
     private function first() {
-        if ($this->page == 1)
-            return '';
-        else
-            return $this->HtmlA($this->uri, 1, $this->config["first"]);
+       return $this->page == 1?'':$this->htmlLink($this->uri, 1, $this->config["first"]);
     }
 
     private function prev() {
-        if ($this->page == 1)
-            return '';
-        else
-            return $this->HtmlA($this->uri, $this->page - 1, $this->config["prev"]);
+        return $this->page == 1?'':$this->htmlLink($this->uri, $this->page - 1, $this->config["prev"]);
     }
 
     private function pageList() {
@@ -93,7 +85,7 @@ class Page {
             $page = $this->page - $i;
             if ($page < 1)
                 continue;
-            $linkPage .=$this->HtmlA($this->uri, $page, $page); //每页数字两边显示空格
+            $linkPage .=$this->htmlLink($this->uri, $page, $page); //每页数字两边显示空格
         }
 
         $linkPage.=$this->htmlCurrent($this->page);
@@ -101,7 +93,7 @@ class Page {
         for ($i = 1; $i <= $inum; $i++) {
             $page = $this->page + $i;
             if ($page <= $this->pageNum)
-                $linkPage .=$this->HtmlA($this->uri, $page, $page) ; //每页数字两边显示空格
+                $linkPage .=$this->htmlLink($this->uri, $page, $page) ; //每页数字两边显示空格
             else
                 break;
         }
@@ -110,17 +102,11 @@ class Page {
     }
 
     private function next() {
-        if ($this->page == $this->pageNum)
-            return '';
-        else
-            return $this->HtmlA($this->uri, $this->page + 1, $this->config["next"]);
+        return $this->page == $this->pageNum?'':$this->htmlLink($this->uri, $this->page + 1, $this->config["next"]);
     }
 
     private function last() {
-        if ($this->page == $this->pageNum)
-            return '';
-        else
-            return $this->HtmlA($this->uri, $this->pageNum, $this->config["last"]);
+        return $this->page == $this->pageNum?'':$this->htmlLink($this->uri, $this->pageNum, $this->config["last"]);
     }
 
     private function jump() {

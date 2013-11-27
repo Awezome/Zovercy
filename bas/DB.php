@@ -22,7 +22,6 @@
  */
 
 class DB {
-    private $tname;
     private $table;
     private $insertid;
     private $where;
