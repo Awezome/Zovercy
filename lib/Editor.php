@@ -14,6 +14,7 @@
  */
 
 class Editor {
+
     private static $url = "/Cloud/ext/kindeditor/";
 
     public static function style() {
@@ -23,12 +24,12 @@ class Editor {
 
     public static function textarea($name, $width, $height, $value = '') {
         self::edit($name);
-        echo "<textarea id=\"$name \" name=\"$name \" style=\"width:$width;height:$height ;visibility:hidden;\" >$value</textarea>";
+        echo "<textarea id=\"" . $name . "\" name=\"" . $name . "\" style=\"width:" . $width . ";height:" . $height . ";visibility:hidden;\" >" . $value . "</textarea>";
     }
 
     private static function edit($name) {
-        echo "<script>var editor;KindEditor.ready(function(K) {editor = K.create('textarea[name=\" $name\"]', {"
-        ."uploadJson : '" . self::kindJson() . "',allowFileManager:true,resizeType:0,filterMode : false});});</script>";
+        echo "<script>var editor;KindEditor.ready(function(K) { editor = K.create('textarea[name=\"" . $name . "\"]', {"
+       ."uploadJson : '" . self::kindJson() . "', allowFileManager:true,resizeType:0,filterMode : false });});</script>";
     }
 
     private static function kindJson($water = 0) {
