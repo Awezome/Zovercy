@@ -55,9 +55,12 @@ class App {
         include SITE_ROOT . self::$_theme . 'header.html';
         include SITE_ROOT . self::$_theme . 'sidebar.html';
         include SITE_ROOT . self::$_source  . self::$model . '.php';
-        extract(Reflect::run(self::$model, self::$page));
-        $page = self::$page == 'auto' ? '' : self::$page;
-        include SITE_ROOT . self::$_theme . self::$model . $page . '.html';
+        $end=Reflect::run(self::$model, self::$page);
+        if(null!=$end){
+            extract($end);
+            $page = self::$page == 'auto' ? '' : self::$page;
+            include SITE_ROOT . self::$_theme . self::$model . $page . '.html';
+        }
         include SITE_ROOT . self::$_theme . 'footer.html';
     }
 

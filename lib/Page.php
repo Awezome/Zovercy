@@ -18,7 +18,7 @@
 class Page {
 
     private $total; //数据表中总记录数
-    private $listRows=10; //每页显示行数
+    private $listRows; //每页显示行数
     private $pageNum; //页数
     private $config = array('header' => '条记录', 'prev' => '上一页', 'next' => '下一页', 'first' => '«', 'last' => "»", 'jump' => 'GO');
     private $uri;
@@ -27,10 +27,12 @@ class Page {
     private $tablename;
     private $page;
     private $sql;
+    private $select;
 
-    function __construct($listRows, $tablename, $where) {
+    function __construct($tablename, $select, $where=1,$listRows=10) {
         $pa = "";
         $this->sql = $where;
+        $this->select= $select;
         $this->link = App::$db;
         $this->tablename = $tablename;
         $this->total = $this->link->table($this->tablename)->where($where)->selectcount();
@@ -138,7 +140,7 @@ class Page {
         $where = $this->sql;
         $per = $this->listRows;
         $ber = ($this->page - 1) * $per; //每页开始查询数字
-        return $this->link->table($this->tablename)->where("$where order by date desc limit $ber,$per")->selectall();
+        return $this->link->table($this->tablename)->where("$where order by date desc limit $ber,$per")->selectall($this->select);
     }
 
 }
