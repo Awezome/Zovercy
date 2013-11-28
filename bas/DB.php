@@ -22,6 +22,7 @@
  */
 
 class DB {
+
     private $table;
     private $insertid;
     private $where;
@@ -31,18 +32,18 @@ class DB {
     private static $_instance;
 
     private function __construct() {
-        $this->connect(self::$config['HOST'], self::$config['USER'], self::$config['PWD'], self::$config['NAME'], self::$config['CHARSET'],self::$config['TIMEZONE']);
+        $this->connect(self::$config['HOST'], self::$config['USER'], self::$config['PWD'], self::$config['NAME'], self::$config['CHARSET'], self::$config['TIMEZONE']);
     }
-    
+
     public function __destruct() {}
 
     private function __clone() {}
-    
+
     private function __sleep() {}
 
     public static function getInstance($config) {
         if (!(self::$_instance instanceof self)) {
-            self::$config =$config;
+            self::$config = $config;
             self::$_instance = new self();
         }
         return self::$_instance;
@@ -81,18 +82,41 @@ class DB {
     }
 
     public function update($set) {
-        $this->sql = "update " . $this->table . " set " . $set . " where " . $this->where;
+        if (is_array($set)) {
+            $sql_temp = '';
+            foreach ($set as $key => $value) {
+                $sql_temp.=$key . "='" . $value . "',";
+            }
+            $sql = substr($sql_temp, 0, -1);
+        } else {
+            $sql = $set;
+        }
+        $this->sql = "update " . $this->table . " set " . $sql . " where " . $this->where;
         $this->query($this->sql);
     }
 
-    public function insert($value) {
-        $this->sql = "insert into " . $this->table . $value;
+    public function insert($values) {
+        if (is_array($values)) {
+            $sql_key_temp = '';
+            $sql_value_temp = '';
+            foreach ($values as $key => $value) {
+                $sql_key_temp.=$key . ',';
+                $sql_value_temp.="'" . $value . "',";
+            }
+            $sql_key = substr($sql_key_temp, 0, -1);
+            $sql_value = substr($sql_value_temp, 0, -1);
+
+            $sql = '(' . $sql_key . ') values (' . $sql_value . ')';
+            echo $sql;
+        } else {
+            $sql = $values;
+        }
+        $this->sql = "insert into " . $this->table . $sql;
         $this->query($this->sql);
-        $this->insertid = $this->insert_id();
     }
 
-    public function _insertid() {
-        return $this->insertid;
+    public function insertId() {
+        return ($id = mysql_insert_id($this->link)) >= 0 ? $id : $this->result($this->query("select last_insert_id()"), 0);
     }
 
     public function delete() {
@@ -108,18 +132,18 @@ class DB {
         return mysql_close($this->link);
     }
 
-    private function connect($dbhost, $dbuser, $dbpw, $dbname,$dbcharset='utf8', $timezone='+8:00',$pconnect = 0) {
-        if($pconnect){
+    private function connect($dbhost, $dbuser, $dbpw, $dbname, $dbcharset = 'utf8', $timezone = '+8:00', $pconnect = 0) {
+        if ($pconnect) {
             $this->link = mysql_pconnect($dbhost, $dbuser, $dbpw);
-        }else{
+        } else {
             $this->link = mysql_connect($dbhost, $dbuser, $dbpw);
         }
-        if(!$this->link){
+        if (!$this->link) {
             $this->halt('Can not connect to MySQL server');
         }
-        mysql_query("set character_set_connection=".$dbcharset.", character_set_results=".$dbcharset.", character_set_client=binary", $this->link);
+        mysql_query("set character_set_connection=" . $dbcharset . ", character_set_results=" . $dbcharset . ", character_set_client=binary", $this->link);
         mysql_query("set sql_mode=''", $this->link);
-        mysql_query("set time_zone = '".$timezone."';");
+        mysql_query("set time_zone = '" . $timezone . "';");
         mysql_select_db($dbname, $this->link);
     }
 
@@ -129,8 +153,8 @@ class DB {
 
     private function fetch_all($sql) {
         $rearr = array();
-        $query=$this->query($sql);
-        while ($re = $this->fetch_array( $query)){
+        $query = $this->query($sql);
+        while ($re = $this->fetch_array($query)) {
             $rearr[] = $re;
         }
         return $rearr;
@@ -146,9 +170,14 @@ class DB {
     }
 
     private function query($sql) {
-       if (!($query = mysql_query($sql, $this->link))) {
+        if (!($query = mysql_query($sql, $this->link))) {
             $this->halt('MySQL Query Error', $sql);
         }
+        return $query;
+    }
+
+    private function result($query, $row) {
+        $query = mysql_result($query, $row);
         return $query;
     }
 
@@ -173,4 +202,5 @@ class DB {
         $note .= '<b>Time: </b>' . date("Y-n-j H:i:s", time()) . '<br />';
         Func::errorMessage($note);
     }
+
 }

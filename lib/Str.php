@@ -2,7 +2,7 @@
 
 class Str {
 
-    public static function comsubstr($string, $length) {
+    public static function comsubstr($string, $length,$charset) {
         $length1 = mb_strlen($string, $charset);
         if ($length >= $length1) {
             return $string;
