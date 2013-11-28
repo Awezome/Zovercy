@@ -22,14 +22,14 @@ class Editor {
         self::css();
     }
 
-    public static function textarea($name, $width, $height, $value = '') {
+    public static function textarea($name, $value = '',$width='80%', $height='400px') {
         self::edit($name);
         echo "<textarea id=\"" . $name . "\" name=\"" . $name . "\" style=\"width:" . $width . ";height:" . $height . ";visibility:hidden;\" >" . $value . "</textarea>";
     }
 
     private static function edit($name) {
         echo "<script>var editor;KindEditor.ready(function(K) { editor = K.create('textarea[name=\"" . $name . "\"]', {"
-       ."uploadJson : '" . self::kindJson() . "', allowFileManager:true,resizeType:0,filterMode : false });});</script>";
+       ."uploadJson : '" . self::kindJson() . "', allowFileManager:true,resizeType:1,filterMode : false });});</script>";
     }
 
     private static function kindJson($water = 0) {

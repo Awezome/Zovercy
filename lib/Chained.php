@@ -13,7 +13,7 @@
  * ----------------------------------------------------------------------*
  */
 
-class chained {
+class Chained {
 
     static private $_id; //要查询内容
     static private $_name; //要查询内容
@@ -21,7 +21,7 @@ class chained {
     static private $_face = "<option value=''>---请选择---</option>"; //未选择时界面
 
     static function run($_table, $_id, $_name, $_selected_first = 0) {
-        $link = new db;
+        $link = App::$db;
 
         self::$_id = $_id;
         self::$_name = $_name;
@@ -39,7 +39,6 @@ class chained {
 
         $data = $link->table("$_table")->where()->selectall("$_id,$_name,$_parent");
         $_max = count($data);
-        self::chain();
 
         $option = "<select id=\"first\" name=\"id_first\">" . self::$_face;
         for ($i = 0; $i < $_max; $i++) {
@@ -58,8 +57,8 @@ class chained {
         echo $option;
     }
 
-    private static function chain() {
-        echo "<script charset=\"utf-8\" src=\"" . THIS_HOST . "HisunPHP/Ext/js/jquery_chained.js\" type=\"text/javascript\"></script>";
+    public  static function style() {
+        echo "<script charset=\"utf-8\" src=\"" . THIS_HOST . "Cloud/ext/js/jquery_chained.js\" type=\"text/javascript\"></script>";
         echo "<script>$(function() {    
 		$('#second').chained('#first');
 		});</script>";
@@ -74,5 +73,3 @@ class chained {
     }
 
 }
-
-?>
