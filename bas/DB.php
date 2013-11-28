@@ -172,6 +172,6 @@ class DB {
         }
         $note .= '<b>Script: </b>' . $_SERVER['PHP_SELF'] . '<br />';
         $note .= '<b>Time: </b>' . date("Y-n-j H:i:s", time()) . '<br />';
-        ErrorDiv($note);
+        Func::errorMessage($note);
     }
 }
