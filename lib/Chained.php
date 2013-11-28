@@ -58,10 +58,8 @@ class Chained {
     }
 
     public  static function style() {
-        echo "<script charset=\"utf-8\" src=\"" . THIS_HOST . "Cloud/ext/js/jquery_chained.js\" type=\"text/javascript\"></script>";
-        echo "<script>$(function() {    
-		$('#second').chained('#first');
-		});</script>";
+        echo Html::js('Cloud/ext/js/jquery_chained.js');
+        echo "<script>$(function() {	$('#second').chained('#first');});</script>";
     }
 
     private static function HtmlOption($class, $value, $content, $_selected) {

@@ -15,11 +15,12 @@
 
 class Editor {
 
-    private static $url = "/Cloud/ext/kindeditor/";
+    private static $url = "Cloud/ext/kindeditor/";
 
     public static function style() {
-        self::script();
-        self::css();
+        echo Html::js(self::$url . 'kindeditor.js');
+        echo Html::js(self::$url . 'lang/zh_CN.js');
+        echo Html::css(self::$url . 'themes/default/default.css');
     }
 
     public static function textarea($name, $value = '',$width='80%', $height='400px') {
@@ -50,14 +51,4 @@ class Editor {
                 ."editor.plugin.fileDialog({fileUrl : K('#url').val(),clickFn : function(url, title) {"
                 ."K('#url').val(url);K('#short').val(title);editor.hideDialog();}});});});});</script>";
     }
-
-    private static function script() {
-        echo "<script charset=\"utf-8\" src=\"" . THIS_HOST . self::$url . "kindeditor.js\" type=\"text/javascript\"></script>"
-        . "<script charset=\"utf-8\" src=\"" . THIS_HOST . self::$url . "lang/zh_CN.js\" type=\"text/javascript\"></script>";
-    }
-
-    private static function css() {
-        echo "<link rel=\"stylesheet\" href=\"" . THIS_HOST . self::$url . "themes/default/default.css\" />";
-    }
-
 }
