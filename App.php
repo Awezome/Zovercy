@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 define('SITE_ROOT', dirname(dirname(__FILE__)) . '/');
 include 'bas/Controller.php';
 include 'bas/Router.php';
@@ -51,11 +51,19 @@ class App {
     }
 
     public function run() {
+        $model= SITE_ROOT . self::$_source  . self::$model . '.php';
+        if(is_file($model)){
+            include $model; 
+        }else{
+            Func::errorMessage("No File : " .  self::$_source  . self::$model . '.php');
+        }
+        $end=Reflect::run(self::$model, self::$page);
+        if('action'==$end){
+            exit();
+        }
         include SITE_ROOT . self::$_source . '/common.php';
         include SITE_ROOT . self::$_theme . 'header.html';
         include SITE_ROOT . self::$_theme . 'sidebar.html';
-        include SITE_ROOT . self::$_source  . self::$model . '.php';
-        $end=Reflect::run(self::$model, self::$page);
         if(null!=$end){
             extract($end);
             $page = self::$page == 'auto' ? '' : self::$page;
