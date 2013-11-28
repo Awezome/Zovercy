@@ -161,7 +161,6 @@ class DB {
     }
 
     private function halt($message = '', $sql = '') {
-        header('Content-Type:text/html;');
         if ($message) {
             $note = '<b>Info: </b>' . $message . '<br />';
         }

@@ -25,7 +25,7 @@ class Editor {
 
     public static function textarea($name, $value = '',$width='80%', $height='400px') {
         self::edit($name);
-        echo "<textarea id=\"" . $name . "\" name=\"" . $name . "\" style=\"width:" . $width . ";height:" . $height . ";visibility:hidden;\" >" . $value . "</textarea>";
+        echo "<textarea id=\"" . $name . "\" name=\"" . $name . "\" style=\"width:" . $width . ";height:" . $height . ";visibility:hidden;\" >" . htmlspecialchars($value) . "</textarea>";
     }
 
     private static function edit($name) {

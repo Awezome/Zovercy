@@ -19,4 +19,12 @@ class Html {
     public static function css($src){
         return '<link rel="stylesheet" href="' . THIS_HOST . $src . ' " />';
     }
+    
+    public static function alert($str){
+         echo "<script type='text/javascript'> alert('$str');</script>";
+    }
+    
+    public static function jump($str){
+        echo "<script type='text/javascript'>location.href='$str';</script>";
+    }
 }

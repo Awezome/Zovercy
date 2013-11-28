@@ -13,43 +13,13 @@ class Str {
         }
     }
 
-    static function cleanText($string) {
-        return htmlspecialchars($string);
-    }
-
-    static function anticleanSql($string) {
-        return get_magic_quotes_gpc() ? stripslashes($string) : $string;
-    }
-
-    static function cleanSql($string) {
-        if (is_array($string)) //如果转义的是数组则对数组中的value进行递归转义
-            foreach ($string as $key => $val)
-                $string[$key] = self::cleanSql($val);
-        else
-            $string = addslashes($string); //进行转义
-        return $string;
-    }
-
     static function cleanJs($js) {
         return preg_replace("'<script[^>]*?>.*?</script>'si", '', $js);
     }
 
-    static function cleanHtml($string) {
-        if (is_array($string)) //如果转义的是数组则对数组中的value进行递归转义
-            foreach ($string as $key => $val)
-                $string[$key] = self::cleanHtml($val);
-        else
-            $string = htmlspecialchars($string); //进行转义
-        return $string;
-    }
-
-//对$string中的html标签进行替换转义
-
     public static function strexists($haystack, $needle) {
         return !(strpos($haystack, $needle) === FALSE);
     }
-
-//判断字符串是否存在	//$haystack：	查找范围,$needle：		要查找的内容
 
     public static function NoRand($begin, $end, $limit = 9) {
         $rand_array = range($begin, $end);
@@ -73,5 +43,3 @@ class Str {
 
 //产生随机字符//$length：要产生的随机字符串长度 $numeric：	是否为纯数字，当为0是表示非纯数字
 }
-
-?>

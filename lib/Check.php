@@ -1,7 +1,7 @@
 <?php
 
 class Check {
-    
+
     //from php cookbook
     static function email($email) {
         $qtext = '[^\\x0d\\x22\\x5c\\x80-\\xff]';
@@ -19,18 +19,22 @@ class Check {
         return preg_match("!^$addr_spec$!", $email);
     }
 
-    static function exist($str){
-        return isset($str)&&strlen($str);
+    static function exist($str) {
+        return isset($str) && strlen($str);
     }
-    
+
     static function number($num) {
-        return  ctype_digit($num)? intval($num):0 ;
+        return ctype_digit($num) ? intval($num) : 0;
+    }
+
+    static function text($string) {
+        return htmlspecialchars($string);
     }
 
     static function isEmpty($data) {
-        if(empty($data)){
+        if (empty($data)) {
             Func::jump(THIS_HOST);
-        }           
+        }
     }
 
 }
