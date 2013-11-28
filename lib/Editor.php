@@ -3,13 +3,13 @@
 /*
  * Class Editor
  *
- * update : 2013-11-27
+ * update : 2013-11-28
  * ----------------------------------------------------------------------*
  * @author : ZYP            @time : 2012-01-25
  * ----------------------------------------------------------------------*
  * Notes :
  * Editor::style()
- * Editor::textarea($name,"95%","400px",$value)
+ * Editor::textarea($name,$value,"95%","400px")
  * ----------------------------------------------------------------------*
  */
 
@@ -29,8 +29,8 @@ class Editor {
     }
 
     private static function edit($name) {
-        echo "<script>var editor;KindEditor.ready(function(K) { editor = K.create('textarea[name=\"" . $name . "\"]', {"
-       ."uploadJson : '" . self::kindJson() . "', allowFileManager:true,resizeType:1,filterMode : false });});</script>";
+       echo "<script>var editor;KindEditor.ready(function(K) { editor = K.create('textarea[name=\"" . $name . "\"]', {";
+       echo "uploadJson : '" . self::kindJson() . "', allowFileManager:true,resizeType:1,filterMode : false });});</script>";
     }
 
     private static function kindJson($water = 0) {
@@ -40,15 +40,15 @@ class Editor {
 
     static function fileupload($name = '', $class = '') {
         self::fileupload_script();
-        echo "<input type=\"text\" name=\"" . $name . "\" class=\"" . $class . "\" id=\"url\" value=\"\" />
-	<input type=\"text\" name=\"" . $name . "\" class=\"" . $class . "\" id=\"short\" value=\"\" />
-	<input type=\"button\" id=\"insertfile\" value=\"选择文件\" />";
+        echo "<input type=\"text\" name=\"" . $name . "\" class=\"" . $class . "\" id=\"url\" value=\"\" />";
+        echo	"<input type=\"text\" name=\"" . $name . "\" class=\"" . $class . "\" id=\"short\" value=\"\" />";
+        echo "<input type=\"button\" id=\"insertfile\" value=\"选择文件\" />";
     }
 
     private function fileupload_script() {
-        echo "<script>KindEditor.ready(function(K) {var editor = K.editor({allowFileManager : false});"
-                ."K('#insertfile').click(function() {editor.loadPlugin('insertfile', function() {"
-                ."editor.plugin.fileDialog({fileUrl : K('#url').val(),clickFn : function(url, title) {"
-                ."K('#url').val(url);K('#short').val(title);editor.hideDialog();}});});});});</script>";
+        echo "<script>KindEditor.ready(function(K) {var editor = K.editor({allowFileManager : false});";
+        echo "K('#insertfile').click(function() {editor.loadPlugin('insertfile', function() {";
+        echo "editor.plugin.fileDialog({fileUrl : K('#url').val(),clickFn : function(url, title) {";
+        echo "K('#url').val(url);K('#short').val(title);editor.hideDialog();}});});});});</script>";
     }
 }
