@@ -20,19 +20,11 @@ class Func {
         echo "</div></div>";
         exit();
     }
-        
-    function _int($num) {
-        return isset($num) ? intval($num) : 0;
-    }
-
-    function _empty($data) {
-        if (!$data)
-            Jump(THIS_HOST);
-    }
-    function Jump($url) {
+    
+    static function jump($url) {
         header("Location: " . $url);
     }
-
+    
     function a($out) {
         header('Content-Type:text/html;charset=utf-8');
         echo "<pre>";
