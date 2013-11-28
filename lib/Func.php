@@ -24,26 +24,8 @@ class Func {
     static function jump($url) {
         header("Location: " . $url);
     }
-    
-    function a($out) {
-        header('Content-Type:text/html;charset=utf-8');
-        echo "<pre>";
-        print_r($out);
-        echo "</pre>";
-        exit;
-    }
 
-    function p($out) {
-        header('Content-Type:text/html;charset=utf-8');
-        echo "<pre>";
-        print_r($out);
-        echo "</pre>";
-    }
-
-    function br() {
-        echo '<br />';
-    }
-
+    ////////////////////////////////
     function Permit($mingid, $maxgid, $word = "无权限操作，请先登录！") {
         global $gid;
         if (!( $mingid <= $gid && $gid <= $maxgid )) {

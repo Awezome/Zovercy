@@ -13,8 +13,6 @@ class Str {
         }
     }
 
-//在一个字符串中截取前$length个字符//$string：待截取的字符串,$length：需要截取的长度
-
     static function cleanText($string) {
         return htmlspecialchars($string);
     }
@@ -31,8 +29,6 @@ class Str {
             $string = addslashes($string); //进行转义
         return $string;
     }
-
-//对sql的一些字符进行转义 ,对单引号（'）、双引号（"）、反斜线（\）与 NUL（NULL 字符），进行转义
 
     static function cleanJs($js) {
         return preg_replace("'<script[^>]*?>.*?</script>'si", '', $js);

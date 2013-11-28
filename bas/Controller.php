@@ -12,13 +12,11 @@
  * @author YunPeng
  */
 class Controller {
-
-    public $abc = 'hello';
-    protected $get = array();
+    protected $get;
     protected $db;
 
     public function __construct() {
-        $this->get = App::$get;
+       $this->get =empty(App::$get)?array(0=>0,1=>0,2=>0,3=>0):App::$get;
         $this->db = App::$db;
     }
 
