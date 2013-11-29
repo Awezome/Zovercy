@@ -30,6 +30,25 @@ class Check {
     static function text($string) {
         return htmlspecialchars($string);
     }
+    
+    static function filterArray($string) {
+        if (is_array($string)) {
+            foreach ($string as $key => $val) {
+                $string[$key] = self::filterArray($val);
+            }
+        } else {
+            $string = addslashes($string);
+        }
+        return $string;
+    }
+
+    static function filterNeed(){
+        return !get_magic_quotes_gpc();
+    }
+    
+    static function filter($var) {
+        return addslashes($var);
+    }
 
     static function isEmpty($data) {
         if (empty($data)) {

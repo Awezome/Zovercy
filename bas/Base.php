@@ -17,17 +17,6 @@ class Base {
         }
     }
 
-    static function magic() {
-        if (!get_magic_quotes_gpc()) {
-            function addslashesDeep($var) {
-                return is_array($var) ? array_map('addslashesDeep', $var) : addslashes($var);
-            }
-            $_GET = addslashesDeep($_GET);
-            $_POST = addslashesDeep($_POST);
-            //$_COOKIE = addslashesDeep($_COOKIE);
-            //$_REQUEST = addslashesDeep($_REQUEST);
-        }
-    }
 }
 
 function p($out) {

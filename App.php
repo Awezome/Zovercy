@@ -33,7 +33,7 @@ class App {
         self::$model = $routerArr['model'];
         self::$page = $routerArr['page'];
         self::$get = $routerArr['gets'];
-
+ 
         self::$db = DB::getInstance(self::$CONFIG['DB']);
 
         session_start();
@@ -45,7 +45,6 @@ class App {
         define('THIS_DIR', THIS_HOST . self::$_theme);
         spl_autoload_register("self::_autoload");
         Base::debug(true); //开发模式
-        Base::magic();
     }
 
     public function run() {

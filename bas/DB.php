@@ -107,7 +107,6 @@ class DB {
             $sql_value = substr($sql_value_temp, 0, -1);
 
             $sql = '(' . $sql_key . ') values (' . $sql_value . ')';
-            echo $sql;
         } else {
             $sql = $values;
         }
