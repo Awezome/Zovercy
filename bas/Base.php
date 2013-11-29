@@ -19,7 +19,7 @@ class Base {
 
 }
 
-function p($out) {
+function p($out='') {
     echo "<pre>";
     print_r($out);
     echo "</pre>";

@@ -6,17 +6,10 @@
  * update : 2013-05-29
  * ----------------------------------------------------------------------*
  * @improve : ZYP            @time : 2012-01-11
- * ----------------------------------------------------------------------*
- * Notes :
- *
- * $c = new Code ();
- * $c -> encode($string_you_want_to_encode , $key_you_will_decode);		    // encode
- * $c -> decode($string_you_want_to_decode , $key_you_have_encoded);		//  decode
- * ----------------------------------------------------------------------*
  */
 class Code {
 
-    public function encode($string, $key = 'zyp') {
+    static function encode($string, $key = 'cloudphp') {
         $encrypt_key = md5(rand(0, 320000000));
         $encrypt_key_length = 32;
         $ctr = 0;
@@ -29,12 +22,11 @@ class Code {
             $tmp.= $code . (substr($string, $i, 1) ^ $code);
             $ctr++;
         }
-        return base64_encode($this->Keycode($tmp, $key));
+        return base64_encode(self::keycode($tmp, $key));
     }
 
-    public function decode($string, $key = 'zyp') {
-        $string = base64_decode($string);
-        $string = $this->keycode($string, $key);
+    static function decode($str, $key = 'cloudphp') {
+        $string =self::keycode(base64_decode($str), $key);
         $tmp = "";
 
         $string_l = strlen($string);
@@ -46,7 +38,7 @@ class Code {
         return $tmp;
     }
 
-    private function keycode($string, $encrypt_key) {
+    static private function keycode($string, $encrypt_key) {
         $encrypt_key = md5($encrypt_key);
         $ctr = 0;
         $tmp = "";
@@ -61,6 +53,8 @@ class Code {
         return $tmp;
     }
 
-}
+    public static function encrypt($string,$key = 'cloudphp') {
+        return md5(md5($string) . substr($string, 0, 4).$key);
+    }
 
-?>
+}
