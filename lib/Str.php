@@ -17,10 +17,6 @@ class Str {
         return preg_replace("'<script[^>]*?>.*?</script>'si", '', $js);
     }
 
-    public static function strexists($haystack, $needle) {
-        return !(strpos($haystack, $needle) === FALSE);
-    }
-
     public static function NoRand($begin, $end, $limit = 9) {
         $rand_array = range($begin, $end);
         shuffle($rand_array); //调用现成的数组随机排列函数

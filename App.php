@@ -68,6 +68,7 @@ class App {
             include SITE_ROOT . self::$_theme . self::$model . $page . '.html';
         }
         include SITE_ROOT . self::$_theme . 'footer.html';
+        exit();
     }
 
     static function _autoload($class_name) {
