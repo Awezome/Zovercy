@@ -2,10 +2,16 @@
 
 class Base {
 
-    static function getThisHost() {
-        return
-                $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . ':'
-                . $_SERVER['SERVER_PORT'] . dirname($_SERVER['SCRIPT_NAME']) . '/';
+    static function getLink() {
+        return self::getHost() . dirname($_SERVER['SCRIPT_NAME']) . '/';
+    }
+
+    static function getHost(){
+        return $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . ':' . $_SERVER['SERVER_PORT'];
+    }
+
+    static function getUrl(){
+        return self::getHost().$_SERVER['REQUEST_URI'];
     }
 
     static function debug($switch) {
