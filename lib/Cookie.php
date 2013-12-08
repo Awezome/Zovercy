@@ -19,12 +19,13 @@
 class Cookie {
 
     static private $config = array();
+    static private $path='/'; //to do : it will delete all cookies in the domain
 
     static function set($name, $value) {
         self::getConfig();
         $name = Code::encrypt($name,self::$config['KEY']);
-        $value = Code::encode($value,self::$config['KEY']); //调用父类的方法
-        setcookie($name, $value, time() + self::$config['TIME']);
+        $value = Code::encode($value,self::$config['KEY']); 
+        setcookie($name, $value, time() + self::$config['TIME'],self::$path);
     }
 
     static function get($name) {
@@ -36,12 +37,14 @@ class Cookie {
     static function delete($name) {
         self::getConfig();
         $name = Code::encrypt($name,self::$config['KEY']);
-        setcookie($name, null , time() - 3600);
+        setcookie($name, null ,-1,self::$path);
     }
 
     static function deleteAll() {
         while ($key = key($_COOKIE)) {
-            setcookie($key, null, time() - 3600);
+            echo $key;
+            echo '<br/>';
+            setcookie($key, null, -1,self::$path);
             next($_COOKIE);
         }
     }

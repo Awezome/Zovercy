@@ -29,7 +29,7 @@ class Chained {
         $_selected_second = 0;
 
         if ($_selected_first) {
-            $_selected_seconds = $link->table("$_table")->where("$_id=$_selected_first")->selectone("$_parent");
+            $_selected_seconds = $link->table("$_table")->where("$_id=$_selected_first")->findOne("$_parent");
             $_selected_second = $_selected_seconds[$_parent];
             if ($_selected_second == 0) {
                 $_selected_second = $_selected_first;
@@ -37,7 +37,7 @@ class Chained {
             }
         }
 
-        $data = $link->table("$_table")->where()->selectall("$_id,$_name,$_parent");
+        $data = $link->table("$_table")->where()->find("$_id,$_name,$_parent");
         $_max = count($data);
 
         $option = "<select id=\"first\" name=\"id_first\">" . self::$_face;

@@ -47,7 +47,7 @@ class Check {
     }
     
     static function filter($var) {
-        return addslashes($var);
+        return addslashes(trim($var));
     }
 
     static function isEmpty($data) {

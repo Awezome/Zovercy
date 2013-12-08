@@ -24,12 +24,12 @@
 class DB {
 
     private $table;
-    private $insertid;
-    private $where;
+    private $where='';
+    private $query=null;
     private $sql;
     private static $config = array();
     private $link = null;
-    private static $_instance;
+    private static $_instance=null;
 
     private function __construct() {
         $this->connect(self::$config['HOST'], self::$config['USER'], self::$config['PWD'], self::$config['NAME'], self::$config['CHARSET'], self::$config['TIMEZONE']);
@@ -50,34 +50,39 @@ class DB {
     }
 
     public function table($tablename) {
-        $this->table = self::$config['TABLEPRE'] . $tablename;
+        $this->table = self::$config['TABLEPRE'] .'_'. $tablename;
         return $this;
     }
 
-    public function where($where = 1) {
-        $this->where = $where;
+    public function where($where='1=1') {
+        $this->where ='  where  '.$where;
         return $this;
     }
 
-    public function selectone($what = '*') {
-        $this->sql = "select " . $what . " from " . $this->table . " where " . $this->where;
-        return $this->fetch_array($this->query($this->sql));
+    public function findOne($what='*') {
+        $this->sqlSelect($what);
+        $this->query();
+        return $this->fetchArray();
     }
 
-    public function selectall($what = '*') {
-        $this->sql = "select " . $what . " from " . $this->table . " where " . $this->where;
-        return $this->fetch_all($this->sql);
+    public function find($what='*') {
+        $this->sqlSelect($what);
+        return $this->fetchAll();
     }
 
-    public function selectgroup($what = '*') {
-        $this->sql = "select " . $what . " from " . $this->table;
-        return $this->fetch_group($this->sql);
+    public function findGroup($what = '*') {
+        $this->sqlSelect($what);
+        return $this->fetchGroup();
     }
 
-    public function selectcount($what = '*') {
-        $this->sql = "select count($what) from $this->table where $this->where";
-        $query = $this->query($this->sql);
-        $sum_arr = $this->fetch_array($query, MYSQL_NUM);
+    private function sqlSelect($what='*'){
+         $this->sql = 'select '.$what.'  from '.$this->table.$this->where;
+    }
+    
+    public function count($what = '*') {
+        $this->sqlSelect("count($what)");
+        $this->query();
+        $sum_arr = $this->fetchArray(MYSQL_NUM);
         return $sum_arr[0];
     }
 
@@ -91,11 +96,11 @@ class DB {
         } else {
             $sql = $set;
         }
-        $this->sql = "update " . $this->table . " set " . $sql . " where " . $this->where;
-        $this->query($this->sql);
+        $this->sql = 'update ' . $this->table . ' set ' . $sql . $this->where;
+        $this->query();
     }
 
-    public function insert($values) {
+    public function save($values) {
         if (is_array($values)) {
             $sql_key_temp = '';
             $sql_value_temp = '';
@@ -110,17 +115,18 @@ class DB {
         } else {
             $sql = $values;
         }
-        $this->sql = "insert into " . $this->table . $sql;
-        $this->query($this->sql);
+        $this->sql = 'insert into ' . $this->table . $sql;
+        $this->query();
     }
 
-    public function insertId() {
-        return ($id = mysql_insert_id($this->link)) >= 0 ? $id : $this->result($this->query("select last_insert_id()"), 0);
+    public function saveId() {
+        $this->sql='select last_insert_id()';
+        return ($id = mysql_insert_id($this->link)) >= 0 ? $id : $this->result($this->query(), 0);
     }
 
     public function delete() {
-        $this->sql = "delete from " . $this->table . " where " . $this->where;
-        $this->query($this->sql);
+        $this->sql = 'delete from ' . $this->table . $this->where;
+        $this->query();
     }
 
     public function sql() {
@@ -146,21 +152,21 @@ class DB {
         mysql_select_db($dbname, $this->link);
     }
 
-    private function fetch_array($query, $result_type = MYSQL_ASSOC) {
-        return mysql_fetch_array($query, $result_type);
+    private function fetchArray($result_type = MYSQL_ASSOC) {
+        return mysql_fetch_array($this->query, $result_type);
     }
 
-    private function fetch_all($sql) {
+    private function fetchAll() {
         $rearr = array();
-        $query = $this->query($sql);
-        while ($re = $this->fetch_array($query)) {
+        $this->query();
+        while ($re = $this->fetchArray()) {
             $rearr[] = $re;
         }
         return $rearr;
     }
 
-    private function fetch_group($sql) {
-        $res = $this->fetch_all($sql);
+    private function fetchGroup() {
+        $res = $this->fetchAll();
         $rearr = array();
         foreach ($res as $re) {
             $rearr[$re['key']] = $re['value'];
@@ -168,11 +174,10 @@ class DB {
         return $rearr;
     }
 
-    private function query($sql) {
-        if (!($query = mysql_query($sql, $this->link))) {
-            $this->halt('MySQL Query Error', $sql);
+    private function query() {
+        if (!($this->query = mysql_query($this->sql, $this->link))) {
+            $this->halt('MySQL Query Error', $this->sql);
         }
-        return $query;
     }
 
     private function result($query, $row) {

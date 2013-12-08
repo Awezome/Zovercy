@@ -6,19 +6,20 @@ include 'bas/Router.php';
 include 'bas/Reflect.php';
 include 'bas/DB.php';
 include 'bas/Base.php';
-define('THIS_HOST', Base::getThisHost());
+define('THIS_HOST', Base::getLink());
 
 class App {
 
-    static private $model;
-    static private $page;
-    static public $get = array();
-    static public $CONFIG;
-    static public $db;
+    static $get = array();
+    static $CONFIG;
+    static $db;
+    static $roleid;
+    static $userid;
+    static $username;
+    static private $controller;
+    static private $action;
     static private $_source;
     static private $_theme;
-    static public $gid = 1;
-    static public $uid = 1;
 
     function __construct($source, $theme) {
         include SITE_ROOT . './Cloud/Config.php';
@@ -30,11 +31,13 @@ class App {
         $this->init();
 
         $routerArr = Router::run();
-        self::$model = $routerArr['model'];
-        self::$page = $routerArr['page'];
-        self::$get = $routerArr['gets'];
- 
+        self::$controller = $routerArr['controller'];
+        self::$action = $routerArr['action'];
+        self::$get = $routerArr['get'];
+
         self::$db = DB::getInstance(self::$CONFIG['DB']);
+
+        $this->user();
 
         session_start();
         header('Content-Type:text/html;charset=' . self::$CONFIG['CHARSET']);
@@ -48,13 +51,13 @@ class App {
     }
 
     public function run() {
-        $model = SITE_ROOT . self::$_source . self::$model . '.php';
+        $model = SITE_ROOT . self::$_source . self::$controller . '.php';
         if (is_file($model)) {
             include $model;
         } else {
-            Func::errorMessage("No Controller : " . self::$_source . self::$model);
+            Func::errorMessage("No Controller : " . self::$_source . self::$controller);
         }
-        $end = Reflect::run(self::$model, self::$page);
+        $end = Reflect::run(self::$controller, self::$action);
         if ('action' == $end) {
             exit();
         }
@@ -63,9 +66,9 @@ class App {
         include SITE_ROOT . self::$_theme . 'sidebar.html';
         if (null != $end) {
             extract($end);
-            $page = self::$page == 'auto' ? '' : self::$page;
-            include SITE_ROOT . self::$_theme . self::$model . $page . '.html';
         }
+        $page = self::$action == 'auto' ? '' : self::$action;
+        include SITE_ROOT . self::$_theme . self::$controller . $page . '.html';
         include SITE_ROOT . self::$_theme . 'footer.html';
         exit();
     }
@@ -79,6 +82,12 @@ class App {
 
     function __destruct() {
         self::$db->close();
+    }
+
+    private function user() {
+        self::$username = Cookie::get('username');
+        self::$userid = Cookie::get('userid');
+        self::$roleid = Cookie::get('roleid');
     }
 
 }

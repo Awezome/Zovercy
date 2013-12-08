@@ -35,7 +35,7 @@ class Page {
         $this->select= $select;
         $this->link = App::$db;
         $this->tablename = $tablename;
-        $this->total = $this->link->table($this->tablename)->where($where)->selectcount();
+        $this->total = $this->link->table($this->tablename)->where($where)->count();
         $this->listRows = $listRows;
         $this->uri = $this->getUri($pa);
         $this->page = isset($_GET['p']) ? intval($_GET['p']) : 1;
@@ -140,7 +140,7 @@ class Page {
         $where = $this->sql;
         $per = $this->listRows;
         $ber = ($this->page - 1) * $per; //每页开始查询数字
-        return $this->link->table($this->tablename)->where("$where order by date desc limit $ber,$per")->selectall($this->select);
+        return $this->link->table($this->tablename)->where("$where order by date desc limit $ber,$per")->find($this->select);
     }
 
 }
