@@ -15,9 +15,9 @@
 class Router {
 
     static function run() {
-        $name = str_replace( Base::getLink(), '', Base::getUrl());
+        $name = str_replace(Base::getLink(), '', Base::getUrl());
         $url = explode("/", $name);
-        return self::setUpRouter($url);
+        self::setUpRouter($url);
     }
 
     static function setUpRouter($arr) {
@@ -26,14 +26,17 @@ class Router {
         for ($i = 3; $i < $size; $i++) {
             $url[] = $arr[$i];
         }
-       $rarray=array();
         if (empty($arr[2])) {
-            $rarray=array('controller' =>'', 'action' => 'auto', 'get' => '');
-            $rarray['controller']=empty($arr[1])?'index':$arr[1];            
+            Z::$controller = '';
+            Z::$action = 'auto';
+            Z::$get = '';
+
+            Z::$controller = empty($arr[1]) ? 'index' : $arr[1];
         } else {
-            $rarray=array('controller' => $arr[1], 'action' => $arr[2], 'get' => $url);
+            Z::$controller = $arr[1];
+            Z::$action = $arr[2];
+            Z::$get = $url;
         }
-        return $rarray;
     }
 
 }

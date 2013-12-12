@@ -42,15 +42,13 @@ class Cookie {
 
     static function deleteAll() {
         while ($key = key($_COOKIE)) {
-            echo $key;
-            echo '<br/>';
             setcookie($key, null, -1,self::$path);
             next($_COOKIE);
         }
     }
 
     static private function getConfig(){
-        self::$config = APP::$CONFIG['COOKIE'];
+        self::$config = Z::$config['COOKIE'];
     }
     
 }

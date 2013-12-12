@@ -21,15 +21,13 @@ class Chained {
     static private $_face = "<option value=''>---请选择---</option>"; //未选择时界面
 
     static function run($_table, $_id, $_name, $_selected_first = 0) {
-        $link = App::$db;
-
         self::$_id = $_id;
         self::$_name = $_name;
         $_parent = self::$_parent;
         $_selected_second = 0;
 
         if ($_selected_first) {
-            $_selected_seconds = $link->table("$_table")->where("$_id=$_selected_first")->findOne("$_parent");
+            $_selected_seconds = Z::$db->table("$_table")->where("$_id=$_selected_first")->findOne("$_parent");
             $_selected_second = $_selected_seconds[$_parent];
             if ($_selected_second == 0) {
                 $_selected_second = $_selected_first;
@@ -37,7 +35,7 @@ class Chained {
             }
         }
 
-        $data = $link->table("$_table")->where()->find("$_id,$_name,$_parent");
+        $data =Z::$db->table("$_table")->where()->find("$_id,$_name,$_parent");
         $_max = count($data);
 
         $option = "<select id=\"first\" name=\"id_first\">" . self::$_face;

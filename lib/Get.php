@@ -13,15 +13,15 @@
  */
 class Get {
     static function all() {
-        return empty(App::$get) ? null : Check::filterNeed() ? Check::filterArray(App::$get) : App::$get;
+        return empty(Z::$get) ? null : Check::filterNeed() ? Check::filterArray(Z::$get) : Z::$get;
     }
 
     static function string($key = 0) {
-        return empty(App::$get) ? null : Check::text(Check::filterNeed() ? Check::filter(App::$get[$key]) : App::$get[$key]);
+        return empty(Z::$get) ? null : Check::text(Check::filterNeed() ? Check::filter(Z::$get[$key]) : Z::$get[$key]);
     }
 
     static function number($key = 0) {
-        return empty(App::$get) ? null : Check::number(App::$get[$key]);
+        return empty(Z::$get) ? null : Check::number(Z::$get[$key]);
     }
 
 }

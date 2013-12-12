@@ -12,10 +12,9 @@
  * @author YunPeng
  */
 class Controller {
-    protected $db;
 
     public function __construct() {
-        $this->db = App::$db;
+
     }
 
     public function __destruct() {

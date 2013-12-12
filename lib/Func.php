@@ -29,7 +29,7 @@ class Func {
     function Permit($mingid, $maxgid, $word = "无权限操作，请先登录！") {
         global $gid;
         if (!( $mingid <= $gid && $gid <= $maxgid )) {
-            echo "<script type='text/javascript'> alert('" . $word . "');location.href='" . THIS_HOST . "page/login';</script>";
+            echo "<script type='text/javascript'> alert('" . $word . "');location.href='" .  Z::$link . "page/login';</script>";
             exit();
         }
     }

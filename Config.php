@@ -1,6 +1,6 @@
 <?php
 
-$CONFIG['DB'] = array(
+Z::$config['DB'] = array(
     'TYPE' => 'mysql', //数据库类型
     'HOST' => '127.0.0.1', //数据库地址
     'NAME' => 'cloudphp', //数据库名
@@ -12,9 +12,9 @@ $CONFIG['DB'] = array(
 );
 
 // Cookie
-$CONFIG['COOKIE'] = array(
+Z::$config['COOKIE'] = array(
     'KEY' => 'cloudphp', //cookie 加密密钥，加密使用，建议更改
     'TIME' => 120000, //cookie过期时间，单位秒
 );
 
-$CONFIG['CHARSET'] = 'utf-8'; // 'gbk', 'big5', 'utf-8'
+Z::$config['CHARSET'] = 'utf-8'; // 'gbk', 'big5', 'utf-8'

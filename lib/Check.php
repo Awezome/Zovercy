@@ -52,7 +52,7 @@ class Check {
 
     static function isEmpty($data) {
         if (empty($data)) {
-            Func::jump(THIS_HOST);
+            Func::jump( Z::$link);
         }
     }
 

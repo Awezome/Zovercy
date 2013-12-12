@@ -13,7 +13,9 @@
  */
 class Reflect {
 
-    static public function run($classname, $methodname) {
+    static public function run() {
+            $classname=Z::$controller;
+            $methodname=Z::$action;
             if (!class_exists($classname)) {
                 Func::errorMessage("No Class : " . $classname);
             }
