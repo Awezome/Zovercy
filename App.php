@@ -1,14 +1,14 @@
 <?php
 
 define('SITE_ROOT', dirname(dirname(__FILE__)) . '/');
-include 'bas/Base.php';
-include 'bas/Z.php';
+include SITE_ROOT . './Cloud/bas/Base.php';
+include SITE_ROOT . './Cloud/bas/Z.php';
 include SITE_ROOT . './Cloud/Config.php';
-include 'bas/Controller.php';
-include 'bas/Router.php';
-include 'bas/Reflect.php';
-include 'bas/DB.php';
-include 'bas/Auth.php';
+include SITE_ROOT . './Cloud/bas/Controller.php';
+include SITE_ROOT . './Cloud/bas/Router.php';
+include SITE_ROOT . './Cloud/bas/Reflect.php';
+include SITE_ROOT . './Cloud/bas/DB.php';
+include SITE_ROOT . './Cloud/bas/Auth.php';
 
 class App {
     static private $_source;

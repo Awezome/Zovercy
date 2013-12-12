@@ -27,11 +27,9 @@ class Router {
             $url[] = $arr[$i];
         }
         if (empty($arr[2])) {
-            Z::$controller = '';
-            Z::$action = 'auto';
-            Z::$get = '';
-
             Z::$controller = empty($arr[1]) ? 'index' : $arr[1];
+            Z::$action = 'auto';
+            Z::$get = '';            
         } else {
             Z::$controller = $arr[1];
             Z::$action = $arr[2];
