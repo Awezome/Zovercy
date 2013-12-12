@@ -49,6 +49,7 @@ class Cookie {
 
     static private function getConfig(){
         self::$config = Z::$config['COOKIE'];
+        self::$path=Base::getWebDir();
     }
     
 }

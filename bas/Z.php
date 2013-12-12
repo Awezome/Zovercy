@@ -13,18 +13,21 @@
  */
 class Z {
 
-    static $userid;
-    static $username;
-    static $roleid;
+    static $userid=0;
+    static $username='';
+    static $roleid=0;
     
     static $config;
     
     static $db = null;
     
     static $link;
+    static $theme;
     
     static $controller;
     static $action;
     static $get = array();
-
+    static $model;
+    
+    static $online=false;
 }

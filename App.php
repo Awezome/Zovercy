@@ -8,7 +8,7 @@ include 'bas/Controller.php';
 include 'bas/Router.php';
 include 'bas/Reflect.php';
 include 'bas/DB.php';
-Z::$link=Base::getLink();
+include 'bas/Auth.php';
 
 class App {
     static private $_source;
@@ -17,10 +17,11 @@ class App {
     function __construct($source, $theme) {
         self::$_source = $source;
         self::$_theme = $theme;
-
+        
         $this->init();
 
         Router::run();
+        Z::$model=Z::$link.Base::getAppName().'/'.Z::$controller.'/';
         Z::$db = DB::getInstance(Z::$config['DB']);
 
         $this->user();
@@ -30,18 +31,21 @@ class App {
 
     private function init() {
         date_default_timezone_set('PRC'); //设置中国时区
-        define('THIS_DIR', Z::$link . self::$_theme);
+        Z::$link=Base::getLink();
+        Z::$theme= Z::$link . self::$_theme;
         spl_autoload_register("self::_autoload");
-        Base::debug(true); //开发模式
+        Base::debug(Z::$config['DEBUG']); //开发模式
     }
 
     public function run() {
         $model = SITE_ROOT . self::$_source . Z::$controller . '.php';
-        if (is_file($model)) {
-            include $model;
-        } else {
+        if (!is_file($model)) {
             Func::errorMessage("No Controller : " . self::$_source . Z::$controller);
         }
+        
+        Auth::run();
+        
+        include $model;
         $end = Reflect::run();
         if ('action' == $end) {
             exit();
@@ -71,8 +75,9 @@ class App {
 
     private function user() {
         Z::$username = Cookie::get('username');
-        Z::$userid = Cookie::get('userid');
-        Z::$roleid = Cookie::get('roleid');
+        Z::$userid = Check::number(Cookie::get('userid'));
+        Z::$roleid = Check::number(Cookie::get('roleid'));
+        Z::$online=Z::$userid>0?true:false;
     }
 
 }

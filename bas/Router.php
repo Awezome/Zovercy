@@ -15,7 +15,7 @@
 class Router {
 
     static function run() {
-        $name = str_replace(Base::getLink(), '', Base::getUrl());
+        $name = str_replace(Z::$link, '', Base::getUrl());
         $url = explode("/", $name);
         self::setUpRouter($url);
     }

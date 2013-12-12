@@ -14,7 +14,9 @@ Z::$config['DB'] = array(
 // Cookie
 Z::$config['COOKIE'] = array(
     'KEY' => 'cloudphp', //cookie 加密密钥，加密使用，建议更改
-    'TIME' => 120000, //cookie过期时间，单位秒
+    'TIME' => 3600, //cookie过期时间，单位秒
 );
 
 Z::$config['CHARSET'] = 'utf-8'; // 'gbk', 'big5', 'utf-8'
+
+Z::$config['DEBUG']=true;
