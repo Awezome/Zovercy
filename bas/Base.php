@@ -7,7 +7,8 @@ class Base {
     }
 
     static function getHost(){
-        return $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . ':' . $_SERVER['SERVER_PORT'];
+        //return $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . ':' . $_SERVER['SERVER_PORT'];
+        return Z::$config['WEBSITE']['DOMAIN'];
     }
 
     static function getUrl(){
@@ -19,8 +20,9 @@ class Base {
     }
     
     static function getWebDir(){
-        $dir=dirname($_SERVER['SCRIPT_NAME']);
-        return $dir=='\\'?'/':$dir;
+        //$dir=dirname($_SERVER['SCRIPT_NAME']);
+        //$dir=$dir=='\\'?'/':$dir;
+        return Z::$config['WEBSITE']['DIR'];
     }
     
     static function debug($switch) {

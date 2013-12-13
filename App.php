@@ -42,7 +42,6 @@ class App {
         if (!is_file($model)) {
             Func::errorMessage("No Controller : " . self::$_source . Z::$controller);
         }
-        
         Auth::run();
         
         include $model;

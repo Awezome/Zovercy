@@ -20,3 +20,8 @@ Z::$config['COOKIE'] = array(
 Z::$config['CHARSET'] = 'utf-8'; // 'gbk', 'big5', 'utf-8'
 
 Z::$config['DEBUG']=true;
+
+Z::$config['WEBSITE']=array(
+    'DOMAIN'=>'http://127.0.0.1',
+    'DIR'=>'/cloudphp',
+);

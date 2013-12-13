@@ -21,20 +21,17 @@ class Router {
     }
 
     static function setUpRouter($arr) {
+        Z::$controller = empty($arr[1]) ? 'index' : $arr[1];
+        Z::$action = empty($arr[2])?'auto':$arr[2];
+        
         $url = array();
-        $size = count($arr) - 1;
+        $size = count($arr)-1;
         for ($i = 3; $i < $size; $i++) {
             $url[] = $arr[$i];
         }
-        if (empty($arr[2])) {
-            Z::$controller = empty($arr[1]) ? 'index' : $arr[1];
-            Z::$action = 'auto';
-            Z::$get = '';            
-        } else {
-            Z::$controller = $arr[1];
-            Z::$action = $arr[2];
-            Z::$get = $url;
-        }
+        unset($arr);
+
+        Z::$get = $url;  
     }
 
 }
