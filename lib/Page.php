@@ -20,7 +20,7 @@ class Page {
     private $total; //数据表中总记录数
     private $listRows; //每页显示行数
     private $pageNum; //页数
-    private $config = array('header' => '条记录', 'prev' => '上一页', 'next' => '下一页', 'first' => '«', 'last' => "»", 'jump' => 'GO');
+    private $config = array('header' => '条记录', 'prev' => 'PRE', 'next' => 'NEXT', 'first' => '«', 'last' => "»", 'jump' => 'GO');
     private $uri;
     private $listNum = 4;
     private $tablename;
@@ -58,7 +58,7 @@ class Page {
     }
 
     private function htmlCurrent($num){
-        return '<li  class="active" ><a href="#">'  . $num . '</a></li>';
+        return '<li  class="active current" ><a href="#">'  . $num . '</a></li>';
     }
     
     private function start() {
@@ -123,7 +123,7 @@ class Page {
 
     function run() {
         if ($this->pageNum != 1) {
-            return '<ul>'
+            return '<ul class="pagination">'
                     .$this->first()
                     .$this->prev()
                     .$this->pageList()

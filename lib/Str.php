@@ -1,6 +1,24 @@
 <?php
 
 class Str {
+    public static function cutStr($data, $cut = 400, $str = ' <span class="radius label">More...</span>') {
+        $data = strip_tags($data); //去除html标记
+        return mb_strimwidth($data, 0, $cut, $str, "utf-8");
+    }
+
+    static function cutStrBack($value, $length = 400) {
+        $value = strip_tags($value); //去除html标记  
+        $valueEncoding = mb_detect_encoding($value, 'auto', true);
+        if ($length >= mb_strwidth($value, $valueEncoding)) {
+            return $value;
+        }
+        $limited = '';
+        $firstWidth = ceil($length / 2);
+        $secondStart = mb_strwidth($value, $valueEncoding) - ( $length - $firstWidth );
+        $secondWidth = $length - $firstWidth + 1;
+        $limited = mb_strimwidth($value, 0, $firstWidth, '...', $valueEncoding) . mb_substr($value, $secondStart, $secondWidth, $valueEncoding);
+        return $limited;
+    }
 
     public static function comsubstr($string, $length,$charset) {
         $length1 = mb_strlen($string, $charset);
