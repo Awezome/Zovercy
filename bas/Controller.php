@@ -13,16 +13,39 @@
  */
 class Controller {
 
+    private static $path;
+    private $data;
+
     public function __construct() {
-
+        self::$path = SITE_ROOT . Z::$themedir;
     }
 
-    public function __destruct() {
-        
+    public function __destruct() {}
+
+    protected function loadView($page) {
+        $p=self::$path . $page . '.html';
+        if(!is_file($p)){
+            Func::errorMessage('No Template : '. $page );
+        }       
+        include SITE_ROOT . Z::$sourcedir . '/common.php';
+         if (null != $this->data) {
+            extract($this->data);
+        }
+        include self::$path . 'header.html';
+        include self::$path . 'sidebar.html';
+        include $p;
+        include self::$path . 'footer.html';
     }
 
-    public function __call($name, $value) {
-        exit("<br>;Bad function name '$name' ");
+    protected function loadSingle($page) {
+        $p = self::$path . $page . '.html';
+        if (!is_file($p)) {
+            Func::errorMessage('No Template : ' . $page);
+        }
+        include $p;
     }
 
+    protected function setData($data){
+        $this->data=$data;        
+    }
 }

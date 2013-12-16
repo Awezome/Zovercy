@@ -30,4 +30,7 @@ class Z {
     static $model;
     
     static $online=false;
+    
+    static $themedir='';
+    static $sourcedir='';
 }

@@ -11,12 +11,9 @@ include SITE_ROOT . './Cloud/bas/DB.php';
 include SITE_ROOT . './Cloud/bas/Auth.php';
 
 class App {
-    static private $_source;
-    static private $_theme;
-
     function __construct($source, $theme) {
-        self::$_source = $source;
-        self::$_theme = $theme;
+        Z::$themedir=$theme;
+        Z::$sourcedir=$source;
         
         $this->init();
 
@@ -32,32 +29,20 @@ class App {
     private function init() {
         date_default_timezone_set('PRC'); //设置中国时区
         Z::$link=Base::getLink();
-        Z::$theme= Z::$link . self::$_theme;
+        Z::$theme= Z::$link .Z::$themedir;
         spl_autoload_register("self::_autoload");
         Base::debug(Z::$config['DEBUG']); //开发模式
     }
 
-    public function run() {
-        $model = SITE_ROOT . self::$_source . Z::$controller . '.php';
+    public function run() {        
+        $model = SITE_ROOT .  Z::$sourcedir . Z::$controller . '.php';
         if (!is_file($model)) {
-            Func::errorMessage("No Controller : " . self::$_source . Z::$controller);
+            Func::errorMessage("No Controller : " .  Z::$sourcedir . Z::$controller);
         }
         Auth::run();
         
         include $model;
-        $end = Reflect::run();
-        if ('action' == $end) {
-            exit();
-        }
-        include SITE_ROOT . self::$_source . '/common.php';
-        include SITE_ROOT . self::$_theme . 'header.html';
-        include SITE_ROOT . self::$_theme . 'sidebar.html';
-        if (null != $end) {
-            extract($end);
-        }
-        $page = Z::$action == 'auto' ? '' : Z::$action;
-        include SITE_ROOT . self::$_theme .Z::$controller . $page . '.html';
-        include SITE_ROOT . self::$_theme . 'footer.html';
+        Reflect::run();
         exit();
     }
 

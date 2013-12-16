@@ -25,8 +25,9 @@ class Reflect {
             }
             $instance = $class->newInstance();
             $method = $class->getMethod($methodname);
-            $results = $method->invoke($instance);
-            return null == $results ? array() : $results;
+             $method->invoke($instance);
+            //$results = $method->invoke($instance);
+            //return null == $results ? array() : $results;
 
     }
 
