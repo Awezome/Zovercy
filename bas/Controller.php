@@ -34,7 +34,6 @@ class Controller {
             extract($this->data);
         }
         include self::$path . 'header.html';
-        include self::$path . 'sidebar.html';
         include $p;
         include self::$path . 'footer.html';
     }

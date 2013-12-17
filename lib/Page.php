@@ -27,8 +27,9 @@ class Page {
     private $page;
     private $sql;
     private $select;
+    private $order;
 
-    function __construct($tablename, $select, $where=1,$listRows=10) {
+    function __construct($tablename, $select, $order, $where=1,$listRows=10) {
         $pa = "";
         $this->sql = $where;
         $this->select= $select;
@@ -38,6 +39,7 @@ class Page {
         $this->uri = $this->getUri($pa);
         $this->page = isset($_GET['p']) ? intval($_GET['p']) : 1;
         $this->pageNum = ceil($this->total / $this->listRows);
+        $this->order=$order;
     }
 
     private function getUri($pa) {
@@ -136,9 +138,10 @@ class Page {
 
     function sql() {
         $where = $this->sql;
+        $order=$this->order;
         $per = $this->listRows;
         $ber = ($this->page - 1) * $per; //每页开始查询数字
-        return Z::$db->table($this->tablename)->where("$where order by date desc limit $ber,$per")->find($this->select);
+        return Z::$db->table($this->tablename)->where("$where order by $order desc limit $ber,$per")->find($this->select);
     }
 
 }
