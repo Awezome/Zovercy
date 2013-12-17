@@ -20,7 +20,9 @@ class Controller {
         self::$path = SITE_ROOT . Z::$themedir;
     }
 
-    public function __destruct() {}
+    public function __destruct() {
+        unset($this->data);
+    }
 
     protected function loadView($page) {
         $p=self::$path . $page . '.html';

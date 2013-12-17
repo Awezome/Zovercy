@@ -21,14 +21,14 @@ class Reflect {
             }
             $class = new ReflectionClass($classname);
             if (!$class->hasMethod($methodname)) {
-                Func::errorMessage("No Method : " . $classname . '->' . $methodname);
+                Func::errorMessage("No Method : " . $classname . ' -> ' . $methodname);
+            }
+            $method=new ReflectionMethod($classname,$methodname);
+            if($method->isPrivate()){
+                Func::errorMessage("Private Method  : " . $classname . ' -> ' . $methodname);
             }
             $instance = $class->newInstance();
-            $method = $class->getMethod($methodname);
-             $method->invoke($instance);
-            //$results = $method->invoke($instance);
-            //return null == $results ? array() : $results;
-
+            $method->invoke($instance);
     }
 
 }
