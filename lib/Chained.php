@@ -38,7 +38,7 @@ class Chained {
         $data =Z::$db->table("$_table")->where()->find("$_id,$_name,$_parent");
         $_max = count($data);
 
-        $option = "<select id=\"first\" name=\"id_first\">" . self::$_face;
+        $option = "<select id=\"first\" name=\"id_first\" class=\"form-control\">" . self::$_face;
         for ($i = 0; $i < $_max; $i++) {
             if ($data[$i][$_parent] == 0)
                 $option.=self::HtmlOption('', $data[$i][self::$_id], $data[$i][self::$_name], $_selected_second);
@@ -46,7 +46,7 @@ class Chained {
         $option.= " </select>";
         echo $option;
 
-        $option = "<select id=\"second\" name=\"id_second\">" . self::$_face;
+        $option = "<select id=\"second\" name=\"id_second\" class=\"form-control\">" . self::$_face;
         for ($i = 0; $i < $_max; $i++) {
             if ($data[$i][$_parent] != 0)
                 $option.=self::HtmlOption($data[$i][self::$_parent], $data[$i][self::$_id], $data[$i][self::$_name], $_selected_first);

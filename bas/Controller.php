@@ -29,7 +29,9 @@ class Controller {
         if(!is_file($p)){
             Func::errorMessage('No Template : '. $page );
         }       
+                 
         include SITE_ROOT . Z::$sourcedir . '/common.php';
+
          if (null != $this->data) {
             extract($this->data);
         }

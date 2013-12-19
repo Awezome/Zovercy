@@ -40,9 +40,11 @@ class App {
             Func::errorMessage("No Controller : " .  Z::$sourcedir . Z::$controller);
         }
         Auth::run();
-        
+                            
         include $model;
+       
         Reflect::run();
+
         exit();
     }
 
