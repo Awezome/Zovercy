@@ -17,6 +17,7 @@ class Controller {
     private $data;
 
     public function __construct() {
+        include SITE_ROOT . Z::$sourcedir . '/commonfunction.php';
         self::$path = SITE_ROOT . Z::$themedir;
     }
 
@@ -25,12 +26,13 @@ class Controller {
     }
 
     protected function loadView($page) {
+         include SITE_ROOT . Z::$sourcedir . '/commondata.php';
         $p=self::$path . $page . '.html';
         if(!is_file($p)){
             Func::errorMessage('No Template : '. $page );
         }       
                  
-        include SITE_ROOT . Z::$sourcedir . '/common.php';
+
 
          if (null != $this->data) {
             extract($this->data);
@@ -51,4 +53,9 @@ class Controller {
     protected function setData($data){
         $this->data=$data;        
     }
+	
+    protected function json($str) {
+        echo json_encode($str);
+    }
+
 }

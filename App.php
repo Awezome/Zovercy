@@ -11,6 +11,7 @@ include SITE_ROOT . './Cloud/bas/DB.php';
 include SITE_ROOT . './Cloud/bas/Auth.php';
 
 class App {
+    private static $isauth=true;
     function __construct($source, $theme) {
         Z::$themedir=$theme;
         Z::$sourcedir=$source;
@@ -39,13 +40,14 @@ class App {
         if (!is_file($model)) {
             Func::errorMessage("No Controller : " .  Z::$sourcedir . Z::$controller);
         }
-        Auth::run();
+        
+        if(self::$isauth){
+            Auth::run();
+        }
                             
         include $model;
        
         Reflect::run();
-
-        exit();
     }
 
     static function _autoload($class_name) {
@@ -64,6 +66,10 @@ class App {
         Z::$userid = Check::number(Cookie::get('userid'));
         Z::$roleid = Check::number(Cookie::get('roleid'));
         Z::$online=Z::$userid>0?true:false;
+    }
+    
+    function closeAuth(){
+        self::$isauth=false;
     }
 
 }
