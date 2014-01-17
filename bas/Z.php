@@ -33,4 +33,7 @@ class Z {
     
     static $themedir='';
     static $sourcedir='';
+    
+    static $redison=false;
+    static $redis=null;
 }
