@@ -3,9 +3,9 @@
 define('CLOUD_ROOT',dirname(__FILE__).'/');
 define('SITE_ROOT', dirname(CLOUD_ROOT) . '/');
 
+include SITE_ROOT . 'app/config/config.php';
 include CLOUD_ROOT . 'bas/Base.php';
 include CLOUD_ROOT . 'bas/Z.php';
-include CLOUD_ROOT . 'Config.php';
 include CLOUD_ROOT . 'bas/Controller.php';
 include CLOUD_ROOT . 'bas/Router.php';
 include CLOUD_ROOT . 'bas/Reflect.php';
