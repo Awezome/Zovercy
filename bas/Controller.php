@@ -30,10 +30,8 @@ class Controller {
         $p=self::$path . $page . '.html';
         if(!is_file($p)){
             Func::errorMessage('No Template : '. $page );
-        }       
+        }
                  
-
-
          if (null != $this->data) {
             extract($this->data);
         }

@@ -1,14 +1,16 @@
 <?php
 
-define('SITE_ROOT', dirname(dirname(__FILE__)) . '/');
-include SITE_ROOT . './Cloud/bas/Base.php';
-include SITE_ROOT . './Cloud/bas/Z.php';
-include SITE_ROOT . './Cloud/Config.php';
-include SITE_ROOT . './Cloud/bas/Controller.php';
-include SITE_ROOT . './Cloud/bas/Router.php';
-include SITE_ROOT . './Cloud/bas/Reflect.php';
-include SITE_ROOT . './Cloud/bas/DB.php';
-include SITE_ROOT . './Cloud/bas/Auth.php';
+define('CLOUD_ROOT',dirname(__FILE__).'/');
+define('SITE_ROOT', dirname(CLOUD_ROOT) . '/');
+
+include CLOUD_ROOT . 'bas/Base.php';
+include CLOUD_ROOT . 'bas/Z.php';
+include CLOUD_ROOT . 'Config.php';
+include CLOUD_ROOT . 'bas/Controller.php';
+include CLOUD_ROOT . 'bas/Router.php';
+include CLOUD_ROOT . 'bas/Reflect.php';
+include CLOUD_ROOT . 'bas/DB.php';
+include CLOUD_ROOT . 'bas/Auth.php';
 
 class App {
 
@@ -58,7 +60,7 @@ class App {
     }
 
     static function _autoload($class_name) {
-        $class = SITE_ROOT . 'Cloud/lib/' . $class_name . '.php';
+        $class = CLOUD_ROOT . 'lib/' . $class_name . '.php';
         if (is_file($class)) {
             include $class;
         }

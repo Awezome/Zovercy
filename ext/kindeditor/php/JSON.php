@@ -802,7 +802,7 @@ if (class_exists('PEAR_Error')) {
     }
 
 }
-///以下为ZYP修改的Kindeditor上传目录
+///锟斤拷锟斤拷为ZYP锟睫改碉拷Kindeditor锟较达拷目录
 $kind_upfiles='/public/upload/';  
 $kind_path=substr(dirname(__FILE__), 0, -28) .$kind_upfiles;
 $kind_url=substr(dirname($_SERVER['PHP_SELF']), 0, -28).$kind_upfiles;

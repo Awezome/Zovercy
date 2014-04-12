@@ -247,7 +247,7 @@ if (empty($_FILES) === false) {
 	if($thum_water_w>610){
 		$thum_water_h=610*$thum_water_h/$thum_water_w;
 		define('IN_HISUNPHP', true);
-		include dirname(dirname(dirname(dirname(__FILE__)))).'/lib/class_thumb.php';
+		include dirname(dirname(dirname(dirname(__FILE__)))).'/lib/Thumb.php';
 
 		$now_dir=dirname($file_path);
 		$cut_img=new Thumb('',$now_dir);
