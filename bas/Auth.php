@@ -14,7 +14,7 @@
 class Auth {
 
     static function run() {
-        $apps=self::findAction(Base::getAppName(), 0);
+        $apps=self::findAction(Z::$app, 0);
         if (empty($apps)) {
             return false;
         }

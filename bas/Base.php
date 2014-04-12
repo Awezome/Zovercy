@@ -15,10 +15,6 @@ class Base {
         return self::getHost().$_SERVER['REQUEST_URI'];
     }
 
-    static function getAppName(){
-        return basename($_SERVER['SCRIPT_NAME']);
-    }
-    
     static function getWebDir(){
         //$dir=dirname($_SERVER['SCRIPT_NAME']);
         //$dir=$dir=='\\'?'/':$dir;
@@ -34,10 +30,4 @@ class Base {
         }
     }
 
-}
-
-function p($out='') {
-    echo "<pre>";
-    print_r($out);
-    echo "</pre>";
 }

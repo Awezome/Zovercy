@@ -23,7 +23,8 @@ class Z {
     
     static $link;
     static $theme;
-    
+
+    static $app;
     static $controller;
     static $action;
     static $get = array();
@@ -36,4 +37,11 @@ class Z {
     
     static $redison=false;
     static $redis=null;
+
+    public static function link($app=''){
+        if($app==''){
+            $app=Z::$app;
+        }
+        echo Base::getLink().'public/'.$app.'/';
+    }
 }

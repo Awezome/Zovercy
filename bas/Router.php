@@ -21,6 +21,7 @@ class Router {
     }
 
     static function setUpRouter($arr) {
+        Z::$app=empty($arr[0]) ? 'index' : $arr[0];
         Z::$controller = empty($arr[1]) ? 'index' : $arr[1];
         Z::$action = empty($arr[2])?'auto':$arr[2];
         
@@ -30,8 +31,7 @@ class Router {
             $url[] = $arr[$i];
         }
         unset($arr);
-
-        Z::$get = $url;  
+        Z::$get = $url;
     }
 
 }

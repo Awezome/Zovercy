@@ -1,11 +1,12 @@
 <?php
 
-define('CLOUD_ROOT',dirname(__FILE__).'/');
-define('SITE_ROOT', dirname(CLOUD_ROOT) . '/');
+define('CLOUD_ROOT',__DIR__.'/');
+define('SITE_ROOT', dirname(dirname(__DIR__)). '/');
 
-include SITE_ROOT . 'app/config/config.php';
-include CLOUD_ROOT . 'bas/Base.php';
+include CLOUD_ROOT.'basic/common.php';
 include CLOUD_ROOT . 'bas/Z.php';
+include SITE_ROOT . 'config/config.php';
+include CLOUD_ROOT . 'bas/Base.php';
 include CLOUD_ROOT . 'bas/Controller.php';
 include CLOUD_ROOT . 'bas/Router.php';
 include CLOUD_ROOT . 'bas/Reflect.php';
@@ -24,7 +25,7 @@ class App {
         $this->init();
 
         Router::run();
-        Z::$model = Z::$link . Base::getAppName() . '/' . Z::$controller . '/';
+        Z::$model = Z::$link . Z::$app . '/' . Z::$controller . '/';
         Z::$db = DB::getInstance(Z::$config['DB']);
 
         $this->user();
@@ -41,9 +42,9 @@ class App {
     }
 
     public function run() {
-        $model = SITE_ROOT . Z::$sourcedir . Z::$controller . '.php';
-        if (!is_file($model)) {
-            Func::errorMessage("No Controller : " . Z::$sourcedir . Z::$controller);
+        $controller = SITE_ROOT .'app/'. Z::$app .'/controller/'. Z::$controller . '.php';
+        if (!is_file($controller)) {
+            Func::errorMessage("No Controller : " . $controller);
         }
 
         if (self::$onauth) {
@@ -54,7 +55,7 @@ class App {
             $this->runRedis();
         }
 
-        include $model;
+        include $controller;
 
         Reflect::run();
     }

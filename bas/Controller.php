@@ -18,7 +18,7 @@ class Controller {
 
     public function __construct() {
         include SITE_ROOT . Z::$sourcedir . '/commonfunction.php';
-        self::$path = SITE_ROOT . Z::$themedir;
+        self::$path = SITE_ROOT . Z::$themedir.'/';
     }
 
     public function __destruct() {
@@ -26,7 +26,7 @@ class Controller {
     }
 
     protected function loadView($page) {
-         include SITE_ROOT . Z::$sourcedir . '/commondata.php';
+        include SITE_ROOT . Z::$sourcedir . '/commondata.php';
         $p=self::$path . $page . '.html';
         if(!is_file($p)){
             Func::errorMessage('No Template : '. $page );
