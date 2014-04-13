@@ -17,8 +17,11 @@ class Controller {
     private $data;
 
     public function __construct() {
-        include SITE_ROOT . Z::$sourcedir . '/commonfunction.php';
-        self::$path = SITE_ROOT . Z::$themedir.'/';
+        self::$path=SITE_ROOT.'app/'.Z::$app.'/';
+        $commonFile=self::$path. 'model/commonfunction.php';
+        if(file_exists($commonFile)){
+            include $commonFile;
+        }
     }
 
     public function __destruct() {
@@ -26,8 +29,8 @@ class Controller {
     }
 
     protected function loadView($page) {
-        include SITE_ROOT . Z::$sourcedir . '/commondata.php';
-        $p=self::$path . $page . '.html';
+        include self::$path. 'model/commondata.php';
+        $p=self::$path .'view/'.$page . '.html';
         if(!is_file($p)){
             Func::errorMessage('No Template : '. $page );
         }
@@ -35,15 +38,19 @@ class Controller {
          if (null != $this->data) {
             extract($this->data);
         }
-        include self::$path . 'header.html';
+        include self::$path . 'view/header.html';
         include $p;
-        include self::$path . 'footer.html';
+        include self::$path . 'view/footer.html';
     }
 
     protected function loadSingle($page) {
-        $p = self::$path . $page . '.html';
+        $p = self::$path .'view/'. $page . '.html';
         if (!is_file($p)) {
             Func::errorMessage('No Template : ' . $page);
+        }
+
+        if (null != $this->data) {
+            extract($this->data);
         }
         include $p;
     }

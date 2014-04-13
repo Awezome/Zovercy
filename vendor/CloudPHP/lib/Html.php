@@ -13,11 +13,11 @@
  */
 class Html {
     public static function js($src){
-        return '<script charset="utf-8" src="' .  Z::$link . $src . '" type="text/javascript"></script>';
+        return '<script charset="utf-8" src="' .  URL::web() . $src . '" type="text/javascript"></script>';
     }
     
     public static function css($src){
-        return '<link rel="stylesheet" href="' .  Z::$link . $src . ' " />';
+        return '<link rel="stylesheet" href="' .  URL::web() . $src . ' " />';
     }
     
     public static function alert($str){

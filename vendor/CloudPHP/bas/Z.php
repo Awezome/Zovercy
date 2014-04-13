@@ -20,28 +20,14 @@ class Z {
     static $config;
     
     static $db = null;
-    
-    static $link;
-    static $theme;
 
     static $app;
     static $controller;
     static $action;
     static $get = array();
-    static $model;
-    
+
     static $online=false;
-    
-    static $themedir='';
-    static $sourcedir='';
-    
+
     static $redison=false;
     static $redis=null;
-
-    public static function link($app=''){
-        if($app==''){
-            $app=Z::$app;
-        }
-        echo Base::getLink().'public/'.$app.'/';
-    }
 }

@@ -35,7 +35,7 @@ class Editor {
 
     private static function kindJson($water = 0) {
        $this_water =$water == 1? '?water=1':'';
-        return  Z::$link . self::$url . 'php/upload_json.php' . $this_water;
+        return  URL::web() . self::$url . 'php/upload_json.php' . $this_water;
     }
 
     static function fileupload($name = '', $class = '') {

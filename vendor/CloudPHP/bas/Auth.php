@@ -31,7 +31,7 @@ class Auth {
         $roleauths = Z::$db->table('uroleauth')->where("roleid='$roleid' and authid=" . $actions['authid'])->findOne('id');
         if (empty($roleauths)) {
             //Func::errorMessage('No Auth');
-            Func::jump(Z::$link.'index.php/login/');
+            Func::jump(URL::web().'index.php/login/');
         }
         return true;
     }

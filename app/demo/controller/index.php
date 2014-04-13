@@ -6,7 +6,7 @@ class index extends Controller {
             'hello' => 'hello world',
         );        
         $this->setData($data);        
-        $this->loadView('index');        
+        $this->loadSingle('index');
     }
 
 }

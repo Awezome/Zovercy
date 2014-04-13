@@ -18,14 +18,10 @@ class App {
     private static $onauth = true;
     private static $onredis = false;
 
-    function __construct($source, $theme) {
-        Z::$themedir = $theme;
-        Z::$sourcedir = $source;
-
+    function __construct() {
         $this->init();
 
         Router::run();
-        Z::$model = Z::$link . Z::$app . '/' . Z::$controller . '/';
         Z::$db = DB::getInstance(Z::$config['DB']);
 
         $this->user();
@@ -35,8 +31,6 @@ class App {
 
     private function init() {
         date_default_timezone_set('PRC'); //设置中国时区
-        Z::$link = Base::getLink();
-        Z::$theme = Z::$link . Z::$themedir;
         spl_autoload_register("self::_autoload");
         Base::debug(Z::$config['DEBUG']); //开发模式
     }
@@ -44,7 +38,7 @@ class App {
     public function run() {
         $controller = SITE_ROOT .'app/'. Z::$app .'/controller/'. Z::$controller . '.php';
         if (!is_file($controller)) {
-            Func::errorMessage("No Controller : " . $controller);
+            Func::errorMessage("No Controller : " . Z::$app .'/controller/'. Z::$controller);
         }
 
         if (self::$onauth) {

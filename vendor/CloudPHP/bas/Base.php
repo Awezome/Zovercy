@@ -1,11 +1,6 @@
 <?php
 
 class Base {
-
-    static function getLink() {
-        return self::getHost() . dirname($_SERVER['SCRIPT_NAME']) . '/';
-    }
-
     static function getHost(){
         return $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . ':' . $_SERVER['SERVER_PORT'];
         //return Z::$config['WEBSITE']['DOMAIN'];
