@@ -14,41 +14,16 @@
  */
 
 class Editor {
-
-    private static $url = "Cloud/ext/kindeditor/";
-
+    public static function load($name, $value = '', $width = '100%', $height = '400px') {
+        echo '<textarea id="editor' . $name . '" name="' . $name . '" style="width:' . $width . ';height:' . $height.';" >' . $value. '</textarea>';
+        echo '<script type="text/javascript">UM.getEditor("editor'.$name.'");</script>';
+    }
     public static function style() {
-        echo Html::js(self::$url . 'kindeditor.js');
-        echo Html::js(self::$url . 'lang/zh_CN.js');
-        echo Html::css(self::$url . 'themes/default/default.css');
+        $link = URL::web() . 'vendor/umeditor/';
+        echo '<link href="' . $link . 'themes/default/css/umeditor.css" type="text/css" rel="stylesheet">'
+            . '<script type="text/javascript" charset="utf-8" src="' . $link . 'umeditor.config.js"></script>'
+            . '<script type="text/javascript" charset="utf-8" src="' . $link . 'umeditor.min.js"></script>'
+            . '<script type="text/javascript" src="' . $link . 'lang/zh-cn/zh-cn.js"></script>';
     }
 
-    public static function textarea($name, $value = '',$width='100%', $height='400px') {
-        self::edit($name);
-        echo "<textarea id=\"" . $name . "\" name=\"" . $name . "\" style=\"width:" . $width . ";height:" . $height . ";visibility:hidden;\" >" . htmlspecialchars($value) . "</textarea>";
-    }
-
-    private static function edit($name) {
-       echo "<script>var editor;KindEditor.ready(function(K) { editor = K.create('textarea[name=\"" . $name . "\"]', {";
-       echo "uploadJson : '" . self::kindJson() . "', allowFileManager:true,resizeType:1,filterMode : false });});</script>";
-    }
-
-    private static function kindJson($water = 0) {
-       $this_water =$water == 1? '?water=1':'';
-        return  URL::web() . self::$url . 'php/upload_json.php' . $this_water;
-    }
-
-    static function fileupload($name = '', $class = '') {
-        self::fileupload_script();
-        echo "<input type=\"text\" name=\"" . $name . "\" class=\"" . $class . "\" id=\"url\" value=\"\" />";
-        echo	"<input type=\"text\" name=\"" . $name . "\" class=\"" . $class . "\" id=\"short\" value=\"\" />";
-        echo "<input type=\"button\" id=\"insertfile\" value=\"选择文件\" />";
-    }
-
-    private function fileupload_script() {
-        echo "<script>KindEditor.ready(function(K) {var editor = K.editor({allowFileManager : false});";
-        echo "K('#insertfile').click(function() {editor.loadPlugin('insertfile', function() {";
-        echo "editor.plugin.fileDialog({fileUrl : K('#url').val(),clickFn : function(url, title) {";
-        echo "K('#url').val(url);K('#short').val(title);editor.hideDialog();}});});});});</script>";
-    }
 }
