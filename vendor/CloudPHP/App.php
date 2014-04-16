@@ -1,17 +1,26 @@
 <?php
-
 define('CLOUD_ROOT',__DIR__.'/');
 define('SITE_ROOT', dirname(dirname(__DIR__)). '/');
 
-include CLOUD_ROOT.'basic/common.php';
-include CLOUD_ROOT . 'bas/Z.php';
+include CLOUD_ROOT.'Engine/Load.php';
+
+function __autoload($className) {
+    $map=load::map();
+    if(array_key_exists($className,$map)){
+        include CLOUD_ROOT.$map[$className].$className.'.php';
+    }else{
+        die("Unable to load $className.");
+    }
+}
+
+include CLOUD_ROOT.'Helper/Basic.php';
+include CLOUD_ROOT . 'Engine/Z.php';
 include SITE_ROOT . 'config/config.php';
-include CLOUD_ROOT . 'bas/Base.php';
-include CLOUD_ROOT . 'bas/Controller.php';
-include CLOUD_ROOT . 'bas/Router.php';
-include CLOUD_ROOT . 'bas/Reflect.php';
-include CLOUD_ROOT . 'bas/DB.php';
-include CLOUD_ROOT . 'bas/Auth.php';
+include CLOUD_ROOT . 'Engine/Base.php';
+include CLOUD_ROOT . 'Engine/Controller.php';
+include CLOUD_ROOT . 'Engine/Router.php';
+include CLOUD_ROOT . 'Engine/Reflect.php';
+include CLOUD_ROOT . 'Engine/Auth.php';
 
 class App {
 
@@ -22,7 +31,11 @@ class App {
         $this->init();
 
         Router::run();
-        Z::$db = DB::getInstance(Z::$config['DB']);
+
+        $databaseConfig=include SITE_ROOT.'config/database.php';
+        DB::init($databaseConfig);
+        DB::connect('default');
+        //DB::log(true);
 
         $this->user();
         session_start();
@@ -31,7 +44,6 @@ class App {
 
     private function init() {
         date_default_timezone_set('PRC'); //设置中国时区
-        spl_autoload_register("self::_autoload");
         Base::debug(Z::$config['DEBUG']); //开发模式
     }
 
@@ -54,15 +66,8 @@ class App {
         Reflect::run();
     }
 
-    static function _autoload($class_name) {
-        $class = CLOUD_ROOT . 'lib/' . $class_name . '.php';
-        if (is_file($class)) {
-            include $class;
-        }
-    }
-
     function __destruct() {
-        Z::$db->close();
+        //todo : DB::close();
     }
 
     private function user() {

@@ -7,7 +7,6 @@
  */
 class SQLiteConnector extends Connector implements ConnectorInterface {
 
-
     public function connect() {
         $config=self::$config;
         $options=$this->getOptions($config);

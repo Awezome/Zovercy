@@ -1,43 +1,21 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Awezome
- * Date: 4/3/14
- * Time: 3:08 PM
- */
 
 return array(
-    'scm' => array(
+    'default' => array(
+        'driver'    => 'mysql',             //数据库类型
+        'host' => '127.0.0.1',              //数据库地址
+        'database'  =>'cloudphp',           //数据库名
+        'username'  => 'cloudphp',              //数据库用户名
+        'password'  => 'cloudphp',         // 数据库密码
+        'charset'   => 'utf8',
+        'collation' => 'utf8_unicode_ci',
+        'prefix'    => 'cloudphp',          // 表前缀
+        'timezone'  => '+8:00',
+    ),
+    'sqlite' => array(
         'driver'    => 'sqlite',
         'host' => '192.168.1.1',
         'database'  =>'/tmp/remote/db/scm.db',
-        'charset'   => 'utf8',
-        'collation' => 'utf8_unicode_ci',
-        'prefix'    => '',
-    ),
-    'app' => array(
-        'driver'    => 'sqlite',
-        'database'  =>'/tmp/remote/db/app.db',
-        'charset'   => 'utf8',
-        'collation' => 'utf8_unicode_ci',
-        'prefix'    => '',
-    ),
-    'leanlv' => array(
-        'driver'    => 'mysql',
-        'host' => '127.0.0.1',
-        'database'  =>'learnlv',
-        'username'  => 'admin',
-        'password'  => 'admin',
-        'charset'   => 'utf8',
-        'collation' => 'utf8_unicode_ci',
-        'prefix'    => '',
-    ),
-    'pdotest' => array(
-        'driver'    => 'mysql',
-        'host' => '127.0.0.1',
-        'database'  =>'pdotest',
-        'username'  => 'admin',
-        'password'  => 'admin',
         'charset'   => 'utf8',
         'collation' => 'utf8_unicode_ci',
         'prefix'    => '',
