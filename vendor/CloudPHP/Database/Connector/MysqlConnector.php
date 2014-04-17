@@ -28,6 +28,7 @@ class MysqlConnector extends Connector implements ConnectorInterface {
         if(isset($config['unix_socket'])) {
             $dsn.=";unix_socket={$config['unix_socket']}";
         }
+        $dsn.=';charset='.$charset=$config['charset'];
         return $dsn;
     }
 }

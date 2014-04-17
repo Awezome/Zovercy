@@ -3,28 +3,29 @@
 class DatabaseSupport {
     protected static $instance=NULL;
 
-    public static function connect($name, array $config=array()) {
-        $cf=DatabaseFactory::getInstance();
-        if(!empty($config)) {
-            $cf->setConfig($config);
-        }
-        static::$instance=$cf->connect($name);
+    public static function connect($name) {
+        static::$instance=DatabaseFactory::getInstance()->connect($name);
     }
 
-    public static function disconnect($name) {
-        DatabaseFactory::getInstance()->disconnect($name);
-        static::$instance=null;
+    public static function disconnect($name='') {
+        $size=DatabaseFactory::getInstance()->disconnect($name);
+        if($size==0){
+            static::$instance=null;
+        }
     }
 
     public static function table($name) {
+        self::checkInstance();
         return static::$instance->table($name);
     }
 
     public static function query($sql, array $blind=array()) {
+        self::checkInstance();
         return static::$instance->query($sql, $blind);
     }
 
     public static function transaction(Closure $callback) {
+        self::checkInstance();
         return static::$instance->transaction($callback);
     }
 
@@ -33,15 +34,16 @@ class DatabaseSupport {
     }
 
     public static function pdo(){
+        self::checkInstance();
         return static::$instance->pdo();
     }
 
     public static function log($bool){
+        self::checkInstance();
         static::$instance->log($bool);
     }
 
     private static function checkInstance() {
-        p(static::$instance);
         if(static::$instance==null){
             echo 'connect DB first';
             exit();

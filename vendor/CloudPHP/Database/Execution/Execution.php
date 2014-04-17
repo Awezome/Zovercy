@@ -1,29 +1,31 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Awezome
  * Date: 4/4/14
  * Time: 1:57 PM
  */
-
 class Execution implements ExecutionInterface {
     private $con=NULL;
     private $table;
     private $where='';
     private $blind=array();
     private $sql='';
-    private $showLog=false;
+    private $showLog=FALSE;
+    private $config=array();
 
-    public function pod(){
+    public function pod() {
         return $this->con;
     }
 
-    public function setConnector(ConnectorInterface $connector) {
+    public function __construct(ConnectorInterface $connector, array $config=array()) {
         $this->con=$connector->connect();
+        $this->config=$config;
     }
 
     public function table($table) {
-        $this->table='cloudphp_'.$table;
+        $this->table=empty($this->config['prefix']) ? $table : $this->config['prefix'].'_'.$table;
         return $this;
     }
 
@@ -33,28 +35,28 @@ class Execution implements ExecutionInterface {
         return $this;
     }
 
-    public function find($data='*') {
+    public function find($data='*', $fetchType=PDO::FETCH_ASSOC) {
         $this->sql='select '.$data.' from '.$this->table.$this->where.' limit 0,1';
         $stmt=$this->executeQuery();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetch($fetchType);
     }
 
-    public function fetch($data='*'){
-        return $this->find($data);
+    public function fetch($data='*', $fetchType=PDO::FETCH_ASSOC) {
+        return $this->find($data, $fetchType);
     }
 
-    public function findOne($data='*'){
-        return $this->find($data);
+    public function findOne($data='*', $fetchType=PDO::FETCH_ASSOC) {
+        return $this->find($data, $fetchType);
     }
 
-    public function findAll($data='*') {
+    public function findAll($data='*', $fetchType=PDO::FETCH_ASSOC) {
         $this->sql='select '.$data.' from '.$this->table.$this->where;
         $stmt=$this->executeQuery();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll($fetchType);
     }
 
-    public function fetchAll($data='*'){
-        return $this->findAll($data);
+    public function fetchAll($data='*', $fetchType=PDO::FETCH_ASSOC) {
+        return $this->findAll($data, $fetchType);
     }
 
     public function save(array $data) {
@@ -66,7 +68,7 @@ class Execution implements ExecutionInterface {
         return $this->con->lastInsertId();
     }
 
-    public function insert(array $data){
+    public function insert(array $data) {
         return $this->save($data);
     }
 
@@ -86,16 +88,21 @@ class Execution implements ExecutionInterface {
     }
 
     public function count(array $data=array()) {
-        $this->sql='select count(*) from '.$this->table.$this->where;
+        /*
+         * $this->sql='select count(*) from '.$this->table.$this->where;
         $stmt=$this->executeQuery();
         return $stmt->fetchColumn();
+        to see :http://stackoverflow.com/questions/883365/row-count-with-pdo
+        */
+        $c=$this->find('count(*)', PDO::FETCH_NUM);
+        return $c[0];
     }
 
     private function executeQuery() {
         if($this->sql!='*') {
             $stmt=$this->con->prepare($this->sql);
         }
-        if($this->showLog){
+        if($this->showLog) {
             $this->showLogDetail();
         }
         $stmt->execute($this->blind);
@@ -106,7 +113,7 @@ class Execution implements ExecutionInterface {
     }
 
     public function query($sql, array $blind=array()) {
-        //strstr('delete it from',' ',true);
+        //$letter=strtoupper(strstr(ltrim($sql),' ',true));
         $letter=strtoupper(substr(ltrim($sql), 0, 1));
         $this->sql=$sql;
         $this->blind=$blind;
@@ -136,8 +143,8 @@ class Execution implements ExecutionInterface {
         }
     }
 
-    public function log($b){
-        $this->showLog=$b==true?true:false;
+    public function log($b) {
+        $this->showLog=$b==TRUE ? TRUE : FALSE;
     }
 
     private static function buildMark($size) {
@@ -162,7 +169,7 @@ class Execution implements ExecutionInterface {
         return $this->con->rollback();
     }
 
-    private function showLogDetail(){
+    private function showLogDetail() {
         echo '<pre style="background:#eee;font-weight: 700;font-size: 14px">';
         echo '<span style="color:blue">sql : </span>';
         echo $this->sql;

@@ -1,12 +1,11 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Awezome
  * Date: 4/14/14
  * Time: 11:31 AM
  */
-
-
 class DatabaseFactory {
     private static $config=array();
     private $connectors=array();
@@ -19,8 +18,8 @@ class DatabaseFactory {
     final private function __clone() {
     }
 
-    function __destruct(){
-        self::$instance=null;
+    function __destruct() {
+        self::$instance=NULL;
     }
 
     final public static function getInstance() {
@@ -35,17 +34,18 @@ class DatabaseFactory {
         $con=NULL;
         switch($dbDriver) {
             case 'mysql':
+            case 'mariadb':
                 $con=new MysqlConnector();
                 break;
             case 'sqlite':
                 $con==new SQLiteConnector();
             default:
+                //coming soon...
                 return;
         }
         $con->setConfig(self::$config[$name]);
-        $c=new Execution();
-        $c->setConnector($con);
-        return $c;
+        $ccc=array('prefix'=>self::$config[$name]['prefix']);
+        return new Execution($con, $ccc);
     }
 
     public function connect($name) {
@@ -55,15 +55,19 @@ class DatabaseFactory {
         return $this->connectors[$name];
     }
 
-    public function disconnect($name) {
-        if(array_key_exists($name, $this->connectors)) {
-            $this->connectors[$name]=NULL;
-            unset($this->connectors[$name]);
+    public function disconnect($name='') {
+        if($name==''){
+            unset($this->connectors);
+            return 0;
+        }else{
+            if(array_key_exists($name, $this->connectors)) {
+                unset($this->connectors[$name]);
+            }
+            return count($this->connectors);
         }
     }
 
     public function setConfig($config) {
         self::$config=$config;
     }
-
 }

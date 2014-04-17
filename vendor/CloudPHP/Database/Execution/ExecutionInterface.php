@@ -7,8 +7,8 @@
  */
 
 interface ExecutionInterface {
-    public function findOne($data='*');
-    public function findAll($data='*');
+    public function findOne($data,$fetchType);
+    public function findAll($data,$fetchType);
 
     public function count(array $data);
     public function update(array $data);
