@@ -38,7 +38,7 @@ class Chained {
         $data =DB::table("$_table")->where()->findAll("$_id,$_name,$_parent");
         $_max = count($data);
 
-        $option = "<select id=\"first\" name=\"id_first\" class=\"form-control\">" . self::$_face;
+        $option = "<select id=\"first\" name=\"id_first\" data-live-search=\"true\" class=\"form-control selectpicker\">" . self::$_face;
         for ($i = 0; $i < $_max; $i++) {
             if ($data[$i][$_parent] == 0)
                 $option.=self::HtmlOption('', $data[$i][self::$_id], $data[$i][self::$_name], $_selected_second);
