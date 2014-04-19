@@ -13,3 +13,12 @@ function p($o,$title=''){
     print_r($o);
     echo '</pre>';
 }
+
+function arrayValueToKey($a){
+    $ds=array();
+    $kk=$kk=array_keys($a[0]);
+    foreach($a as $value){
+        $ds[$value[$kk[0]]]=$value[$kk[1]];
+    }
+    return $ds;
+}

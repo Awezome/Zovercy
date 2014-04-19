@@ -57,39 +57,6 @@ class Func {
         return($ip);
     }
 
-
-    function formSelect($table, $id, $name, $getid = 0, $where = 0) {
-        $link = new db;
-        if (!$where)
-            $where = "parentid=0";
-        $selects = $link->table($table)->where($where)->selectall();
-        echo "<select id='select' name='" . $id . "'>";
-        echo "<option value='0'>请选择分类</option>";
-        foreach ($selects as $select) {
-            echo "<option value=" . $select[$id];
-            if ($select[$id] == $getid)
-                echo " selected='selected'";
-            echo ">" . $select['cname'] . "</option>";
-        }
-        echo "</select>";
-    }
-
-    function formTourSelect($getid = 0, $where = 0) {
-        $link = new db;
-        if (!$where)
-            $where = "parentid=0";
-        $selects = $link->table('tourtype')->where("$where")->selectall();
-        echo "<select id='select' name='ntid'>";
-        echo "<option value='0'>请选择分类</option>";
-        foreach ($selects as $select) {
-            echo "<option value=" . $select['ttid'];
-            if ($select['ttid'] == $getid)
-                echo " selected='selected'";
-            echo ">" . $select['cname'] . "</option>";
-        }
-        echo "</select>";
-    }
-
     function newstype_newlist($a) {
         $b = array();
         $count = count($a);

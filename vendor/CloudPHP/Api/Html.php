@@ -32,4 +32,20 @@ class Html {
         echo "<script type='text/javascript'>window.history.go(-1);</script>";
     }
 
+    public static function select(array $data,array $option=array(),$default='') {
+        $o='';
+        foreach($option as $key=>$value){
+            $o.=$key.'="'.$value.'" ';
+        }
+        $s='<select '.$o.'>';
+       // $s.='<option value="0">------</option>';
+        foreach ($data as $key=>$value) {
+            $s.= '<option value="' .$value.'"';
+            if ($value == $default)
+                $s.= ' selected="selected"';
+            $s.= '>' . $key . '</option>';
+        }
+        $s.= '</select>';
+        return $s;
+    }
 }
