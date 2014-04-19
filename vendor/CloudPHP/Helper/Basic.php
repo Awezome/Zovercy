@@ -14,11 +14,15 @@ function p($o,$title=''){
     echo '</pre>';
 }
 
-function arrayValueToKey($a){
+function arrayValueToKey($a,$key='',$value=''){
     $ds=array();
-    $kk=$kk=array_keys($a[0]);
-    foreach($a as $value){
-        $ds[$value[$kk[0]]]=$value[$kk[1]];
+    if($key==''||$value==''){
+        $kk=array_keys($a[0]);
+        $key=$kk[0];
+        $value=$kk[1];
+    }
+    foreach($a as $b){
+        $ds[$b[$key]]=$b[$value];
     }
     return $ds;
 }
