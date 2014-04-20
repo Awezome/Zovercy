@@ -14,7 +14,7 @@ function p($o,$title=''){
     echo '</pre>';
 }
 
-function arrayValueToKey($a,$key='',$value=''){
+function arrayValueToKey($a,$value='',$key=''){
     $ds=array();
     if($key==''||$value==''){
         $kk=array_keys($a[0]);

@@ -1,0 +1,69 @@
+<h3 class="heading">Post Edit</h3>
+<?php Editor::style();?>
+<form role="form" action="<?= URL::controller()?>save/" method="post">
+<div class="row">
+    <div class="col-sm-9">
+        <div class="p-tb-30">
+            <div class="form-group input-group-lg">
+                <input type="text" class="form-control" placeholder="Enter Title" name="title"
+                           value="<?php echo $news['title'] ; ?>">
+                    <br />
+                     <?php Editor::load('postedit',$news['text']);?>
+                </div>
+                <div class="form-group">
+                    <label>Excerpt</label>
+                    <textarea name="Excerpt" class="form-control" placeholder="Enter Excerpt"
+                              rows="3"><?php echo $news['title'] ; ?></textarea>
+                </div>
+        </div>
+    </div>
+    <!-- /.col-lg-9 -->
+    <div class="col-sm-3">
+        <div class="p-t-30  m-b-10">
+            <div class="form-group">
+                <label>Views</label>
+                <input type="text" class="form-control" placeholder="Enter Views" name="view"
+                       value="<?php echo $news['stats'] ; ?>">
+            </div>
+            <div class="form-group">
+                <label>Catalog</label>
+                <?=$postTypes?>
+                <?php //Chained::run('posttype','ptid','cname',$news['ptid']);?>
+            </div>
+            <div class="form-group">
+                <label>Datetime</label>
+                <input type="text" class="form-control" name="this_time"
+                       value="<?php echo $news['addtime'] ; ?>">
+            </div>
+            <div class="form-group">
+                <input type="hidden" name="co" value="newsedit">
+                <input type="hidden" name="pid" value="<?php echo $news['pid'] ; ?>"/>
+                <button type="submit" class="btn btn-lg btn-primary"><?=$news['submit'] ; ?></button>
+            </div>
+            <div class="form-group">
+                <div class="m-b-10">
+                    <input type="checkbox" name="notification" value="" class="icheck">
+                    <span class="m-l-10">Use desktop notifications</span>
+                </div>
+                <div class="m-b-10">
+                    <input type="checkbox" name="notification" value="" class="icheck" checked>
+                    <span class="m-l-10">Justo Inceptos Fringilla</span>
+                </div>
+                <div class="m-b-10">
+                    <input type="checkbox" name="notification" value="" class="icheck">
+                    <span class="m-l-10">Curabitur blandit tempus porttitor.</span>
+                </div>
+
+                <div class="m-b-10">
+                    <input type="radio" name="optionsRadios" value="" class="icheck">
+                    <span class="m-l-10">Sollicitudin Amet Mattis</span>
+                </div>
+                <div class="m-b-10">
+                    <input type="radio" name="optionsRadios" value="" class="icheck" checked>
+                    <span class="m-l-10">Fusce dapibus, tellus ac cursus commodo, tortor mauris.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- /.row -->
+</form>

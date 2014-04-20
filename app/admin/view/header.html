@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CloudPHP Admin</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?=URL::link()?>google/font.css">
+    <link rel="stylesheet" href="<?=URL::link()?>css/admin.css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <script src="<?=URL::link()?>js/lib/modernizr.js"></script>
+    <script src="<?=URL::link()?>/js/jquery.js"></script>
+</head>
+<body class="bg-gray-light">
+
+<nav class="navbar navbar-fixed-top not-collapse bg-g-ln-gray" role="navigation">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#" class="hover-white-shade-bg">
+            CloudPHP Admin
+            <small class="font-w-100 text-gray-alt hidden-xs hidden-sm">Hello World</small>
+        </a>
+    </div>
+    <div id="top-nav">
+        <a href="<?=URL::web()?>home/" type="button" class="btn btn-default navbar-btn navbar-right btn-primary m-r-30 mm-r-10">Home</a>
+        <div class="navbar-dropdown navbar-right navbar-avatar">
+            <a href="#" data-target="#topavatar-toggle" class="hover-no-underline dropdown-toggle m-lr-30 mm-lr-10" data-toggle="dropdown">
+                <span class="text-gray-light hidden-sm hidden-xs"><?=Z::$username?>Admin</span>
+                <span class="caret text-white hidden-sm hidden-xs"></span>
+            </a>
+            <ul id="topavatar-toggle" class="dropdown-menu avatar-dropdown">
+                <li><a href="settings.html">Settings</a></li>
+                <li><a href="login.html">Signup</a></li>
+            </ul>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="messages.html">
+                    <span class="glyphicon glyphicon-envelope"></span>
+		      		<span
+                            class="text-white circle-12px bg-orange text-small text-center icon-counter">4</span>
+                    <span class="hidden-sm hidden-xs">Messages</span>
+                </a>
+            </li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-plus-sign"></span>
+                    <span class="hidden-sm hidden-xs">Pages</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/">Dashboard</a></li>
+                    <li><a href="messages.html">Inbox</a></li>
+                      <li class="divider"></li>
+                    <li><a href="login.html">Login</a></li>
+                    <li><a href="signup.html">Signup</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="sidebar bg-gray-dark text-white text-center pushy pushy-left">
+    <hr class="no-margin" />
+
+    <ul class="unstyled nav">
+        <li class="active"><a href="<?=URL::app()?>" class="text-left">Dashboard</a></li>
+        <li>
+            <a href="#" class="text-left dropdown-toggle" data-toggle="dropdown">
+                Post <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="<?=URL::app()?>post/lists/">Post Lists</a></li>
+                <li><a href="<?=URL::app()?>post/edit/" >Post Add</a></li>
+                <li><a href="<?=URL::app()?>posttype/" >Post Type</a></li>
+            </ul>
+        </li>
+        <li >
+            <a href="#" class="text-left dropdown-toggle" data-toggle="dropdown">
+                Page <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="<?=URL::app()?>pages/lists/">Page Lists</a></li>
+                <li><a href="<?=URL::app()?>pages/edit/" >Page Add</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="messages.html" class="text-left">
+                Inbox
+                <span class="badge bg-blue-light pull-right text-gray-dark brad-small">4</span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="bg-gray-dark-shade text-left search">
+        <i class="glyphicon glyphicon-search text-gray-alt"></i>
+        <input type="text" placeholder="Search" class="input-invisible">
+    </div>
+
+    <div class="sidebar-chart chart m-t-30" data-percent="73" data-scale-color="rgba(255,255,255,.2)">
+        <div class="percentage text-gray-alt font-w-100">73%</div>
+        <div class="label text-gray-alt font-w-100 text-uppercase">Just for Fun</div>
+    </div>
+
+</div>
+
+<div class="preloader">
+    <div class="timer"></div>
+</div>
+
+<div id="container" class="main-content p-lr-30 tp-t-60 p-b-30 tp-lr-10">
+    <button class="menu-btn btn btn-bordered text-gray-alt text-bold top-left-corner">&#9776; MENU</button>

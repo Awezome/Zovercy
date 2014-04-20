@@ -40,10 +40,10 @@ class Html {
         $s='<select '.$o.'>';
         $s.='<option value="0"></option>';
         foreach ($data as $key=>$value) {
-            $s.= '<option value="' .$value.'"';
-            if ($value == $default)
+            $s.= '<option value="' .$key.'"';
+            if ($key == $default)
                 $s.= ' selected="selected"';
-            $s.= '>' . $key . '</option>';
+            $s.= '>' . $value . '</option>';
         }
         $s.= '</select>';
         return $s;
