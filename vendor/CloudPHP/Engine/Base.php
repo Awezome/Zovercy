@@ -11,7 +11,7 @@ class Base {
     }
 
     static function getUrl(){
-        return strstr(self::getUri().'?','?',true);
+        return self::getHost().strstr($_SERVER['REQUEST_URI'].'?','?',true);
     }
 
     static function getWebDir(){
