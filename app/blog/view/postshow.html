@@ -1,0 +1,81 @@
+<ul class="breadcrumbs">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Post</a></li>
+    <li class="unavailable"><a href="#">Gene Splicing</a></li>
+    <li class="current"><a href="#">AWEZOME</a></li>
+</ul>
+<article class="cloudbox">
+    <h3><a href="#"><?php echo $result['title'];?></a></h3>
+    <div class="spanline"></div>
+    <h6>
+        Written by <a href="#">John Smith</a> on <?php echo date('F d, Y.',time($result['addtime']));?>
+        <?php if(Z::$online){?><a href="<?=URL::web()?>post/edit/<?php echo $result['pid'];?>/">Edit</a><?php }?>
+    </h6>
+    <p><?php echo $result['text'];?></p>
+</article>
+<hr />
+<article class="cloudbox">
+    <div class="row ">
+        <div class="large-2 columns small-3"><img src=" <?=URL::link()?>image/hold.gif" /></div>
+        <div class="large-10 columns">
+            <p><strong>Some Person said:</strong> Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
+            <ul class="inline-list">
+                <li><a href="">Reply</a></li>
+                <li><a href="">Share</a></li>
+            </ul>
+            <h6>2 Comments</h6>
+            <div class="row">
+                <div class="large-2 columns small-3"><img src=" <?=URL::link()?>image/hold.gif" /></div>
+                <div class="large-10 columns"><p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit</p></div>
+            </div>
+            <div class="row">
+                <div class="large-2 columns small-3"><img src=" <?=URL::link()?>image/hold.gif" /></div>
+                <div class="large-10 columns"><p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit</p></div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="large-12 columns">
+            <section class="section panel">
+                <div class="content" data-slug="panel1">
+                    <form>
+                        <div class="row collapse">
+                            <div class="large-2 columns">
+                                <label class="inline">Your Name</label>
+                            </div>
+                            <div class="large-10 columns">
+                                <input type="text" id="yourName" placeholder="Jane Smith">
+                            </div>
+                        </div>
+                        <div class="row collapse">
+                            <div class="large-2 columns">
+                                <label class="inline"> Your Email</label>
+                            </div>
+                            <div class="large-10 columns">
+                                <input type="text" id="yourEmail" placeholder="jane@smithco.com">
+                            </div>
+                        </div>
+                        <div class="row collapse">
+                            <div class="large-2 columns">
+                                <label class="inline"> What's up?</label>
+                            </div>
+                            <div class="large-10 columns">
+                                <textarea rows="6"></textarea>
+                            </div>
+                        </div>
+                        <div class="row collapse">
+                            <div class="large-2 columns">
+                            </div>
+                            <div class="large-10 columns">
+                                <button type="submit" class="radius button">Submit</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </section></div>
+    </div>
+</article>
+<br />
+

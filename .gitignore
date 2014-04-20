@@ -5,3 +5,4 @@ app/index/*
 config/config.php
 public/admin/*
 public/home/*
+public/blog/*
