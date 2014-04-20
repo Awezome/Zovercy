@@ -18,11 +18,11 @@
                 <td><?php echo $result['title'];?></td>
                 <td><?php echo $result['name'];?></td>
                 <td><?php echo $result['addtime']; ?></td>
-                <td><a href="<?= URL::controller()?>edit/<?=$result['pageid']?>/">
+                <td><a href="<?= URL::controller()?>edit/<?=$result['pageid']?>">
                     <span class="label label-primary">Edit</span></a>
-                    <a href="<?= URL::web()?>home/pages/show/<?=$result['name']?>/">
+                    <a href="<?= URL::web()?>blog/pages/<?=$result['name']?>">
                         <span class="label label-success">View</span></a>
-                    <a href="<?= URL::controller()?>delete/<?=$result['pageid']?>/">
+                    <a href="<?= URL::controller()?>delete/<?=$result['pageid']?>">
                         <span class="label label-danger">Delete</span></a>
                 </td>
             </tr>

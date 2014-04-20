@@ -22,18 +22,31 @@ class Router {
 
     static function setUpRouter($arr) {
         $flag=3;
-        Z::$app=empty($arr[0]) ? 'index' : $arr[0];
-        Z::$controller = empty($arr[1]) ? 'index' : $arr[1];
-        Z::$action = empty($arr[2])?'auto':$arr[2];
 
-        if(!isset($arr[2])&&isset($arr[1])){
-            Z::$controller ='index';
-        }
-
-        if(!isset($arr[3])&&isset($arr[2])){
-            Z::$action ='show';
+        if(isset($arr[3])||!isset($arr[2])){
+            if(empty($arr[2])){
+                Z::$action='auto';
+            }else{
+                Z::$action=$arr[2];
+            }
+        }else{
+            Z::$action='show';
             $flag=2;
         }
+
+        if(isset($arr[2])){
+            if(empty($arr[1])){
+                Z::$controller='index';
+            }else{
+                Z::$controller=$arr[1];
+            }
+        }else{
+            Z::$controller ='index';
+            $flag=1;
+        }
+
+
+        Z::$app=empty($arr[0]) ? 'index' : $arr[0];
 
         $url = array();
         $size = count($arr);

@@ -50,7 +50,7 @@ class App {
     public function run() {
         $controller = SITE_ROOT .'app/'. Z::$app .'/controller/'. Z::$controller . '.php';
         if (!is_file($controller)) {
-            Func::errorMessage("No Controller : " . Z::$app .'/controller/'. Z::$controller);
+            Func::errorMessage("No Controller : " . Z::$app .'/'. Z::$controller);
         }
 
         if (self::$onauth) {

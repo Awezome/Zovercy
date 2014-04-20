@@ -3,7 +3,7 @@
 class post extends Controller {
 
     function auto() {
-        $page = new Page('post', 'pid,title,istop,stats,addtime,ptid,checked','addtime'); 
+        $page = new Page('post', 'pid,title,istop,stats,addtime,ptid,checked','addtime');
 
         $data=array(
             'newpage' =>$page->run(),
