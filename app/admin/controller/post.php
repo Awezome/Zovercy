@@ -2,7 +2,7 @@
 
 class post extends Controller {
 
-    function lists() {
+    function auto() {
         $page = new Page('post', 'pid,title,istop,stats,addtime,ptid,checked','addtime'); 
 
         $data=array(
@@ -11,6 +11,10 @@ class post extends Controller {
         );        
         $this->setData($data);      
         $this->loadView('postlists');
+    }
+
+    function add(){
+        $this->edit();
     }
 
     function edit() {
@@ -63,11 +67,18 @@ class post extends Controller {
 
         Html::jump( URL::controller() . 'edit/' . $pid . '/');
     }
-    
+
+    function update(){
+
+    }
+
+
     function delete(){
         $pid =Get::number(0);
         DB::table('post')->where('pid='.$pid)->delete();
         Html::jump( URL::web() . 'admin.php/post/lists/');
     }
+
+    function show(){}
 
 }
