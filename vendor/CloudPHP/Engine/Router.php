@@ -22,8 +22,7 @@ class Router {
 
     static function setUpRouter($arr) {
         $flag=3;
-
-        if(isset($arr[3])||!isset($arr[2])){
+        if(isset($arr[3])||(isset($arr[2])&&empty($arr[2]))||(isset($arr[1])&&empty($arr[1]))){
             if(empty($arr[2])){
                 Z::$action='auto';
             }else{
@@ -44,7 +43,6 @@ class Router {
             Z::$controller ='index';
             $flag=1;
         }
-
 
         Z::$app=empty($arr[0]) ? 'index' : $arr[0];
 

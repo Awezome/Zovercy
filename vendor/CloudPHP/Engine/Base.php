@@ -6,8 +6,12 @@ class Base {
         //return Z::$config['WEBSITE']['DOMAIN'];
     }
 
-    static function getUrl(){
+    static function getUri(){
         return self::getHost().$_SERVER['REQUEST_URI'];
+    }
+
+    static function getUrl(){
+        return strstr(self::getUri().'?','?',true);
     }
 
     static function getWebDir(){
