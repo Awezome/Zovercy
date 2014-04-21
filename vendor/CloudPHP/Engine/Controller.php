@@ -12,16 +12,13 @@
  * @author YunPeng
  */
 class Controller {
-
+    protected $model=null;
     private static $path;
     private $data;
 
     public function __construct() {
         self::$path=SITE_ROOT.'app/'.Z::$app.'/';
-        $commonFile=self::$path. 'model/commonfunction.php';
-        if(file_exists($commonFile)){
-            include $commonFile;
-        }
+        $this->loadModel(Z::$controller);
     }
 
     public function __destruct() {
@@ -61,6 +58,16 @@ class Controller {
 	
     protected function json($str) {
         echo json_encode($str);
+    }
+
+    private function loadModel($filename){
+        $name=ucfirst($filename).'Model';
+        $model=self::$path. 'model/'.$name.'.php';
+        if(file_exists($model)){
+            include $model;
+            $class=new ReflectionClass($name);
+            $this->model= $class->newInstance();
+        }
     }
 
 }

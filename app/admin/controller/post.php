@@ -26,7 +26,7 @@ class post extends Controller {
             $news['submit'] = 'Update';
         }
 
-        $d=DB::table('posttype')->findAll('cname,ptid');
+        $d=DB::table('posttype')->findAll('ptid,cname');
         $postTypes=Html::select(arrayValueToKey($d),array(
             'id'=>'first',
             'name'=>'id_first',
@@ -67,11 +67,6 @@ class post extends Controller {
 
         Html::jump( URL::controller() . 'edit/' . $pid . '/');
     }
-
-    function update(){
-
-    }
-
 
     function delete(){
         $pid =Get::number(0);

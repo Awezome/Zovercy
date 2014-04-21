@@ -26,3 +26,11 @@ function arrayValueToKey($a,$value='',$key=''){
     }
     return $ds;
 }
+
+function arrayInsert(&$array, $index, $position) {
+    //  $pos   = array_search($position, array_keys($array))+1;
+    $pos=$position;
+    $start = array_slice($array, 0, $pos);
+    $end = array_slice($array, $pos);
+    $array=array_merge($start,$index,$end);
+}
