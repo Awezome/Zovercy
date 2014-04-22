@@ -10,18 +10,15 @@
  *
  * @author YunPeng
  */
+
 class posttype extends Controller{
-   // private $model='posttype';
-
     function auto(){
-        $ddd=DB::table('posttype')->where('1 order by level,parentid,torder')->findAll();
-        $this->model->arrayLists($ddd);
-
+        $ddd=$this->model->getPosttype();
         $data=array(
             'results' =>$ddd,
-            'newDataSelect'=>arrayValueToKey($ddd,'cname','ptid'),
+            'newDataSelect'=>$this->model->showPostSelect($ddd),
         );
         $this->setData($data);
-        $this->loadView('posttype');
+        $this->loadView();
     }
 }

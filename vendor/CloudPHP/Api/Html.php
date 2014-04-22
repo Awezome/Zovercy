@@ -48,4 +48,21 @@ class Html {
         $s.= '</select>';
         return $s;
     }
+
+    public static function selectArrayValue(array $data,$k,$v,array $option=array(),$default='0'){
+        $o='';
+        foreach($option as $key=>$value){
+            $o.=$key.'="'.$value.'" ';
+        }
+        $s='<select '.$o.'>';
+        $s.='<option value="0"></option>';
+        foreach ($data as $value) {
+            $s.= '<option value="' .$value[$v].'"';
+            if ($value[$v] == $default)
+                $s.= ' selected="selected"';
+            $s.= '>' . $value[$k] . '</option>';
+        }
+        $s.= '</select>';
+        return $s;
+    }
 }

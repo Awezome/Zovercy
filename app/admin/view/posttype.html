@@ -46,15 +46,7 @@
             </div>
             <div class="form-group">
                 <label>Catalog</label>
-                <?=
-                Html::select($newDataSelect,array(
-                'id'=>'first',
-                'name'=>'id_first',
-                'data-live-search'=>'true',
-                'class'=>'form-control',
-                'border'=>'1px solid #ccc'
-                ));
-                ?>
+                <?=$newDataSelect?>
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-lg btn-primary">Add</button>

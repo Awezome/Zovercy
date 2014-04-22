@@ -25,7 +25,8 @@ class Controller {
         unset($this->data);
     }
 
-    protected function loadView($page) {
+    protected function loadView($page=null) {
+        $page=$page==null?Z::$controller:$page;
         include self::$path. 'model/commondata.php';
         $p=self::$path .'view/'.$page . '.html';
         if(!is_file($p)){
