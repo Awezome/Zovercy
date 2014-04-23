@@ -34,14 +34,17 @@ class PosttypeModel {
         }
     }
 
-    function showPostSelect($results){
+    function showPostSelect($results=null,$default=''){
+        if($results==null){
+            $results=$this->getPosttype();
+        }
         return Html::selectArrayValue($results,'cname','ptid',array(
             'id'=>'first',
             'name'=>'id_first',
             'data-live-search'=>'true',
             'class'=>'form-control',
             'border'=>'1px solid #ccc'
-        ));
+        ),$default);
     }
 
     function selectRadio(array $data, $default = '') {

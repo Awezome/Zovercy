@@ -13,12 +13,14 @@
  */
 class Controller {
     protected $model=null;
+    protected $models=array();
     private static $path;
     private $data;
 
     public function __construct() {
         self::$path=SITE_ROOT.'app/'.Z::$app.'/';
-        $this->loadModel(Z::$controller);
+        $m=Model::load(array(Z::$controller));
+        $this->model=$m[Z::$controller];
     }
 
     public function __destruct() {
@@ -53,6 +55,10 @@ class Controller {
         include $p;
     }
 
+    protected function loadModel(array $data){
+        $this->models=Model::load($data);
+    }
+
     protected function setData($data){
         $this->data=$data;        
     }
@@ -60,15 +66,4 @@ class Controller {
     protected function json($str) {
         echo json_encode($str);
     }
-
-    private function loadModel($filename){
-        $name=ucfirst($filename).'Model';
-        $model=self::$path. 'model/'.$name.'.php';
-        if(file_exists($model)){
-            include $model;
-            $class=new ReflectionClass($name);
-            $this->model= $class->newInstance();
-        }
-    }
-
 }

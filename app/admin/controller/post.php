@@ -18,6 +18,7 @@ class post extends Controller {
     }
 
     function edit() {
+        $this->loadModel(array('posttype'));
         if (Get::number()==null) {
             $news = array('title' => '', 'excerpt' => '', 'istop' => 0, 'text' => '', 'stats' => '', 'addtime' => date('Y-m-d h:i:s'), 'ptid' => '', 'img' => '', 'submit' => 'Save',);
         } else {
@@ -26,18 +27,9 @@ class post extends Controller {
             $news['submit'] = 'Update';
         }
 
-        $d=DB::table('posttype')->findAll('ptid,cname');
-        $postTypes=Html::select(arrayValueToKey($d),array(
-            'id'=>'first',
-            'name'=>'id_first',
-            'data-live-search'=>'true',
-            'class'=>'form-control',
-            'border'=>'1px solid #ccc'
-        ),$news['ptid']);
-
         $data = array(
             'news' => $news,
-            'postTypes'=>$postTypes,
+            'postTypes'=>$this->models['posttype']->showPostSelect(null,$news['ptid']),
         );
         $this->setData($data);      
         $this->loadView('postedit');

@@ -29,4 +29,13 @@ class Base {
         }
     }
 
+    static function newClassByName($name,$dir){
+        if(file_exists($dir)){
+            include $dir;
+            $class=new ReflectionClass($name);
+            return $class->newInstance();
+        }else{
+            return null;
+        }
+    }
 }

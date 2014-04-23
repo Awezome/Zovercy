@@ -18,6 +18,7 @@ return array(
     'Html'=>'Api/',
     'Image'=>'Api/',
     'Input'=>'Api/',
+    'Model'=>'Api/',
     'Page'=>'Api/',
     'Post'=>'Api/',
     'Rediz'=>'Api/',
