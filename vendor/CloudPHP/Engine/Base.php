@@ -25,6 +25,7 @@ class Base {
             ini_set('display_errors', 'On');
             error_reporting(E_ALL);
         } else {
+            ini_set('display_errors', 'Off');
             error_reporting(0);
         }
     }
