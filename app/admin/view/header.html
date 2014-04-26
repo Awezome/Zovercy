@@ -66,9 +66,7 @@
     <ul class="unstyled nav">
         <li class="active"><a href="<?=URL::app()?>" class="text-left">Dashboard</a></li>
         <li>
-            <a href="#" class="text-left dropdown-toggle" data-toggle="dropdown">
-                Post <b class="caret"></b>
-            </a>
+            <a href="#" class="text-left dropdown-toggle" data-toggle="dropdown">Post <b class="caret"></b></a>
             <ul class="dropdown-menu" role="menu">
                 <li><a href="<?=URL::app()?>post/">Post Lists</a></li>
                 <li><a href="<?=URL::app()?>post/add/" >Post Add</a></li>
@@ -76,11 +74,16 @@
             </ul>
         </li>
         <li >
-            <a href="#" class="text-left dropdown-toggle" data-toggle="dropdown">
-                Page <b class="caret"></b>
-            </a>
+            <a href="#" class="text-left dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
             <ul class="dropdown-menu" role="menu">
                 <li><a href="<?=URL::app()?>pages/lists/">Page Lists</a></li>
+                <li><a href="<?=URL::app()?>pages/edit/" >Page Add</a></li>
+            </ul>
+        </li>
+        <li >
+            <a href="#" class="text-left dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="<?=URL::app()?>user/">User Lists</a></li>
                 <li><a href="<?=URL::app()?>pages/edit/" >Page Add</a></li>
             </ul>
         </li>
