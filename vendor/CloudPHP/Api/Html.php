@@ -27,6 +27,10 @@ class Html {
     public static function jump($str){
         echo "<script type='text/javascript'>location.href='$str';</script>";
     }
+
+    public static function refresh(){
+        self::jump(Base::getUri());
+    }
     
     public static function jumpBack(){
         echo "<script type='text/javascript'>window.history.go(-1);</script>";

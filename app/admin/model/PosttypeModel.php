@@ -8,7 +8,9 @@
  */
 class PosttypeModel {
     function getPosttype(){
-        return DB::table('posttype')->where('1 order by level,parentid,torder')->findAll();
+        $data=$this->getPosttypeAll();
+        $this->arrayLists($data);
+        return $data;
     }
 
     function arrayLists(array &$arr) {
@@ -40,7 +42,7 @@ class PosttypeModel {
         }
         return Html::selectArrayValue($results,'cname','ptid',array(
             'id'=>'first',
-            'name'=>'id_first',
+            'name'=>'posttype',
             'data-live-search'=>'true',
             'class'=>'form-control',
             'border'=>'1px solid #ccc'
@@ -54,6 +56,16 @@ class PosttypeModel {
              .'<span class="m-l-10">'.$key.'</span></div>';
         }
         return $s;
+    }
+
+    private function getPosttypeAll() {
+        return DB::table('posttype')->where('1 order by level,parentid,torder')->findAll();
+    }
+
+    //get this record level by it's parentid
+    public function getLevel($parentid){
+        $level=DB::table('posttype')->where('ptid=?',array($parentid))->findOne('level');
+        return $level['level']+1;
     }
 }
 

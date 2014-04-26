@@ -21,4 +21,17 @@ class posttype extends Controller{
         $this->setData($data);
         $this->loadView();
     }
+
+    function save(){
+        $name=Input::text('typename');
+        $parentid=Input::number('posttype');
+
+        DB::table('posttype')->save(array(
+            'cname'=>$name,
+            'parentid'=>$parentid,
+            'level'=>$this->model->getLevel($parentid),
+        ));
+
+        Html::jump(URL::controller());
+    }
 }
