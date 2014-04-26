@@ -25,11 +25,15 @@ class Input {
     }
 
     static function text($key) {
-        return Check::text(Check::filterNeed() ? Check::filter($_POST[$key]) : $_POST[$key]);
+        if(isset($_POST[$key])){
+            return Check::text(Check::filterNeed() ? Check::filter($_POST[$key]) : $_POST[$key]);
+        }else{
+            return '';
+        }
     }
 
     static function number($key) {
-        return Check::number($_POST[$key]);
+        return isset($_POST[$key])?Check::number($_POST[$key]):0;
     }
 
     static function datetime() {

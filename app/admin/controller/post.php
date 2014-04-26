@@ -40,20 +40,18 @@ class post extends Controller {
 
         $set = array(
             'title' =>Input::text('title'),
-            'ptid' =>Input::number('id_first'),
-            'text' =>Input::get('postedit'),
+            'ptid' =>Input::number('posttype'),
             'excerpt' =>Input::text('excerpt'),
             'stats' =>Input::number('stats'),
             'addtime' =>Input::get('this_time'),
-            //'pid' => $pid
+            'text' =>Input::get('postedit'),
         );
-        
+
         if($pid){
             DB::table('post')->where("pid=" . $pid)->update($set);
             Html::alert('编辑成功');
         }else{
-            DB::table('post')->save($set);
-            $pid=DB::saveId();
+            $pid=DB::table('post')->save($set);
             Html::alert('添加成功');
         }
 
