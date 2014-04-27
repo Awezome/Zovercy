@@ -43,7 +43,7 @@ class Controller {
         include self::$path . 'view/footer.html';
     }
 
-    protected function loadSingle($page) {
+    protected function loadPage($page) {
         $p = self::$path .'view/'. $page . '.html';
         if (!is_file($p)) {
             Func::errorMessage('No Template : ' . $page);

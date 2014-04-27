@@ -1,0 +1,19 @@
+<div class="row" style="">
+        <div class="bg-white p-30  m-10">
+            <form role="form" action="<?= URL::controller()?>save/" method="post">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" placeholder="Enter Name" name="typename"
+                       value="" />
+            </div>
+            <div class="form-group">
+                <label>Catalog</label>
+                <?=$newDataSelect?>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-lg btn-primary">Add</button>
+            </div>
+            </form>
+        </div>
+
+ </div>

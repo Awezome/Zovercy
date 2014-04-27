@@ -1,0 +1,38 @@
+<h3 class="heading">User Lists</h3>
+<div class="bg-white p-30 m-t-30 b-bot-2px-gray-light b-right-1px-gray-light">
+    <div class="table-responsive">
+        <table class="table table-condensed table-bordered table-striped table-hover">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>User Name</th>
+                <th>Role ID</th>
+                <th>Nick Name</th>
+                <th>Email</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ( $results as $result){?>
+            <tr>
+                <td><input type="checkbox" name="row_sel" class="select_row"/></td>
+                <td><?=$result['username']?></td>
+                <td><?=$result['roleid']?></td>
+                <td><?=$result['nickname']?></td>
+                <td><?=$result['email']?></td>
+                <td>
+                    <a href="<?= URL::controller()?>edit/<?=$result['username']?>/">
+                        <span class="label label-primary">Edit</span></a>
+                    <a href="<?= URL::controller()?>delete/<?=$result['username']?>/">
+                        <span class="label label-danger">Delete</span></a>
+                </td>
+            </tr>
+            <?php }?>
+            </tbody>
+        </table>
+    </div>
+    <br />
+    <div>
+        <?php echo $newpage; ?>
+    </div>
+</div>

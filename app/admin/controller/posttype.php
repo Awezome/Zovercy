@@ -34,4 +34,13 @@ class posttype extends Controller{
 
         Html::jump(URL::controller());
     }
+
+    function edit(){
+        $ddd=$this->model->getPosttype();
+        $data=array(
+            'newDataSelect'=>$this->model->showPostSelect($ddd),
+        );
+        $this->setData($data);
+        $this->loadPage('posttypenew');
+    }
 }

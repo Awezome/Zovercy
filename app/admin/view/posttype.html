@@ -1,7 +1,8 @@
 <h3 class="heading">Post Type</h3>
 <div class="row">
-    <div class="col-sm-9 bg-white p-30 m-t-30 b-bot-2px-gray-light b-right-1px-gray-light">
+    <div class="bg-white p-30 m-t-30 b-bot-2px-gray-light b-right-1px-gray-light">
             <div class="table-responsive">
+                <button class="btn btn-primary" data-trigger="modal" href="../posttype/edit/" data-title="Add New Post Type" class="btn">Add New Post Type</button>
                 <table class="table table-bordered table-striped table-hover">
                     <thead>
                     <tr>
@@ -26,7 +27,6 @@
                                 <span class="label label-primary">Update</span></a>
                             <a href="<?= URL::controller()?>">
                                 <span class="label label-danger">Delete</span></a>
-
                         </td>
                     </tr>
                     <?php }?>
@@ -34,25 +34,4 @@
                 </table>
             </div>
     </div>
-    <!-- /.col-lg-9 -->
-    <form role="form" action="<?= URL::controller()?>save/" method="post">
-    <div class="col-sm-3">
-        <div class="p-t-30  m-b-10">
-            <h4>Add New Post Type</h4><br />
-            <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control" placeholder="Enter Name" name="typename"
-                       value="" />
-            </div>
-            <div class="form-group">
-                <label>Catalog</label>
-                <?=$newDataSelect?>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-lg btn-primary">Add</button>
-            </div>
-        </div>
-    </div>
-    </form>
 </div> <!-- /.row -->
-
