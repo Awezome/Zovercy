@@ -25,7 +25,7 @@
                         <td>
                             <a href="<?= URL::controller()?>edit/<?=$result['ptid']?>" data-trigger="modal" href="../posttype/edit/1">
                                 <span class="label label-primary">Edit</span></a>
-                            <a href="<?= URL::controller()?>delete/<?=$result['ptid']?>">
+                            <a href="<?= URL::controller()?>delete/<?=$result['ptid']?>" data-trigger="confirm">
                                 <span class="label label-danger">Delete</span></a>
                         </td>
                     </tr>

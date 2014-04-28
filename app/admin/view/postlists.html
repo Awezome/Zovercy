@@ -25,7 +25,7 @@
                         <span class="label label-primary">Edit</span></a>
                     <a href="<?= URL::web()?>blog/post/show/<?=$result['pid']?>/">
                         <span class="label label-success">View</span></a>
-                    <a href="<?= URL::controller()?>delete/<?=$result['pid']?>/">
+                    <a href="<?= URL::controller()?>delete/<?=$result['pid']?>/" data-trigger="confirm">
                         <span class="label label-danger">Delete</span></a>
                 </td>
             </tr>
