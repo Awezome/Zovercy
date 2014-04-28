@@ -2,7 +2,7 @@
 <div class="row">
     <div class="bg-white p-30 m-t-30 b-bot-2px-gray-light b-right-1px-gray-light">
             <div class="table-responsive">
-                <button class="btn btn-primary" data-trigger="modal" href="../posttype/edit/" data-title="Add New Post Type" class="btn">Add New Post Type</button>
+                <button class="btn btn-primary" data-trigger="modal" href="../posttype/edit/0" data-title="Add New Post Type" class="btn">Add New Post Type</button>
                 <table class="table table-bordered table-striped table-hover">
                     <thead>
                     <tr>
@@ -23,9 +23,9 @@
                         <td><?=$result['torder']?></td>
                         <td></td>
                         <td>
-                            <a href="<?= URL::controller()?>">
-                                <span class="label label-primary">Update</span></a>
-                            <a href="<?= URL::controller()?>">
+                            <a href="<?= URL::controller()?>edit/<?=$result['ptid']?>" data-trigger="modal" href="../posttype/edit/1">
+                                <span class="label label-primary">Edit</span></a>
+                            <a href="<?= URL::controller()?>delete/<?=$result['ptid']?>">
                                 <span class="label label-danger">Delete</span></a>
                         </td>
                     </tr>
