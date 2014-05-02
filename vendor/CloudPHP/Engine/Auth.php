@@ -22,18 +22,18 @@ class Auth {
         if (empty($controllers)) {
             return false;
         }
-        $actions =self::findAction(Z::$action,$controllers['authid']); 
+        $actions =self::findAction(Z::$action,$controllers['authid']);
         if (empty($actions)) {
             return false;
         }
-        
         $roleid = Z::$roleid;
-        $roleauths = Z::$db->table('uroleauth')->where("roleid='$roleid' and authid=" . $actions['authid'])->findOne('id');
+        $roleauths = DB::table('uroleauth')->where("roleid='$roleid' and authid=" . $actions['authid'])->findOne('id');
         if (empty($roleauths)) {
-            //Func::errorMessage('No Auth');
-            Func::jump(URL::web().'index.php/login/');
+            Func::errorMessage('No Auth');
+            return false;
+        }else{
+            return true;
         }
-        return true;
     }
     
     static private function findAction($action,$parentid){

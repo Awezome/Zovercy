@@ -6,7 +6,6 @@
  * Time: 12:10 PM
  */
 return array(
-    'Auth'=>'Api/',
     'Chained'=>'Api/',
     'Check'=>'Api/',
     'Code'=>'Api/',

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cloud PHP Admin</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="<?=URL::link()?>css/admin.css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <script src="<?=URL::link()?>js/lib/modernizr.js"></script>
+
+
+</head>
+<body class="backstretch">
+
+<div class="block-absolute-center login-form">
+
+    <div class="text-center m-b-10">
+        <h2 class="text-white font-w-100">Cloud PHP Admin</h2>
+    </div>
+    <form role="form" action="<?=URL::controller()?>in/" method="post">
+        <div class="form-group">
+            <input type="text" class="form-control input-glass"
+                   name="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <input type="password" class="form-control input-glass"
+                   name="password" placeholder="Password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-lg">Sign in</button>
+    </form>
+    <a href="signup.html" class="text-white hover-opacity-change hover-white-opacity-text m-t-10 d-block">Don't have an
+        account yet?</a>
+
+</div>
+
+<script src="<?=URL::link()?>/js/jquery.js"></script>
+<script src="<?=URL::link()?>js/lib/backstretch.js"></script>
+<script>
+    $(".backstretch").backstretch([
+        "<?=URL::link()?>backgrounds/wg_blurred_backgrounds_8.jpg",
+        "<?=URL::link()?>backgrounds/wg_blurred_backgrounds_5.jpg",
+        "<?=URL::link()?>backgrounds/wg_blurred_backgrounds_3.jpg",
+        "<?=URL::link()?>backgrounds/wg_blurred_backgrounds_1.jpg",
+        "<?=URL::link()?>backgrounds/wg_blurred_backgrounds_2.jpg",
+        "<?=URL::link()?>backgrounds/wg_blurred_backgrounds_4.jpg",
+        "<?=URL::link()?>backgrounds/wg_blurred_backgrounds_6.jpg",
+        "<?=URL::link()?>backgrounds/wg_blurred_backgrounds_7.jpg",
+        "<?=URL::link()?>backgrounds/wg_blurred_backgrounds_9.jpg",
+    ], {
+        duration: 5000,
+        fade: 'slow'
+    });
+</script>
+</body>
+</html>

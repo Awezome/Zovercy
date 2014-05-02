@@ -53,6 +53,8 @@ class App {
             Func::errorMessage("No Controller : " . Z::$app .'/'. Z::$controller);
         }
 
+        $this->user();
+
         if (self::$onauth) {
             Auth::run();
         }

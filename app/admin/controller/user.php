@@ -14,11 +14,25 @@ class user extends Controller {
     }
 
     function add(){
-        $this->edit();
+        $results=array(
+            'username'=>'',
+            'nickname'=>'',
+            'email'=>'',
+        );
+        $this->setData(array(
+            'results'=>$results,
+        ));
+        $this->loadView('useredit');
     }
 
     function edit() {
-
+        $name=Get::string(0);
+        $results=DB::table('user')->where('username=?',array($name))
+            ->find('username,nickname,email,roleid');
+        $this->setData(array(
+            'results'=>$results,
+        ));
+        $this->loadView('useredit');
     }
 
     function save() {

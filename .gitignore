@@ -6,3 +6,4 @@ config/config.php
 public/admin/*
 public/home/*
 public/blog/*
+vendor/umeditor/php/upload/*

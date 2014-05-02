@@ -29,12 +29,12 @@
         <a href="<?=URL::web()?>home/" type="button" class="btn btn-default navbar-btn navbar-right btn-primary m-r-30 mm-r-10">Home</a>
         <div class="navbar-dropdown navbar-right navbar-avatar">
             <a href="#" data-target="#topavatar-toggle" class="hover-no-underline dropdown-toggle m-lr-30 mm-lr-10" data-toggle="dropdown">
-                <span class="text-gray-light hidden-sm hidden-xs"><?=Z::$username?>Admin</span>
+                <span class="text-gray-light hidden-sm hidden-xs"><?=Z::$username?></span>
                 <span class="caret text-white hidden-sm hidden-xs"></span>
             </a>
             <ul id="topavatar-toggle" class="dropdown-menu avatar-dropdown">
                 <li><a href="settings.html">Settings</a></li>
-                <li><a href="login.html">Signup</a></li>
+                <li><a href="<?=URL::app()?>login/out/">Signup</a></li>
             </ul>
         </div>
         <ul class="nav navbar-nav navbar-right">
@@ -56,7 +56,7 @@
                     <li><a href="messages.html">Inbox</a></li>
                       <li class="divider"></li>
                     <li><a href="login.html">Login</a></li>
-                    <li><a href="signup.html">Signup</a></li>
+                    <li><a href="<?=URL::app()?>login/out/">Signup</a></li>
                 </ul>
             </li>
         </ul>
@@ -87,7 +87,7 @@
             <a href="#" class="text-left dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
             <ul class="dropdown-menu" role="menu">
                 <li><a href="<?=URL::app()?>user/">User Lists</a></li>
-                <li><a href="<?=URL::app()?>pages/edit/" >Page Add</a></li>
+                <li><a href="<?=URL::app()?>user/add/" >User Add</a></li>
             </ul>
         </li>
         <li>
