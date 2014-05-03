@@ -18,6 +18,7 @@ return array(
     'Image'=>'Api/',
     'Input'=>'Api/',
     'Model'=>'Api/',
+    'View'=>'Api/',
     'Page'=>'Api/',
     'Post'=>'Api/',
     'Rediz'=>'Api/',

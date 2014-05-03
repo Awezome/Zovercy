@@ -9,7 +9,7 @@ function __autoload($className) {
     if(array_key_exists($className,$map)){
         include CLOUD_ROOT.$map[$className].$className.'.php';
     }else{
-        die("Unable to load $className.");
+        die("Unable to load class $className.");
     }
 }
 

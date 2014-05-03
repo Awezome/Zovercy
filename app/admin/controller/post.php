@@ -9,8 +9,7 @@ class post extends Controller {
             'newpage' =>$page->run(),
             'results' => $page->sql()
         );        
-        $this->setData($data);      
-        $this->loadView('postlists');
+        View::load('postlists',$data);
     }
 
     function add(){
@@ -30,8 +29,7 @@ class post extends Controller {
             'news' => $news,
             'postTypes'=>Model::get('posttype')->showPostSelect(null,$news['ptid']),
         );
-        $this->setData($data);      
-        $this->loadView('postedit');
+        View::load('postedit',$data);
     }
 
     function save() {

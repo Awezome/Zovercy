@@ -18,8 +18,7 @@ class posttype extends Controller{
             'results' =>$ddd,
             'newDataSelect'=>Model::get()->showPostSelect($ddd),
         );
-        $this->setData($data);
-        $this->loadView();
+        View::load('posttype',$data);
     }
 
     function save(){
@@ -57,8 +56,7 @@ class posttype extends Controller{
             'id'=>$id,
             'newDataSelect'=>Model::get()->showPostSelect($ddd,$parentid),
         );
-        $this->setData($data);
-        $this->loadPage('posttypenew');
+        View::load('posttypenew',$data);
     }
 
     function delete(){

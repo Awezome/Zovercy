@@ -15,7 +15,6 @@ class catalog extends Controller {
             'navname'=>$ps,
             'postlist'=>true
         );
-        $this->setData($data);
-        $this->loadView('postlists');
+        View::load('postlists',$data);
     }
 }

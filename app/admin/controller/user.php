@@ -9,8 +9,7 @@ class user extends Controller {
             'newpage' =>$page->run(),
             'results' => $page->sql()
         );
-        $this->setData($data);
-        $this->loadView('userlists');
+        View::load('userlists',$data);
     }
 
     function add(){
@@ -19,10 +18,9 @@ class user extends Controller {
             'nickname'=>'',
             'email'=>'',
         );
-        $this->setData(array(
+        View::load('useredit',array(
             'results'=>$results,
         ));
-        $this->loadView('useredit');
     }
 
     function edit() {
@@ -32,7 +30,7 @@ class user extends Controller {
         $this->setData(array(
             'results'=>$results,
         ));
-        $this->loadView('useredit');
+        View::load('useredit');
     }
 
     function save() {

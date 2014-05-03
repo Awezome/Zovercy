@@ -6,7 +6,7 @@
  */
 class login extends Controller {
     function auto(){
-        $this->loadPage('login');
+        View::page('login');
     }
 
     function in() {

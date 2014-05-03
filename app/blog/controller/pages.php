@@ -5,8 +5,7 @@ class pages extends Controller {
         $pid =Get::string(0);
         $result = DB::table('page')->where("name='$pid'")->findOne();
         Check::isEmpty($result);        
-        $this->setData(array('result' => $result));        
-        $this->loadView('page');      
+        View::load('page',array('result' => $result));
     }
 
 }

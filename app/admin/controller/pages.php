@@ -9,8 +9,7 @@ class pages extends Controller {
             'newpage' =>$page->run(),
             'results' => $page->sql()
         );        
-        $this->setData($data);
-        $this->loadView('pageslists');
+        View::load('pageslists',$data);
     }
 
     function edit() {
@@ -25,8 +24,7 @@ class pages extends Controller {
         $data = array(
             'news' => $news
         );
-        $this->setData($data);      
-        $this->loadView('pagesedit');
+        View::load('pagesedit',$data);
     }
 
     function save() {

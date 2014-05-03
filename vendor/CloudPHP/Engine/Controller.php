@@ -12,49 +12,13 @@
  * @author YunPeng
  */
 class Controller {
-    private static $path;
-    private $data;
 
     public function __construct() {
-        self::$path=SITE_ROOT.'app/'.Z::$app.'/';
     }
 
     public function __destruct() {
-        unset($this->data);
     }
 
-    protected function loadView($page=null) {
-        $page=$page==null?Z::$controller:$page;
-        include self::$path. 'model/commondata.php';
-        $p=self::$path .'view/'.$page . '.html';
-        if(!is_file($p)){
-            Func::errorMessage('No Template : '. $page );
-        }
-                 
-         if (null != $this->data) {
-            extract($this->data);
-        }
-        include self::$path . 'view/header.html';
-        include $p;
-        include self::$path . 'view/footer.html';
-    }
-
-    protected function loadPage($page) {
-        $p = self::$path .'view/'. $page . '.html';
-        if (!is_file($p)) {
-            Func::errorMessage('No Template : ' . $page);
-        }
-
-        if (null != $this->data) {
-            extract($this->data);
-        }
-        include $p;
-    }
-
-    protected function setData($data){
-        $this->data=$data;        
-    }
-	
     protected function json($str) {
         echo json_encode($str);
     }

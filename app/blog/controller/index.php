@@ -9,8 +9,7 @@ class index extends Controller {
             'newsAlls' => $p->sql(),
             'build_page' => $p->run()
         );        
-        $this->setData($data);        
-        $this->loadView('postlists');        
+        View::load('postlists',$data);
     }
 
 }
