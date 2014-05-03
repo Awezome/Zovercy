@@ -21,6 +21,7 @@ include CLOUD_ROOT . 'Engine/Controller.php';
 include CLOUD_ROOT . 'Engine/Router.php';
 include CLOUD_ROOT . 'Engine/Reflect.php';
 include CLOUD_ROOT . 'Engine/Auth.php';
+include CLOUD_ROOT . 'Engine/Factory.php';
 
 class App {
 

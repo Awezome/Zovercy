@@ -14,6 +14,11 @@ function p($o,$title=''){
     echo '</pre>';
 }
 
+
+function jump($url) {
+    header("Location: " . $url);
+}
+
 function arrayValueToKey($a,$value='',$key=''){
     $ds=array();
     if($key==''||$value==''){

@@ -12,15 +12,11 @@
  * @author YunPeng
  */
 class Controller {
-    protected $model=null;
-    protected $models=array();
     private static $path;
     private $data;
 
     public function __construct() {
         self::$path=SITE_ROOT.'app/'.Z::$app.'/';
-        $m=Model::load(array(Z::$controller));
-        $this->model=$m[Z::$controller];
     }
 
     public function __destruct() {
@@ -53,10 +49,6 @@ class Controller {
             extract($this->data);
         }
         include $p;
-    }
-
-    protected function loadModel(array $data){
-        $this->models=Model::load($data);
     }
 
     protected function setData($data){

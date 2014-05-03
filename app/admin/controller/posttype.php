@@ -13,10 +13,10 @@
 
 class posttype extends Controller{
     function auto(){
-        $ddd=$this->model->getPosttype();
+        $ddd=Model::get()->getPosttype();
         $data=array(
             'results' =>$ddd,
-            'newDataSelect'=>$this->model->showPostSelect($ddd),
+            'newDataSelect'=>Model::get()->showPostSelect($ddd),
         );
         $this->setData($data);
         $this->loadView();
@@ -35,7 +35,7 @@ class posttype extends Controller{
             DB::table('posttype')->save(array(
                 'cname'=>$name,
                 'parentid'=>$parentid,
-                'level'=>$this->model->getLevel($parentid),
+                'level'=>Model::get()->getLevel($parentid),
             ));
         }
         Html::jump(URL::controller());
@@ -51,11 +51,11 @@ class posttype extends Controller{
             $parentid=0;
             $typename='';
         }
-        $ddd=$this->model->getPosttype();
+        $ddd=Model::get()->getPosttype();
         $data=array(
             'name'=>$typename,
             'id'=>$id,
-            'newDataSelect'=>$this->model->showPostSelect($ddd,$parentid),
+            'newDataSelect'=>Model::get()->showPostSelect($ddd,$parentid),
         );
         $this->setData($data);
         $this->loadPage('posttypenew');

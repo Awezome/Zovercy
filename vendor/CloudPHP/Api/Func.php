@@ -20,10 +20,6 @@ class Func {
         echo "</div></div>";
         exit();
     }
-    
-    static function jump($url) {
-        header("Location: " . $url);
-    }
 
     ////////////////////////////////
     function Permit($mingid, $maxgid, $word = "无权限操作，请先登录！") {

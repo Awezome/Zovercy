@@ -20,16 +20,17 @@ class login extends Controller {
             Cookie::set('username', $user['username']);
             Cookie::set('userid', $user['userid']);
             Cookie::set('roleid', $user['roleid']);
-            Func::jump( URL::app());
+            jump( URL::app());
         } else {
             Html::alert('Sorry');
             Html::jump( URL::controller());
+            exit();
         }
     }
 
     function out() {
         Cookie::deleteAll();
-        Func::jump( URL::controller());
+        jump( URL::controller());
     }
 
 }

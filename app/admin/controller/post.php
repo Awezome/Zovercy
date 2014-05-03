@@ -18,7 +18,6 @@ class post extends Controller {
     }
 
     function edit() {
-        $this->loadModel(array('posttype'));
         if (Get::number()==null) {
             $news = array('title' => '', 'excerpt' => '', 'istop' => 0, 'text' => '', 'stats' => '', 'addtime' => date('Y-m-d h:i:s'), 'ptid' => '', 'img' => '', 'submit' => 'Save',);
         } else {
@@ -29,7 +28,7 @@ class post extends Controller {
 
         $data = array(
             'news' => $news,
-            'postTypes'=>$this->models['posttype']->showPostSelect(null,$news['ptid']),
+            'postTypes'=>Model::get('posttype')->showPostSelect(null,$news['ptid']),
         );
         $this->setData($data);      
         $this->loadView('postedit');
