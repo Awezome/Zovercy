@@ -33,6 +33,7 @@ class post extends Controller {
     }
 
     function save() {
+        Token::check();
         $pid=Input::number('pid');
 
         $set = array(

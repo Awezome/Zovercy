@@ -22,6 +22,7 @@ class posttype extends Controller{
     }
 
     function save(){
+        Token::check();
         $id=Input::number('id');
         $name=Input::text('typename');
         $parentid=Input::number('posttype');

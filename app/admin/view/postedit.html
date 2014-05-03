@@ -38,6 +38,7 @@
             <div class="form-group">
                 <input type="hidden" name="co" value="newsedit">
                 <input type="hidden" name="pid" value="<?php echo $news['pid'] ; ?>"/>
+                <?=Token::run()?>
                 <button type="submit" class="btn btn-lg btn-primary"><?=$news['submit'] ; ?></button>
             </div>
         </div>
