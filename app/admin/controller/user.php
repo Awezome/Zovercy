@@ -45,6 +45,7 @@ class user extends Controller {
     }
 
     function save() {
+        Token::check();
         $username = Input::text('username');
         if ($username !== '') {
             $data = array(
@@ -52,6 +53,8 @@ class user extends Controller {
                 'email' => Input::text('email'),
             );
             DB::table('user')->where('username=?', array($username))->update($data);
+            Html::alert('ok');
+            Html::jump(URL::controller());
         } else {
             $username = Input::text('newusername');
             $results = DB::table('user')->where('username=?', array($username))->findOne('username');

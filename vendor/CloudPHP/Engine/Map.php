@@ -10,6 +10,8 @@ return array(
     'Check'=>'Api/',
     'Code'=>'Api/',
     'Cookie'=>'Api/',
+    'Session'=>'Api/',
+    'Token'=>'Api/',
     'Editor'=>'Api/',
     'File'=>'Api/',
     'Func'=>'Api/',
