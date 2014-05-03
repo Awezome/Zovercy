@@ -5,8 +5,6 @@ class index extends Controller {
        $data=array(
             'hello' => 'hello world',
         );        
-        $this->setData($data);        
-        $this->loadSingle('index');
+        View::page('index',$data);
     }
-
 }

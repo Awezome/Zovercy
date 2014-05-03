@@ -26,6 +26,7 @@ class Html {
     
     public static function jump($str){
         echo "<script type='text/javascript'>location.href='$str';</script>";
+        exit();
     }
 
     public static function refresh(){
