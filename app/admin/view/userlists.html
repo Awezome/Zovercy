@@ -23,7 +23,7 @@
                 <td>
                     <a href="<?= URL::controller()?>edit/<?=$result['username']?>/">
                         <span class="label label-primary">Edit</span></a>
-                    <a href="<?= URL::controller()?>delete/<?=$result['username']?>/">
+                    <a href="<?= URL::controller()?>delete/<?=$result['username']?>/" data-trigger="confirm">
                         <span class="label label-danger">Delete</span></a>
                 </td>
             </tr>

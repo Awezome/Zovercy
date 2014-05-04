@@ -57,7 +57,7 @@ class posttype extends Controller{
             'id'=>$id,
             'newDataSelect'=>Model::get()->showPostSelect($ddd,$parentid),
         );
-        View::load('posttypenew',$data);
+        View::page('posttypenew',$data);
     }
 
     function delete(){
