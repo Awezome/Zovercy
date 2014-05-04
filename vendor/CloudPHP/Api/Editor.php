@@ -15,7 +15,7 @@
 
 class Editor {
     public static function load($name, $value = '', $width = '100%', $height = '400px') {
-        echo '<textarea id="editor' . $name . '" name="' . $name . '" style="width:' . $width . ';height:' . $height.';" >' . $value. '</textarea>';
+        echo '<textarea id="editor' . $name . '" name="' . $name . '" style="width:' . $width . ';height:' . $height.';" >' . htmlspecialchars_decode($value). '</textarea>';
         echo '<script type="text/javascript">UM.getEditor("editor'.$name.'");</script>';
     }
     public static function style() {

@@ -45,9 +45,6 @@ class post extends Controller {
             'text' =>Input::get('postedit'),
         );
 
-
-        p(Input::get('postedit'));
-
         if($pid){
             DB::table('post')->where("pid=" . $pid)->update($set);
             Html::alert('编辑成功');

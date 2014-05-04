@@ -13,11 +13,11 @@
  */
 class Input {
     static function get($key) {
-        return Check::filterNeed() ? Check::filterArray($_POST[$key]) : $_POST[$key];
+        return $_POST[$key];
     }
 
     static function getAll() {
-        return Check::filterNeed() ? Check::filterArray($_POST) : $_POST;
+        return $_POST;
     }
 
     static function has($key) {
@@ -25,11 +25,7 @@ class Input {
     }
 
     static function text($key) {
-        if(isset($_POST[$key])){
-            return Check::text(Check::filterNeed() ? Check::filter($_POST[$key]) : $_POST[$key]);
-        }else{
-            return '';
-        }
+        return isset($_POST[$key])?Check::text($_POST[$key]):'';
     }
 
     static function number($key) {
