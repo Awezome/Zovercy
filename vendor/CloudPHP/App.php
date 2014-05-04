@@ -57,15 +57,19 @@ class App {
         $this->user();
 
         if (self::$onauth) {
-            Auth::run();
+            $authrun=Auth::run();
         }
+
+        if($authrun!==true){
+            exit();
+        }
+
+        Token::init();
 
         if (self::$onredis) {
             $this->runRedis();
         }
-
         include $controller;
-
         Reflect::run();
     }
 

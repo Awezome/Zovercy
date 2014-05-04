@@ -16,21 +16,20 @@ class Auth {
     static function run() {
         $apps=self::findAction(Z::$app, 0);
         if (empty($apps)) {
-            return false;
+            return true;
         }
         $controllers =self::findAction(Z::$controller, $apps['authid']);
         if (empty($controllers)) {
-            return false;
+            return true;
         }
         $actions =self::findAction(Z::$action,$controllers['authid']);
         if (empty($actions)) {
-            return false;
+            return true;
         }
         $roleid = Z::$roleid;
         $roleauths = DB::table('uroleauth')->where("roleid='$roleid' and authid=" . $actions['authid'])->findOne('id');
         if (empty($roleauths)) {
             jump(URL::app().'login/');
-            return false;
         }else{
             return true;
         }

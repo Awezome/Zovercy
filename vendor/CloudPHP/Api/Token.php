@@ -14,9 +14,13 @@ class Token {
         echo '<input type="hidden" name="taketoken" value="'.$key.'" />';
     }
 
+    static public function init(){
+        Session::set('token',md5(time()));
+    }
+
     static public function check($msg='wrong token'){
         $session=Session::get('token');
-        Session::set('token',0);
+        self::init();
         $input=Input::text('taketoken');
         if($session==$input){
             return true;

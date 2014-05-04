@@ -17,6 +17,7 @@ function p($o,$title=''){
 
 function jump($url) {
     header("Location: " . $url);
+    exit();
 }
 
 function arrayValueToKey($a,$value='',$key=''){
