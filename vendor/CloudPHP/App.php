@@ -6,10 +6,15 @@ include CLOUD_ROOT.'Engine/Load.php';
 
 function __autoload($className) {
     $map=load::map();
-    if(array_key_exists($className,$map)){
-        include CLOUD_ROOT.$map[$className].$className.'.php';
+    $apiDir=CLOUD_ROOT.'api/'.$className.'.php';
+    if(file_exists($apiDir)){
+        include $apiDir;
     }else{
-        die("Unable to load class $className.");
+        if(array_key_exists($className,$map)){
+            include CLOUD_ROOT.$map[$className].$className.'.php';
+        }else{
+            die("Unable to load class $className.");
+        }
     }
 }
 
