@@ -69,8 +69,6 @@ class App {
             exit();
         }
 
-        Token::init();
-
         if (self::$onredis) {
             $this->runRedis();
         }
