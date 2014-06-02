@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foundation Docs</title>
+    <link rel="stylesheet" href="css/docs.css" />
+	<link rel="stylesheet" href="css/font.css" />
+    <script src="js/modernizr.js"></script>
+</head>
+  <body class="antialiased hide-extras" style="">
+    <div class="marketing off-canvas-wrap">
+      <div class="inner-wrap">
+
+ <title>Foundation: The Most Advanced Responsive Front-end Framework from ZURB</title><meta name="description" content="Foundation from ZURB is the most advanced responsive front-end framework in the world.">
+ 
+
+<!-- <nav class="tab-bar show-for-small">
+  <a class="off-canvas-left-toggle menu-icon ">
+    <span></span>
+  </a>  
+</nav> -->
+
+
+<nav class="top-bar docs-bar hide-for-small" data-topbar="" style="">
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="http://foundation.zurb.com/">Foundation</a></h1>
+    </li>
+  </ul>  
+<section class="top-bar-section">
+    <ul class="right">
+      <li class="divider"></li>
+      <li class="has-dropdown not-click">
+        <a href="http://foundation.zurb.com/learn/features.html" class="">Learn</a>
+        <ul class="dropdown"><li class="title back js-generated"><h5><a href="http://foundation.zurb.com/docs/sass.html#">Back</a></h5></li>
+          <li><a href="http://foundation.zurb.com/learn/features.html">Features</a></li>
+          <li><a href="http://foundation.zurb.com/learn/faq.html">FAQ</a></li>
+          <li><a href="http://foundation.zurb.com/learn/case-washington-post.html">Case Studies</a></li>
+          <li><a href="http://foundation.zurb.com/learn/website-examples.html">Website Examples</a></li>
+          <li><a href="http://foundation.zurb.com/learn/video-started-with-foundation.html">Videos</a></li>
+          <li><a href="http://foundation.zurb.com/learn/training.html">Training</a></li>
+          <li><a href="http://foundation.zurb.com/learn/about.html">About</a></li>
+        </ul>
+      </li>
+      <li class="divider"></li>
+      <li class="has-dropdown not-click">
+        <a href="http://foundation.zurb.com/templates.html" class="">Develop</a>
+        <ul class="dropdown"><li class="title back js-generated"><h5><a href="http://foundation.zurb.com/docs/sass.html#">Back</a></h5></li>
+          <li><a href="http://foundation.zurb.com/templates.html">Add-ons</a></li>
+          <li><a href="http://foundation.zurb.com/docs">Docs</a></li>
+          <li><a href="http://foundation.zurb.com/develop/download.html">Download</a></li>
+          <li><a href="http://foundation.zurb.com/develop/contribute.html">Contribute</a></li>
+          <li><a href="http://foundation.zurb.com/develop/tools.html">Tools</a></li>
+        </ul>
+      </li>
+      <li class="divider"></li>
+      <li class="has-dropdown not-click">
+        <a href="http://foundation.zurb.com/support/forum.html" class="">Support</a>
+        <ul class="dropdown"><li class="title back js-generated"><h5><a href="http://foundation.zurb.com/docs/sass.html#">Back</a></h5></li>
+          <li><a href="http://foundation.zurb.com/support/support.html">Support Channels</a></li>
+          <li><a href="http://foundation.zurb.com/forum">Foundation Forum</a></li>
+          <li><a href="http://foundation.zurb.com/support/images-and-badges.html">Images &amp; Badges</a></li>
+        </ul>
+      </li>
+      <li class="divider"></li>
+      <li>
+        <a href="http://foundation.zurb.com/business/services.html" class="">Business</a>
+      </li>
+      <li class="divider"></li>
+      <li>
+        <a href="http://foundation.zurb.com/docs" class="">Docs</a>
+      </li>
+      <li class="divider"></li>
+      <li class="has-form">
+        <a href="http://foundation.zurb.com/docs" class="small button">Getting Started</a>
+    </li></ul>
+  </section></nav>
+<nav class="tab-bar show-for-small">
+  <a class="left-off-canvas-toggle menu-icon">
+    <span>Foundation</span>
+  </a>
+</nav>
+  <div class="row">
+    <div class="large-12 columns">
+      <h1>Blog <small>This is my blog. It's awesome.</small></h1>
+      <hr />
+    </div>
+  </div>
+<aside class="marketing-left-off-canvas-menu">
+  <ul class="off-canvas-list">
+    <li><label class="first">Foundation</label></li>
+    <li><a href="http://foundation.zurb.com/">Home</a></li>
+  </ul>
+
+  <hr>
+
+  <ul class="off-canvas-list">
+    <li><label>Setup</label></li>
+    <li><a href="http://foundation.zurb.com/docs/sass.html#css">CSS</a></li>
+    <li><a href="./f_files/f.htm">Sass</a></li>
+    <li><a href="http://foundation.zurb.com/docs/sass.html#rails">Rails</a></li>
+    <li><a href="http://foundation.zurb.com/docs/components/global.html">Global Styles</a></li>
+    <li><a href="http://foundation.zurb.com/docs/sass.html#upgrading">Upgrading</a></li>
+    <hr>
+    <div class="zurb-links">
+    <ul class="top">
+      <li class="logo"><a href="http://zurb.com/"></a></li>
+      <li><a href="http://zurb.com/about">About</a></li>
+      <li><a href="http://zurb.com/blog">Blog</a></li>
+      <li><a href="http://zurb.com/contact">Contact</a></li>
+    </ul>
+    <ul class="pillars">
+      <li>
+        <a href="http://www.zurb.com/studios" class="footer-link-block services">
+          <span class="title">Studios</span>
+          <span>Helping startups win since '98.</span>
+        </a>
+      </li>
+    </ul>
+</div>
+
+  </ul>
+</aside>
+
+        <section role="main">
+
+          <div class="row">
+
+            <div class="large-9 medium-8 columns">
+
+      <article>
+ 
+        <h2><a href="#">Blog Post Title</a></h2>
+        <h6>Written by <a href="#">John Smith</a> on August 12, 2012.</h6>
+
+ 
+        <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
+ 
+        <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
+ 
+      </article>
+ 
+      <hr />
+ 
+      <article>
+ 
+        <h2><a href="#">Blog Post Title</a></h2>
+        <h6>Written by <a href="#">John Smith</a> on August 12, 2012.</h6>
+
+ 
+        <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
+ 
+        <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
+ 
+      </article>
+<hr />
+      <article>
+ 
+        <h2><a href="#">Blog Post Title</a></h2>
+        <h6>Written by <a href="#">John Smith</a> on August 12, 2012.</h6>
+
+ 
+        <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
+ 
+        <p>Pork drumstick turkey fugiat. Tri-tip elit turducken pork chop in. Swine short ribs meatball irure bacon nulla pork belly cupidatat meatloaf cow. Nulla corned beef sunt ball tip, qui bresaola enim jowl. Capicola short ribs minim salami nulla nostrud pastrami.</p>
+ 
+      </article>	  
+<ul class="pagination">
+  <li class="arrow unavailable"><a href="">&laquo;</a></li>
+  <li class="current"><a href="">1</a></li>
+  <li><a href="">2</a></li>
+  <li><a href="">3</a></li>
+  <li><a href="">4</a></li>
+  <li class="unavailable"><a href="">&hellip;</a></li>
+  <li><a href="">12</a></li>
+  <li><a href="">13</a></li>
+  <li class="arrow"><a href="">&raquo;</a></li>
+</ul>
+            </div>
+			
+<div class="large-3 medium-4 columns">
+              <div class="hide-for-small">
+              <div class="sidebar">
+  <h5>Foundation Documentation</h5>
+  <form>
+    <!--  <label>Search Documentation</label> -->
+    <input tabindex="1" id="autocomplete" type="search" placeholder="Search Docs: e.g. forms" autocomplete="off">
+  </form>
+  <nav>
+    <ul class="side-nav">
+      <li class="heading">Setup</li>
+      <li><a href="http://foundation.zurb.com/docs/index.html">Getting Started</a></li>
+      <li><a href="http://foundation.zurb.com/docs/css.html">CSS</a></li>
+      <li class="active"><a href="./f_files/f.htm">Sass</a></li>
+	   <li class="divider"></li>
+	      <li class="heading">Setup</li>
+      <li><a href="http://foundation.zurb.com/docs/index.html">Getting Started</a></li>
+      <li><a href="http://foundation.zurb.com/docs/css.html">CSS</a></li>
+      <li class="active"><a href="./f_files/f.htm">Sass</a></li>
+    </ul>
+  </nav>
+</div>  
+              </div>
+            </div>
+			
+          </div>
+
+<div id="newsletter">
+  <div class="row">
+    <div class="medium-8 columns">
+      <h5>Stay on top of what’s happening in <a href="http://zurb.com/responsive">responsive design</a>.</h5>
+      <p>Sign up to receive monthly <a href="http://zurb.com/responsive/reading">Responsive Reading</a> highlights. <a href="http://www.zurb.com/responsive/reading/2012/10">Read Last Month's Edition »</a></p>
+    </div>
+  <div class="medium-4 columns">
+    <form method="post" action="http://zurb.com/responsive/subscribe">
+      <div class="row collapse margintop-20px">
+        <div class="small-8 medium-8 columns">
+          <input type="text" name="email" placeholder="signup@example.com">
+        </div>
+        <div class="small-4 medium-4 columns">
+          <input type="submit" href="#" class="postfix small button expand" value="Sign Up">
+        </div>
+      </div>
+    </form>
+  </div>  
+  </div>
+</div>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="./js/jquery.js"></script>
+    <script src="./js/foundation.min.js"></script>
+    <script>
+            $(document).foundation().foundation('joyride', 'start');
+    </script>
+  
+</body>
+
+
+</html>

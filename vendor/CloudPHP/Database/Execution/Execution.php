@@ -55,6 +55,11 @@ class Execution implements ExecutionInterface {
         return $stmt->fetchAll($fetchType);
     }
 
+    public function GetOne($name){
+        $results=$this->find($name);
+        return $results[$name];
+    }
+
     public function fetchAll($data='*', $fetchType=PDO::FETCH_ASSOC) {
         return $this->findAll($data, $fetchType);
     }

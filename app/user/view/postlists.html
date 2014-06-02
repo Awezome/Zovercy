@@ -1,0 +1,20 @@
+<?php if(isset($postlist)){?>
+<ul class="breadcrumbs">
+    <li><a href=" <?=URL::web()?>">Home</a></li>
+    <li><a href="#">Post</a></li>
+    <li class="unavailable"><a href="#">Lists</a></li>
+    <li class="current"><a href="#"><?php echo $navname;?></a></li>
+</ul>
+<?php }?>
+<?php foreach($newsAlls as $news){?>
+<article class="cloudbox"> 
+    <h3><a href="<?=URL::web().'blog/post/'.$news['pid']?>"><?php echo $news['title'];?></a></h3>
+    <div class="spanline"></div>
+    <h6>Written by <a href="#"><?=$uname?></a> on <?php echo date('F d, Y.',time($news['addtime']));?></h6>
+    <p><?php echo Str::cutStr($news['text']);?></p>
+</article>
+<br/>
+<?php }?>
+
+<?php echo $build_page; ?>
+

@@ -8,7 +8,7 @@
     <h3><a href="#"><?php echo $result['title'];?></a></h3>
     <div class="spanline"></div>
     <h6>
-        Written by <a href="#">John Smith</a> on <?php echo date('F d, Y.',time($result['addtime']));?>
+        Written by <a href="#"><?=$username?></a> on <?php echo date('F d, Y.',time($result['addtime']));?>
         <?php if(Z::$online){?><a href="<?=URL::web()?>post/edit/<?php echo $result['pid'];?>/">Edit</a><?php }?>
     </h6>
     <p><?php echo $result['text'];?></p>

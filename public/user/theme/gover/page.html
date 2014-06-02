@@ -1,0 +1,150 @@
+<script type="text/javascript">
+    function checkform() {
+        if ($(".reg_username").val() == '') {
+            $("#username").html("用户名不能为空");
+            return false;
+        } else if ($(".reg_username").val().length > 18 || $(".reg_username").val().length < 4) {
+            $("#username").html("用户名长度为4-18位");
+            return false;
+        } else if (!$(".reg_username").val().match(/^\w+$/)) {
+            $("#username").html("用户名中不能含有中文及非法字符");
+            return false;
+        } else if ($(".reg_password").val() == '') {
+            $("#password").html("密码不能为空");
+            return false;
+        } else if ($(".reg_password").val() != $(".reg_password2").val()) {
+            $("#password2").html("两次密码填写不一致");
+            return false;
+        } else if ($(".reg_email").val() == '') {
+            $("#email").html("邮箱不能为空");
+            return false;
+        } else if (!$(".reg_email").val().match(/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/)) {
+            $("#email").html("邮箱格式不正确");
+            return false;
+            //}else if($(".reg_idcard").val() == ''){
+            //$("#idcard").html("身份证不能为空");
+            //return false;
+        } else if ($(".qq").val() == '') {
+            $("#qq").html("QQ不能为空");
+            return false;
+        } else if (!$(".qq").val().match(/^[0-9]*$/)) {
+            $("#qq").html("QQ必须为数字");
+            return false;
+        } else if ($(".safeques").val() == '') {
+            $("#safeques").html("请选择安全问题");
+            return false;
+        } else if ($(".reg_safeans").val() == '') {
+            $("#safeans").html("请填写安全问题");
+            return false;
+        } else if ($(".reg_safeans").val().length > 36) {
+            $("#safeans").html("问题答案过长");
+            return false;
+        } else if ($("#ck").attr('checked') == undefined) {
+            alert('请阅读免责声明！');
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+</script>
+
+<?php if($page=='login'){?>
+<div class="reg">
+    <form name="login" action="<?php echo THIS_HOST ; ?>admin.php?ac=user&op=login" method="post">
+        <div class="reg_input"><span>用户名</span><input type="text" name="username" /></div>
+        <div class="reg_note"><span>4-18个字符</span></div>
+        <div class="reg_input"><span>密码</span><input type="password" name="password" /></div>
+        <div class="reg_note"><span><span><a href="<?php echo THIS_HOST.'index.php/page/safe';?>" style="color:#0066cc">忘记密码？</a></span></span></div>
+        <div class="reg_btn">
+            <input id="login_btn" type="submit" value=""/>
+            <input id="reg_btn" type="button" value="" onClick="location = '<?php echo THIS_HOST.'index.php / page / reg';?>'" />
+        </div>
+    </form>
+</div>
+<?php }else if($page=='safe'){?>
+<div class="reg" >
+    <form name="safe" action="<?php echo THIS_HOST ; ?>admin.php?ac=user&op=safe" method="post">
+        <div style="font-size:16px; font-weight:700; height:40px; color:#006666"><span>密码找回</span></div>
+        <div class="reg_input"><span>用户名</span><input type="text" name="username" /></div>
+        <div class="reg_ques"><span>安全问题&nbsp;</span>
+            <select name="safeques" class="safeques">
+                <option value="" selected>请选择问题</option>
+                <option value="1">父亲的名字</option>
+                <option value="2">母亲的名字</option>
+                <option value="3">你出生的城市</option>
+                <option value="4">你的星座</option>
+                <option value="5">您个人计算机的品牌</option>
+                <option value="6">您最喜欢的餐馆名称</option>
+                <option value="7">身份证最后四位数字</option>
+            </select>
+        </div>
+        <div class="reg_input" style="margin-bottom:20px;"><span>问题答案</span><input type="text" name="safeans" /></div>
+        <div class="" style="margin-bottom:60px; text-align:right; width:400px;"><input type="submit" name="submit" value="提交"/></div>
+    </form>
+</div>
+<?php }else if($page=='reset'){?>
+<div class="reg" >
+    <form name="safe" action="<?php echo THIS_HOST ; ?>admin.php?ac=user&op=reset" method="post">
+        <div style="font-size:16px; font-weight:700; height:40px; color:#006666"><span>密码重置</span></div>
+        <div class="reg_input"><span>新密码</span><input type="text" name="password" /></div>
+        <div class="reg_input" style="margin-bottom:10px"><span>确认密码</span><input type="text" name="password2" /></div>
+        <div class="" style="margin-bottom:60px; text-align:right; width:400px;"><input type="submit" name="submit" value="提交"/></div>
+    </form>
+</div>
+<?php }else if($page=='reg'){?>
+<div class="reg">
+    <form name="login" action="<?php echo THIS_HOST ; ?>admin.php?ac=reg&op=reg" method="post">
+        <div class="reg_input"><div class="for_name">用户名</div><div class="for_input"><input type="text" name="username" class="reg_username"/></div></div>
+        <div class="reg_note"><span id="username">用户名为长度4-18位的英文或数字组合</span></div>
+        <div class="reg_input"><div class="for_name">密码</div><div class="for_input"><input type="password" name="password"  class="reg_password"/></div></div>
+        <div class="reg_note"><span><span id="password"></span></span></div>
+        <div class="reg_input"><div class="for_name">确认密码</div><div class="for_input"><input type="password" name="password2"  class="reg_password2"/></div></div>
+        <div class="reg_note"><span><span id="password2"></span></span></div>
+        <div class="reg_line">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</div>
+        <div class="reg_input"><div class="for_name">E-mail</div><div class="for_input"><input type="text" name="email"  class="reg_email"/></div></div>
+        <div class="reg_note"><span><span id="email"></span></span></div>
+        <div class="reg_input"><div class="for_name">QQ</div><div class="for_input"><input type="text" name="qq"  class="qq"/></div></div>
+        <div class="reg_note"><span><span id="qq"></span></span></div>
+        <div class="reg_note"><span><span id="phone"></span></span></div>
+        <div class="reg_line">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</div>
+        <div class="reg_ques"><div class="for_name">安全问题</div>
+            <select name="safeques" class="safeques">
+                <option value="" selected>请选择问题</option>
+                <option value="1">父亲的名字</option>
+                <option value="2">母亲的名字</option>
+                <option value="3">你出生的城市</option>
+                <option value="4">你的星座</option>
+                <option value="5">您个人计算机的品牌</option>
+                <option value="6">您最喜欢的餐馆名称</option>
+                <option value="7">身份证最后四位数字</option>
+            </select>
+        </div>
+        <div class="reg_note"><span><span id="safeques"></span></span></div>
+        <div class="reg_input"><div class="for_name">问题答案</div><div class="for_input"><input type="text" name="safeans"  class="reg_safeans"/></div></div>
+        <div class="reg_note"><span><span id="safeans"></span></span></div>
+        <div class="reg_line">- - - - - - - - - - - - - - - - - - - (以下内容选填)- - - - - - - - - - - - - - - - - - -</div>
+        <div class="reg_input"><div class="for_name">电话</div><div class="for_input"><input type="text" name="phone"  class="reg_phone"/></div></div>
+        <div class="reg_note"><span><span></span></span></div>
+        <div class="reg_line">- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</div>
+        <div style="margin-left:90px;"><input id="ck" type="checkbox" checked="checked"/><a target="_blank" href="<?php echo THIS_HOST.'index.php/page/disclaimer';?>">阅读免责声明</a></div>
+        <div class="reg_btn">
+            <input id="reg_btn" type="submit" name="submit" value="" onclick="return checkform();"/>
+            <input id="login_btn" type="button" value="" onClick="location = '<?php echo THIS_HOST;?>index.php/page/login'" />
+        </div>
+    </form>
+</div>
+<?php }else{?>
+<div class="about_main">
+    <div class="main_bar"><span>首页 >> <?php echo $result['ctitle'];?></span></div>
+    <div class="about_main_place"></div>
+    <div class="about_main_title">
+        <span><?php echo $result['ctitle'];?></span>
+    </div>
+    <div class="about_main_content">
+        <?php echo $result['text'];?>
+    </div>
+</div>
+
+<?php }?>
+
