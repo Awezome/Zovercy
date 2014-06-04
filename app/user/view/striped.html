@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Striped by HTML5 UP</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <script src="<?=URL::link()?>html5up-striped/js/jquery.min.js"></script>
+    <script src="<?=URL::link()?>html5up-striped/js/skel.min.js"></script>
+    <script src="<?=URL::link()?>html5up-striped/js/skel-panels.min.js"></script>
+    <script src="<?=URL::link()?>html5up-striped/js/init.js"></script>
+    <link rel="stylesheet" href="<?=URL::link()?>html5up-striped/css/skel-noscript.css"/>
+    <link rel="stylesheet" href="<?=URL::link()?>html5up-striped/css/style.css"/>
+    <link rel="stylesheet" href="<?=URL::link()?>html5up-striped/css/style-desktop.css"/>
+    <link rel="stylesheet" href="<?=URL::link()?>html5up-striped/css/style-wide.css"/>
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="<?=URL::link()?>html5up-striped/css/ie9.css"/><![endif]-->
+    <!--[if lte IE 8]>
+    <script src="<?=URL::link()?>html5up-striped/js/html5shiv.js"></script>
+    <link rel="stylesheet" href="css/ie8.css"/><![endif]-->
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" href="<?=URL::link()?>html5up-striped/css/ie7.css"/><![endif]-->
+</head>
+<!--
+    Note: Set the body element's class to "left-sidebar" to position the sidebar on the left.
+    Set it to "right-sidebar" to, you guessed it, position it on the right.
+-->
+<body class="left-sidebar">
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Content -->
+<div id="content">
+    <div id="content-inner">
+
+        <!-- Post -->
+        <?php foreach($newsAlls as $news){?>
+        <article class="is-post is-post-excerpt">
+            <header>
+                <h2><a href="<?=URL::web().'blog/post/'.$news['pid']?>"><?php echo $news['title'];?></a></h2>
+            </header>
+            <div class="info">
+                <span class="date"><span class="month">Jan<span>uary</span></span> <span class="day">14</span><span
+                        class="year">, 2013</span></span>
+            </div>
+
+            <a href="#" class="image image-full">
+            <?php if($news['ptid']/2==0){?>
+                <img src="<?=URL::link()?>html5up-striped/images/n33-robot-invader.jpg" alt=""/>
+            <?php }else{?>
+                <img src="<?=URL::link()?>html5up-striped/images/fotogrph-dark-stairwell.jpg" alt=""/>
+            <?php }?>
+            </a>
+
+            <p><?php echo Str::cutStr($news['text']);?></p>
+        </article>
+        <?php }?>
+    </div>
+</div>
+
+<!-- Sidebar -->
+<div id="sidebar">
+
+    <!-- Logo -->
+    <div id="logo">
+        <h1>STRIPED</h1>
+    </div>
+
+    <!-- Nav -->
+    <nav id="nav">
+        <ul>
+            <li class="current_page_item"><a href="#">Latest Post</a></li>
+            <li><a href="#">Archives</a></li>
+            <li><a href="#">About Me</a></li>
+            <li><a href="#">Contact Me</a></li>
+        </ul>
+    </nav>
+
+    <!-- Search -->
+    <section class="is-search">
+        <form method="post" action="#">
+            <input type="text" class="text" name="search" placeholder="Search"/>
+        </form>
+    </section>
+
+    <!-- Text -->
+    <section class="is-text-style1">
+        <div class="inner">
+            <p>
+                <strong>Striped:</strong> A free and fully responsive HTML5 site
+                template designed by <a href="http://n33.co/">AJ</a> for <a href="http://html5up.net/">HTML5 up!</a>
+            </p>
+        </div>
+    </section>
+
+    </section>
+
+
+    <!-- Copyright -->
+    <div id="copyright">
+        <p>
+            &copy; 2013 An Untitled Site.<br/>
+            Images: <a href="http://n33.co">n33</a>, <a href="http://fotogrph.com">fotogrph</a><br/>
+            Design: <a href="http://html5up.net/">HTML5 UP</a>
+        </p>
+    </div>
+
+</div>
+
+</div>
+
+</body>
+</html>

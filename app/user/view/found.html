@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awezome Zone</title>
+    <link rel="stylesheet" href=" <?=URL::link()?>css/docs.css" />
+    <link rel="stylesheet" href=" <?=URL::link()?>css/cloudphp.css" />
+    <script src="js/modernizr.js"></script>
+</head>
+<body class="antialiased hide-extras" style="">
+<div class="marketing off-canvas-wrap">
+    <div class="inner-wrap">
+        <nav class="top-bar docs-bar hide-for-small" data-topbar="" style="">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href=" <?=URL::web()?>">Awezome Zone</a></h1>
+                </li>
+            </ul>
+            <section class="top-bar-section">
+                <ul class="right">
+                    <li class="divider"></li>
+                    <li><a href=" <?=URL::web()?>" class="">Home</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li class="has-form">
+                        <a href="<?php echo URL::web().'admin/';?>" class="small button">
+                            <?php if(Z::$online){?>Admin<?php }else{?>Login<?php }?>
+                        </a>
+                    </li></ul>
+            </section>
+        </nav>
+        <nav class="tab-bar show-for-small">
+            <a class="left-off-canvas-toggle menu-icon">
+                <span>Awezome Zone</span>
+            </a>
+        </nav>
+        <div class="row">
+            <div class="large-12 columns">
+                <h1><a href=" <?=URL::web()?>">Awezome Zone </a><small>Hello , I Am Awezome !</small></h1>
+                <hr />
+            </div>
+        </div>
+        <aside class="marketing-left-off-canvas-menu">
+            <ul class="off-canvas-list">
+                <li><label class="first">Awezome Zone</label></li>
+                <li><a href="http://Awezome Zone.zurb.com/">Home</a></li>
+            </ul>
+
+            <hr>
+
+            <ul class="off-canvas-list">
+                <li><label>Develop</label></li>
+                <?php foreach($news_type_head_arrs as $news_type_arr){?>
+                <li><a href="<?php echo URL::app().'post/lists/'.$news_type_arr['cname'];?>/">
+                    <?=$news_type_arr['cname']?></a> <li>
+                <?php }?>
+
+                <hr>
+                <div class="zurb-links">
+                    <ul class="top">
+                        <?php foreach($pages as $page){?>
+                        <li><a href="<?=URL::app()?>pages/show/<?php echo $page['name']?>/"><?php echo $page['name']?></a></li>
+                        <?php }?>
+                    </ul>
+                </div>
+            </ul>
+        </aside>
+        <section role="main">
+            <div class="row">
+                <div class="large-9 medium-8 columns">
+<?php if(isset($postlist)){?>
+<ul class="breadcrumbs">
+    <li><a href=" <?=URL::web()?>">Home</a></li>
+    <li><a href="#">Post</a></li>
+    <li class="unavailable"><a href="#">Lists</a></li>
+    <li class="current"><a href="#"><?php echo $navname;?></a></li>
+</ul>
+<?php }?>
+<?php foreach($newsAlls as $news){?>
+<article class="cloudbox"> 
+    <h3><a href="<?=URL::web().'blog/post/'.$news['pid']?>"><?php echo $news['title'];?></a></h3>
+    <div class="spanline"></div>
+    <h6>Written by <a href="#"><?=$uname?></a> on <?php echo date('F d, Y.',time($news['addtime']));?></h6>
+    <p><?php echo Str::cutStr($news['text']);?></p>
+</article>
+<br/>
+<?php }?>
+
+<?php echo $build_page; ?>
+</div>
+<div class="large-3 medium-4 columns">
+    <div class="hide-for-small">
+        <div class="sidebar">
+            <h5>Awezome Guide</h5>
+            <form>
+                <input name="search" tabindex="1" id="autocomplete" type="search" placeholder="Search Here ..." autocomplete="off">
+            </form>
+            <nav>
+                <ul class="side-nav">
+                    <li class="heading">Setup</li>
+                    <li><a href="http://foundation.zurb.com/docs/index.html">Getting Started</a></li>
+                    <li><a href="http://foundation.zurb.com/docs/css.html">CSS</a></li>
+                    <li class="active"><a href="./f_files/f.htm">Sass</a></li>
+                    <li class="divider"></li>
+                    <li class="heading">Setup</li>
+                    <li><a href="http://foundation.zurb.com/docs/index.html">Getting Started</a></li>
+                    <li><a href="http://foundation.zurb.com/docs/css.html">CSS</a></li>
+                    <li class="active"><a href="./f_files/f.htm">Sass</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+</div>
+
+</section>
+<div class="zurb-footer-bottom">
+    <div class="row">
+        <div class="medium-4 medium-4 push-8 columns">
+            <ul class="home-social">
+                <li><a href="http://www.twitter.com/ZURB" class="twitter"></a></li>
+                <li><a href="http://www.facebook.com/ZURB" class="facebook"></a></li>
+                <li><a href="/contact" class="mail"></a></li>
+            </ul>
+        </div>
+        <div class="medium-8 medium-8 pull-4 columns">
+            <a href="http://www.zurb.com" class="zurb-logo regular"></a>
+            <ul class="zurb-links">
+                <li><a href="http://zurb.com/about">About</a></li>
+                <li><a href="http://zurb.com/blog">Blog</a></li>
+                <li><a href="http://zurb.com/news">News<span class="show-for-medium-up"> &amp; Events</span></a></li>
+                <li><a href="http://zurb.com/contact">Contact</a></li>
+                <li><a href="http://zurb.com/sitemap">Sitemap</a></li>
+            </ul>
+            <p class="copyright">Copyright &copy; 2013-<?php echo date('Y');?> <a href=" <?=URL::web()?>">Awezome Zone</a> , Powered by <a href="">CloudPHP</a> , Template by <a href="http://foundation.zurb.com/">Foundation</a> , Theme by <a href=" <?=URL::web()?>">Awezome</a> .</p>
+        </div>
+    </div>
+</div>
+<a class="exit-off-canvas"></a>
+</div>
+</div>
+
+<script src=" <?=URL::link()?>js/jquery.js"></script>
+<script src=" <?=URL::link()?>js/foundation.min.js"></script>
+<script>
+    $(document).foundation();
+</script>
+
+</body>
+
+
+</html>

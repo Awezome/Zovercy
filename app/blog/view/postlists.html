@@ -10,7 +10,7 @@
 <article class="cloudbox"> 
     <h3><a href="<?=URL::app().'post/'.$news['pid']?>"><?php echo $news['title'];?></a></h3>
     <div class="spanline"></div>
-    <h6>Written by <a href="#">Awezome</a> on <?php echo date('F d, Y.',time($news['addtime']));?></h6>
+    <h6>Written by <a href="<?=URL::web()?>user/<?=User::idToName($news['uid'])?>"><?=User::idToName($news['uid'])?></a> on <?php echo date('F d, Y.',time($news['addtime']));?></h6>
     <p><?php echo Str::cutStr($news['text']);?></p>
 </article>
 <br/>

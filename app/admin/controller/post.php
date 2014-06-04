@@ -3,7 +3,7 @@
 class post extends Controller {
 
     function auto() {
-        $page = new Page('post', 'pid,title,istop,stats,addtime,ptid,checked','addtime');
+        $page = new Page('post', 'pid,title,istop,stats,addtime,ptid,checked','addtime','uid='.Z::$userid);
 
         $data=array(
             'newpage' =>$page->run(),
@@ -22,6 +22,9 @@ class post extends Controller {
         } else {
             $newsid = Get::number(0);
             $news = DB::table('post')->where('pid=' . $newsid)->findOne();
+            if($news['uid']!=Z::$userid){
+                exit('error user');
+            }
             $news['submit'] = 'Update';
         }
 
@@ -43,6 +46,7 @@ class post extends Controller {
             'stats' =>Input::number('stats'),
             'addtime' =>Input::get('this_time'),
             'text' =>Input::get('postedit'),
+            'uid'=>Z::$userid,
         );
 
         if($pid){

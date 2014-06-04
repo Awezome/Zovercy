@@ -7,7 +7,7 @@ class catalog extends Controller {
         $pp=DB::table('posttype')->where("cname='$ps'")->findOne('ptid');
         $t=Check::number($pp['ptid']);
         $where = "ptid=" . $t;
-        $p = new Page('post', 'pid,title,text,istop,stats,addtime,ptid,checked', 'addtime',$where,10);
+        $p = new Page('post', 'pid,title,text,istop,stats,addtime,ptid,checked,uid', 'addtime',$where,10);
 
         $data=array(
             'newsAlls' => $p->sql(),

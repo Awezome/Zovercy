@@ -6,76 +6,36 @@
 </ul>
 <article class="cloudbox">
     <h3><a href="#"><?php echo $result['title'];?></a></h3>
+
     <div class="spanline"></div>
     <h6>
         Written by <a href="#"><?=$username?></a> on <?php echo date('F d, Y.',time($result['addtime']));?>
         <?php if(Z::$online){?><a href="<?=URL::web()?>post/edit/<?php echo $result['pid'];?>/">Edit</a><?php }?>
     </h6>
+
     <p><?php echo $result['text'];?></p>
 </article>
-<hr />
+<br/>
 <article class="cloudbox">
-    <div class="row ">
-        <div class="large-2 columns small-3"><img src=" <?=URL::link()?>image/hold.gif" /></div>
-        <div class="large-10 columns">
-            <p><strong>Some Person said:</strong> Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit, dolore aliqua non est magna in labore pig pork biltong.</p>
-            <ul class="inline-list">
-                <li><a href="">Reply</a></li>
-                <li><a href="">Share</a></li>
-            </ul>
-            <h6>2 Comments</h6>
-            <div class="row">
-                <div class="large-2 columns small-3"><img src=" <?=URL::link()?>image/hold.gif" /></div>
-                <div class="large-10 columns"><p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit</p></div>
-            </div>
-            <div class="row">
-                <div class="large-2 columns small-3"><img src=" <?=URL::link()?>image/hold.gif" /></div>
-                <div class="large-10 columns"><p>Bacon ipsum dolor sit amet nulla ham qui sint exercitation eiusmod commodo, chuck duis velit. Aute in reprehenderit</p></div>
-            </div>
-        </div>
-    </div>
-    <br />
     <div class="row">
         <div class="large-12 columns">
-            <section class="section panel">
-                <div class="content" data-slug="panel1">
-                    <form>
-                        <div class="row collapse">
-                            <div class="large-2 columns">
-                                <label class="inline">Your Name</label>
-                            </div>
-                            <div class="large-10 columns">
-                                <input type="text" id="yourName" placeholder="Jane Smith">
-                            </div>
-                        </div>
-                        <div class="row collapse">
-                            <div class="large-2 columns">
-                                <label class="inline"> Your Email</label>
-                            </div>
-                            <div class="large-10 columns">
-                                <input type="text" id="yourEmail" placeholder="jane@smithco.com">
-                            </div>
-                        </div>
-                        <div class="row collapse">
-                            <div class="large-2 columns">
-                                <label class="inline"> What's up?</label>
-                            </div>
-                            <div class="large-10 columns">
-                                <textarea rows="6"></textarea>
-                            </div>
-                        </div>
-                        <div class="row collapse">
-                            <div class="large-2 columns">
-                            </div>
-                            <div class="large-10 columns">
-                                <button type="submit" class="radius button">Submit</button>
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
-            </section></div>
+            <div id="SOHUCS"></div>
+            <script>
+                (function () {
+                    var appid = 'cyr5joKV7',
+                            conf = 'prod_a88a2c9bca07bad961f1e3264e3fe61c';
+                    var doc = document,
+                            s = doc.createElement('script'),
+                            h = doc.getElementsByTagName('head')[0] || doc.head || doc.documentElement;
+                    s.type = 'text/javascript';
+                    s.charset = 'utf-8';
+                    s.src = 'http://assets.changyan.sohu.com/upload/changyan.js?conf=' + conf + '&appid=' + appid;
+                    h.insertBefore(s, h.firstChild);
+                    window.SCS_NO_IFRAME = true;
+                })()
+            </script>
+        </div>
     </div>
 </article>
-<br />
+<br/>
 

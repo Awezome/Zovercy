@@ -8,8 +8,8 @@ class index extends Controller {
 
     public function show(){
         $uname=Get::string(0);
-        $userid=DB::table('user')->where('username=?',array($uname))->GetOne('userid');
-
+        $user=DB::table('user')->where('username=?',array($uname))->findOne('userid,template');
+        $userid=$user['userid'];
         $p = new Page('post', 'pid,title,text,istop,stats,addtime,ptid,checked', 'addtime','uid='.$userid,10);
 
         $data=array(
@@ -17,7 +17,9 @@ class index extends Controller {
             'build_page' => $p->run(),
             'uname'=>$uname,
         );
-        View::load('postlists',$data);
+        //get template page
+        $page=$user['template']==''?'found':$user['template'];
+        View::page($page,$data);
     }
 
 }
