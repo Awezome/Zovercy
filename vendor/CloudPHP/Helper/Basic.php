@@ -42,10 +42,8 @@ function arrayInsert(&$array, $index, $position) {
 }
 
 	
-function g($v){
-	if(is_array($v)){
-		print_r($v);
-	}else{
-		echo $v."\n";
-	}
+function g($v=''){
+    $content=date('Y-m-d H:i:s')."\t".$v."\n";
+    //echo $content;
+    file_put_contents(Z::$config['LOG']['dir'], $content, FILE_APPEND);
 }

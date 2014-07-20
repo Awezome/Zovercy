@@ -30,6 +30,9 @@ class DatabaseFactory {
     }
 
     private function newConnect($name) {
+        if(!isset(self::$config[$name])){
+            exit("can't find config database::$name");
+        }
         $dbDriver=self::$config[$name]['driver'];
         $con=NULL;
         switch($dbDriver) {

@@ -55,20 +55,15 @@ class Execution implements ExecutionInterface {
         return $stmt->fetchAll($fetchType);
     }
 
-    public function GetOne($name){
-        $results=$this->find($name);
-        return $results[$name];
-    }
-
     public function fetchAll($data='*', $fetchType=PDO::FETCH_ASSOC) {
         return $this->findAll($data, $fetchType);
     }
 
     public function save(array $data) {
-        $column=implode(',', array_keys($data));
+        $column=implode('`,`', array_keys($data));
         $this->blind=array_values($data);
         $mark=self::buildMark(count($data)); // build ? marks .
-        $this->sql='insert into '.$this->table.' ('.$column.') values ('.$mark.')';
+        $this->sql='insert into '.$this->table.' (`'.$column.'`) values ('.$mark.')';
         $this->executeQuery();
         return $this->con->lastInsertId();
     }
@@ -93,11 +88,11 @@ class Execution implements ExecutionInterface {
     }
 
     public function count(array $data=array()) {
-        /*
+        /**
          * $this->sql='select count(*) from '.$this->table.$this->where;
-        $stmt=$this->executeQuery();
-        return $stmt->fetchColumn();
-        to see :http://stackoverflow.com/questions/883365/row-count-with-pdo
+         *$stmt=$this->executeQuery();
+         *return $stmt->fetchColumn();
+         *@url http://stackoverflow.com/questions/883365/row-count-with-pdo
         */
         $c=$this->find('count(*)', PDO::FETCH_NUM);
         return $c[0];

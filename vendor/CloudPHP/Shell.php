@@ -25,17 +25,13 @@ include CLOUD_ROOT . 'Engine/Base.php';
 include CLOUD_ROOT . 'Engine/Factory.php';
 
 class Shell {
-
-    private static $onauth = true;
-    private static $onredis = false;
-
     function __construct() {
         $this->init();
 
-     //   $databaseConfig=include SITE_ROOT.'config/database.php';
-     //   DB::init($databaseConfig);
-     //   DB::connect('default');
-        //DB::log(true);
+        $databaseConfig=include SITE_ROOT.'config/database.php';
+        DB::init($databaseConfig);
+        DB::connect('default');
+        DB::log(true);
     }
 
     private function init() {
@@ -61,22 +57,9 @@ class Shell {
     }
 
     function __destruct() {
-        //todo : DB::close();
+        DB::disconnect();
     }
 
-    function redis($on) {
-        self::$onredis = $on;
-    }
-
-    private function runRedis() {
-        Z::$redis = new Redis();
-        if (Z::$redis->connect(Z::$config['REDIS']['HOST'], Z::$config['REDIS']['PORT'])) {
-            Z::$redison = true;
-        } else {
-            Z::$redison= false;
-        }
-    }
-	
 	private function reflect($classname,$methodname){
 	        //$classname=Z::$controller;
             //$methodname=Z::$action;
