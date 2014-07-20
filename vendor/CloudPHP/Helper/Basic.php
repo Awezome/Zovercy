@@ -40,3 +40,12 @@ function arrayInsert(&$array, $index, $position) {
     $end = array_slice($array, $pos);
     $array=array_merge($start,$index,$end);
 }
+
+	
+function g($v){
+	if(is_array($v)){
+		print_r($v);
+	}else{
+		echo $v."\n";
+	}
+}
