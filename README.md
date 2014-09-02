@@ -1,4 +1,4 @@
-CloudPHP
+Zovercy
 =======
 
 a very lightweight php framework
