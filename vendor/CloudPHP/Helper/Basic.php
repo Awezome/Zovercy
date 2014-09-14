@@ -44,6 +44,15 @@ function arrayInsert(&$array, $index, $position) {
 	
 function g($v=''){
     $content=date('Y-m-d H:i:s')."\t".$v."\n";
-    //echo $content;
+   // echo $content;
     file_put_contents(Z::$config['LOG']['dir'], $content, FILE_APPEND);
 }
+
+//function array_convert($var, $rField='name', $rKey='id'){
+//	$count = count($var);
+//	for($i=0;$i<$count;$i++)
+//	{
+//		$temp[$var[$i][$rKey]] = $var[$i][$rField];
+//	}
+//	return $temp;
+//}

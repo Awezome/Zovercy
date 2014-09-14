@@ -41,10 +41,11 @@ class DatabaseFactory {
                 $con=new MysqlConnector();
                 break;
             case 'sqlite':
-                $con==new SQLiteConnector();
+                $con=new SQLiteConnector();
+                break;
             default:
                 //coming soon...
-                return;
+                return false;
         }
         $con->setConfig(self::$config[$name]);
         $ccc=array('prefix'=>self::$config[$name]['prefix']);
