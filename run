@@ -1,5 +1,0 @@
-<?php
-
-include './vendor/Zovercy/Shell.php';
-$s = new Shell();
-$s->run($argv);
