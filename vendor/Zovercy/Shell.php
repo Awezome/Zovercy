@@ -1,28 +1,28 @@
 <?php
-define('CLOUD_ROOT',__DIR__.'/');
+define('Zovercy',__DIR__.'/');
 define('SITE_ROOT', dirname(dirname(__DIR__)). '/');
 
-include CLOUD_ROOT.'Engine/Load.php';
+include Zovercy.'Engine/Load.php';
 
 function __autoload($className) {
     $map=load::map();
-    $apiDir=CLOUD_ROOT.'api/'.$className.'.php';
+    $apiDir=Zovercy.'api/'.$className.'.php';
     if(file_exists($apiDir)){
         include $apiDir;
     }else{
         if(array_key_exists($className,$map)){
-            include CLOUD_ROOT.$map[$className].$className.'.php';
+            include Zovercy.$map[$className].$className.'.php';
         }else{
             die("Unable to load class $className.");
         }
     }
 }
 
-include CLOUD_ROOT.'Helper/Basic.php';
-include CLOUD_ROOT . 'Engine/Z.php';
+include Zovercy.'Helper/Basic.php';
+include Zovercy . 'Engine/Z.php';
 include SITE_ROOT . 'config/config.php';
-include CLOUD_ROOT . 'Engine/Base.php';
-include CLOUD_ROOT . 'Engine/Factory.php';
+include Zovercy . 'Engine/Base.php';
+include Zovercy . 'Engine/Factory.php';
 
 class Shell {
     function __construct() {

@@ -10,7 +10,7 @@ class Load {
     private static $map=array();
     final public static function map() {
         if(empty(self::$map)) {
-            self::$map=include CLOUD_ROOT.'Engine/Map.php';
+            self::$map=include Zovercy.'Engine/Map.php';
         }
         return self::$map;
     }
