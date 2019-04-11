@@ -6,11 +6,13 @@ class Router
 {
     private $router=null;
 
-    function __construct()
+    function __construct($routerMaps)
     {
-        $this->router = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
-            $r->addRoute('GET', '/example', 'ExampleController@index');
-        });
+        $this->router = FastRoute\simpleDispatcher(
+            function(FastRoute\RouteCollector $router) use ($routerMaps){
+                include $routerMaps;
+            }
+        );
     }
 
     public function dispatch(Request $request, Response $response){

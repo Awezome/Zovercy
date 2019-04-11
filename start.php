@@ -14,22 +14,26 @@ Class App{
     function __construct()
     {
         $this->worker=new Worker("http://0.0.0.0:2345");
-        $this->worker->count=4;
+        $this->worker->count=1;
         $this->worker->onWorkerStart=function (){
-            $this->start();
+            $this->onWorkerStart();
         };
         $this->worker->onMessage = function($connection, $data)
         {
-            $request=new \Zovercy\Http\Request();
-            $response=new \Zovercy\Http\Response();
-            $this->router->dispatch($request,$response);
-            $connection->send($response->toJson());
+            $this->onMessage($connection, $data);
         };
     }
 
-    private function start(){
+    private function onWorkerStart(){
         echo 'worker is start...'.PHP_EOL;
-        $this->router = new \Zovercy\Http\Router();
+        $this->router = new \Zovercy\Http\Router(__DIR__.'/app/Routes/api.php');
+    }
+
+    private function onMessage($connection, $data){
+        $request=new \Zovercy\Http\Request();
+        $response=new \Zovercy\Http\Response();
+        $this->router->dispatch($request,$response);
+        $connection->send($response->toJson());
     }
 
     function run(){
