@@ -6,5 +6,15 @@
             "email": "likezyp@gmail.com"
         }
     ],
-    "require": {}
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Zovercy\\": "zovercy/"
+        }
+    },
+    "require": {
+        "workerman/workerman": "^3.5",
+        "larapack/dd": "^1.1",
+        "nikic/fast-route": "^1.3"
+    }
 }
