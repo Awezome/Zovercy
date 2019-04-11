@@ -1,5 +1,6 @@
 <?php
 namespace Zovercy\Http;
+use Workerman\Protocols\Http;
 
 class Response
 {
@@ -19,5 +20,12 @@ class Response
             $content=json_encode($content,JSON_UNESCAPED_UNICODE);
         }
         return $content;
+    }
+
+    public function setHeader($header,$code=200,$replace=true){
+        if($header=='json'){
+            $header='Content-Type: application/json;charset=utf-8';
+        }
+        Http::header($header,$replace,$code);
     }
 }
