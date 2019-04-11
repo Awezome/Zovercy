@@ -9,12 +9,13 @@ class Router
     function __construct()
     {
         $this->router = FastRoute\simpleDispatcher(function(FastRoute\RouteCollector $r) {
-            $r->addRoute('GET', '/users', 'get_all_users_handler');
+            $r->addRoute('GET', '/example', 'ExampleController@index');
         });
     }
 
     public function dispatch(Request $request, Response $response){
         $routeInfo = $this->router->dispatch($request->method(), $request->uri());
+        $content=null;
         switch ($routeInfo[0]) {
             case FastRoute\Dispatcher::NOT_FOUND:
                 break;
@@ -22,13 +23,22 @@ class Router
                 $allowedMethods = $routeInfo[1];
                 // ... 405 Method Not Allowed  方法不允许
                 break;
-            case FastRoute\Dispatcher::FOUND: // 找到对应的方法
-                $handler = $routeInfo[1]; // 获得处理函数
-                $vars = $routeInfo[2]; // 获取请求参数
-                // ... call $handler with $vars // 调用处理函数
+            case FastRoute\Dispatcher::FOUND:
+                $handle = $routeInfo[1];
+                $params = $routeInfo[2]??null;
+                $content=$this->callController($handle,$params);
                 break;
         }
 
-        $response->setContent('response set data');
+        $response->setContent($content);
+    }
+
+    private function callController($handle,$params){
+        $handle=explode('@',$handle);
+        $class=$handle[0];
+        $method=$handle[1];
+
+        $mainClass = '\\App\\Controllers\\' . $class;
+        return (new $mainClass())->$method($params);
     }
 }

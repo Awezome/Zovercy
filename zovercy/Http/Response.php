@@ -1,6 +1,5 @@
 <?php
 namespace Zovercy\Http;
-use FastRoute;
 
 class Response
 {
@@ -15,6 +14,10 @@ class Response
     }
 
     public function toJson(){
-        return $this->content;
+        $content=$this->content;
+        if(is_array($content)){
+            $content=json_encode($content,JSON_UNESCAPED_UNICODE);
+        }
+        return $content;
     }
 }
